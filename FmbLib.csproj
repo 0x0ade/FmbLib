@@ -52,18 +52,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="MonoGame.Framework">
-      <HintPath>libs\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="FezEngine">
-      <HintPath>libs\FezEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="ContentSerialization">
-      <HintPath>libs\ContentSerialization.dll</HintPath>
-    </Reference>
-    <Reference Include="SDL2-CS">
-      <HintPath>libs\SDL2-CS.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,6 +100,8 @@
     <Folder Include="FmbLib\TypeHandlers\" />
     <Folder Include="FmbLib\TypeHandlers\Xna\" />
     <Folder Include="FmbLib\TypeHandlers\Fez\" />
+    <Folder Include="XnaSlim\" />
+    <Folder Include="FezSlim\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TypeHandlerBases\Fez\AmbienceTrackReader.txt" />
