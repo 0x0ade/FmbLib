@@ -1,0 +1,9 @@
+﻿
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System.IO;
+int num2 
+index += num2;
+count -= num2;
+texture2D.SetData<byte>

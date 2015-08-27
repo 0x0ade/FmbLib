@@ -1,0 +1,12 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+ChestCount Int32
+LockedDoorCount Int32
+UnlockedDoorCount Int32
+ScriptIds Object<List<int>>
+CubeShardCount Int32
+OtherCollectibleCount Int32
+SplitUpCount Int32
+SecretCount Int32

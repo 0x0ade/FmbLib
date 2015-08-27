@@ -1,0 +1,11 @@
+﻿
+using FezEngine;
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+LevelName String
+Connections Object<List<MapNode.Connection>>
+NodeType Object<LevelNodeType>
+Conditions Object<WinConditions>
+HasLesserGate Boolean
+HasWarpGate Boolean

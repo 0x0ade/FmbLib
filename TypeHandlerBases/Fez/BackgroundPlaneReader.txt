@@ -1,0 +1,28 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Position Vector3
+Rotation Quaternion
+Scale Vector3
+Size Vector3
+TextureName String
+LightMap Boolean
+AllowOverbrightness Boolean
+Filter Color
+Animated Boolean
+Doublesided Boolean
+Opacity Single
+AttachedGroup Object<int?>
+Billboard Boolean
+SyncWithSamples Boolean
+Crosshatch Boolean
+Boolean
+AlwaysOnTop Boolean
+Fullbright Boolean
+PixelatedLightmap Boolean
+XTextureRepeat Boolean
+YTextureRepeat Boolean
+ClampTexture Boolean
+ActorType Object<ActorType>
+AttachedPlane Object<int?>
+ParallaxFactor Single

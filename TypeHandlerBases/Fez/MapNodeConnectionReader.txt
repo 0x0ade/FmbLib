@@ -1,0 +1,7 @@
+﻿
+using FezEngine;
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Face Object<FaceOrientation>
+Node Object<MapNode>
+BranchOversize Single

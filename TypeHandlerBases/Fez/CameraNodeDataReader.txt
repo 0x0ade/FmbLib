@@ -1,0 +1,6 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Perspective Boolean
+PixelsPerTrixel Int32
+SoundName Object<string>

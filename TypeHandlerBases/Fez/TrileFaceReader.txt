@@ -1,0 +1,6 @@
+﻿
+using FezEngine;
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Id Object<TrileEmplacement>
+Face Object<FaceOrientation>

@@ -1,0 +1,11 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+Segments Object<List<PathSegment>>
+NeedsTrigger Boolean
+EndBehavior Object<PathEndBehavior>
+SoundName Object<string>
+IsSpline Boolean
+OffsetSeconds Single
+SaveTrigger Boolean

@@ -1,0 +1,8 @@
+﻿
+using FezEngine.Structure.Scripting;
+using Microsoft.Xna.Framework.Content;
+Object Object<Entity>
+Operator Object<ComparisonOperator>
+Property String
+Value String
+OnDeserialization

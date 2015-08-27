@@ -1,0 +1,8 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Name Object<string>
+Dawn Boolean
+Day Boolean
+Dusk Boolean
+Night Boolean

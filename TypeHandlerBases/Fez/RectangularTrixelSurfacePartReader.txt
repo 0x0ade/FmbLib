@@ -1,0 +1,8 @@
+﻿
+using FezEngine;
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Start = TrixelIdentifierReader.ReadTrixelIdentifier
+Orientation Object<FaceOrientation>
+TangentSize Int32
+BitangentSize Int32

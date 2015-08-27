@@ -1,0 +1,21 @@
+﻿
+using FezEngine;
+using FezEngine.Structure;
+using FezEngine.Structure.Geometry;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+Name String
+CubemapPath String
+Size Vector3
+Offset Vector3
+Immaterial Boolean
+SeeThrough Boolean
+Thin Boolean
+ForceHugging Boolean
+Faces Object<Dictionary<FaceOrientation, CollisionType>>
+Geometry Object<ShaderInstancedIndexedPrimitives<VertexPositionNormalTextureInstance, Vector4>>
+ActorSettings.Type Object<ActorType>
+ActorSettings.Face Object<FaceOrientation>
+SurfaceType Object<SurfaceType>
+AtlasOffset Vector2

@@ -1,0 +1,11 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+Position Vector3
+TrileId Int32
+byte orientation Byte
+SetPhiLight
+if (Boolean())
+ActorSettings Object<InstanceActorSettings>
+OverlappedTriles Object<List<TrileInstance>>

@@ -1,0 +1,5 @@
+﻿3 bytes, ascii chars FMB to indicate FMB file format as opposed to XNB file format
+.NET string, short type name of the main object
+object data, main object with data depending on handler
+7BitEncodedInt, indicating how many shared resources exist
+all the shared resources as object datas

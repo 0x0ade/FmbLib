@@ -1,0 +1,7 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Position Vector3
+Rotation Quaternion
+Scale Vector3
+ActorSettings Object<ArtObjectActorSettings>

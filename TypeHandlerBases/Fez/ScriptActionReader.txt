@@ -1,0 +1,9 @@
+﻿
+using FezEngine.Structure.Scripting;
+using Microsoft.Xna.Framework.Content;
+Object Object<Entity>
+Operation String
+Arguments Object<string[]>
+Killswitch Boolean
+Blocking Boolean
+OnDeserialization

@@ -1,0 +1,5 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Text Object<string>
+OverrideContent Object<NpcActionContent>

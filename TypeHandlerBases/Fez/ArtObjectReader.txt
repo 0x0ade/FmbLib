@@ -1,0 +1,12 @@
+﻿
+using FezEngine.Structure;
+using FezEngine.Structure.Geometry;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+Name String
+Cubemap Object<Texture2D>
+Size Vector3
+Geometry Object<ShaderInstancedIndexedPrimitives<VertexPositionNormalTextureInstance, Matrix>>
+ActorType Object<ActorType>
+NoSihouette Boolean

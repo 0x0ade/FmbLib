@@ -1,0 +1,20 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+Triles Object<List<TrileInstance>>
+Path Object<MovementPath>
+Heavy Boolean
+ActorType Object<ActorType>
+GeyserOffset Single
+GeyserPauseFor Single
+GeyserLiftFor Single
+GeyserApexHeight Single
+SpinCenter Vector3
+SpinClockwise Boolean
+SpinFrequency Single
+SpinNeedsTriggering Boolean
+Spin180Degrees Boolean
+FallOnRotate Boolean
+SpinOffset Single
+AssociatedSound Object<string>

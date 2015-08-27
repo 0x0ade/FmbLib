@@ -1,0 +1,7 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Name String
+InFront Boolean
+Opacity Single
+FogTint Single

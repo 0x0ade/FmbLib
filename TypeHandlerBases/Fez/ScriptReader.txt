@@ -1,0 +1,16 @@
+﻿
+using FezEngine.Structure.Scripting;
+using Microsoft.Xna.Framework.Content;
+using System;
+using System.Collections.Generic;
+Name String
+Timeout Object<TimeSpan?>
+Triggers Object<List<ScriptTrigger>>
+Conditions Object<List<ScriptCondition>>
+Actions Object<List<ScriptAction>>
+OneTime Boolean
+Triggerless Boolean
+IgnoreEndTriggers Boolean
+LevelWideOneTime Boolean
+Disabled Boolean
+IsWinCondition Boolean

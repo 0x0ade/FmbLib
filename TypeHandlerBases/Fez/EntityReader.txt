@@ -1,0 +1,5 @@
+﻿
+using FezEngine.Structure.Scripting;
+using Microsoft.Xna.Framework.Content;
+Type String
+Identifier Object<int?>

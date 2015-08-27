@@ -1,0 +1,10 @@
+bin/
+obj/
+*.sln
+*.userprefs
+FmbLibStripper/bin/
+FmbLibStripper/obj/
+FmbLibStripper/*.sln
+FmbLibStripper/*.userprefs
+*.xnb
+

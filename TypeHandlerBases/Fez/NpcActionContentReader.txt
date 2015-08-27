@@ -1,0 +1,5 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+AnimationName Object<string>
+SoundName Object<string>

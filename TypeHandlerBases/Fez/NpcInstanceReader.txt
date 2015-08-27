@@ -1,0 +1,14 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+Name String
+Position Vector3
+DestinationOffset Vector3
+WalkSpeed Single
+RandomizeSpeech Boolean
+SayFirstSpeechLineOnce Boolean
+AvoidsGomez Boolean
+ActorType Object<ActorType>
+Speech Object<List<SpeechLine>>
+Actions Object<Dictionary<NpcAction, NpcActionContent>>

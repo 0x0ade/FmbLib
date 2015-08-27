@@ -1,0 +1,20 @@
+﻿
+using FezEngine;
+using FezEngine.Structure;
+using FezEngine.Structure.Scripting;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+Triles Object<Dictionary<TrileEmplacement, TrileInstance>>
+ArtObjects Object<Dictionary<int, ArtObjectInstance>>
+BackgroundPlanes Object<Dictionary<int, BackgroundPlane>>
+Groups Object<Dictionary<int, TrileGroup>>
+NonPlayerCharacters Object<Dictionary<int, NpcInstance>>
+Paths Object<Dictionary<int, MovementPath>>
+Descending Boolean
+Rainy Boolean
+LowPass Boolean
+MutedLoops Object<List<string>>
+AmbienceTracks Object<List<AmbienceTrack>>
+NodeType Object<LevelNodeType>
+Quantum Boolean
+OnDeserialization

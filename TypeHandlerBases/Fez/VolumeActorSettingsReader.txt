@@ -1,0 +1,13 @@
+﻿
+using FezEngine.Structure;
+using FezEngine.Structure.Input;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+FarawayPlaneOffset Vector2
+IsPointOfInterest Boolean
+DotDialogue Object<List<DotDialogueLine>>
+WaterLocked Boolean
+CodePattern Object<CodeInput[]>
+IsBlackHole Boolean
+NeedsTrigger Boolean
+IsSecretPassage Boolean

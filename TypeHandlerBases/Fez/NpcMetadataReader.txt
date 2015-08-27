@@ -1,0 +1,8 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+WalkSpeed Single
+AvoidsGomez Boolean
+SoundPath Object<string>
+SoundActions Object<List<NpcAction>>

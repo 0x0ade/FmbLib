@@ -1,0 +1,12 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+Loops Object<List<Loop>>
+Name String
+Tempo Int32
+TimeSignature Int32
+Notes Object<ShardNotes[]>
+AssembleChord Object<AssembleChords>
+RandomOrdering Boolean
+CustomOrdering Object<int[]>

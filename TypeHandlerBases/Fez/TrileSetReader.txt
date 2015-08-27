@@ -1,0 +1,9 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
+Name String
+Triles Object<Dictionary<int, Trile>>
+TextureAtlas Object<Texture2D>
+OnDeserialization

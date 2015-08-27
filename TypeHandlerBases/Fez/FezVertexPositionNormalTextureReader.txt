@@ -1,0 +1,5 @@
+﻿
+using FezEngine.Structure.Geometry;
+using Microsoft.Xna.Framework.Content;
+TextureCoordinate Vector2()
+;

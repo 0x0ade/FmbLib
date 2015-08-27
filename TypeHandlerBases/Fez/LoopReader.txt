@@ -1,0 +1,17 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+Duration Int32
+LoopTimesFrom Int32
+LoopTimesTo Int32
+Name String
+TriggerFrom Int32
+TriggerTo Int32
+Delay Int32
+Night Boolean
+Day Boolean
+Dusk Boolean
+Dawn Boolean
+FractionalTime Boolean
+OneAtATime Boolean
+CutOffTail Boolean

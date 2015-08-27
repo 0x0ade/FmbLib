@@ -1,0 +1,9 @@
+﻿
+using FezEngine.Structure;
+using Microsoft.Xna.Framework.Content;
+ContainedTrile Object<int?>
+SignText Object<string>
+Sequence Object<bool[]>
+SequenceSampleName Object<string>
+SequenceAlternateSampleName Object<string>
+HostVolume Object<int?>
