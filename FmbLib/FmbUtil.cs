@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.CSharp;
@@ -27,38 +28,49 @@ namespace FmbLib {
         private static Dictionary<Type, TypeHandler> TypeHandlerTypeMap = new Dictionary<Type, TypeHandler>();
         private static string[] ManifestResourceNames;
 
+		static FmbUtil(){
+
+			{
+				#if XNA
+				____dotnetassembliesneedtobereferenced____.Add(typeof(Vector3));
+				#endif
+				#if FEZENGINE
+				____dotnetassembliesneedtobereferenced____.Add(typeof(TrileSet));
+				#endif
+			}
+
+			{
+				GeneratedTypeHandlerAssemblies.Add("MonoGame.Framework");
+				GeneratedTypeHandlerAssemblies.Add("FezEngine");
+				GeneratedTypeHandlerAssemblies.Add("ContentSerialization");
+			}
+
+			{
+				GeneratedTypeHandlerSpecialTypes.Add("Matrix");
+				GeneratedTypeHandlerSpecialTypes.Add("Quaternion");
+				GeneratedTypeHandlerSpecialTypes.Add("Vector2");
+				GeneratedTypeHandlerSpecialTypes.Add("Vector3");
+				GeneratedTypeHandlerSpecialTypes.Add("Vector4");
+				GeneratedTypeHandlerSpecialTypes.Add("Color");
+				GeneratedTypeHandlerSpecialTypes.Add("BoundingSphere");
+			}
+
+		}
+
         /// <summary>
         /// List of types that need to be accessed so that the assembly containing them gets referenced
         /// </summary>
-        private static List<Type> ____dotnetassembliesneedtobereferenced____ = new List<Type>() {
-            #if XNA
-            typeof(Vector3),
-            #endif
-            #if FEZENGINE
-            typeof(TrileSet),
-            #endif
-        };
+        private static List<Type> ____dotnetassembliesneedtobereferenced____ = new List<Type>();
 
         /// <summary>
         /// List of assemblies required for the generated typehandlers.
         /// </summary>
-        public static List<string> GeneratedTypeHandlerAssemblies = new List<string>() {
-            "MonoGame.Framework", //replace this with FNA / XNA when compiling against these
-            "FezEngine",
-            "ContentSerialization"
-        };
+		public static List<string> GeneratedTypeHandlerAssemblies = new List<string>();
+		
         /// <summary>
         /// List of types that are not found in BinaryReader, but in XNA's ContentReader
         /// </summary>
-        public static List<string> GeneratedTypeHandlerSpecialTypes = new List<string>() {
-            "Matrix",
-            "Quaternion",
-            "Vector2",
-            "Vector3",
-            "Vector4",
-            "Color",
-            "BoundingSphere" //this one is not existing in FmbLib anyways
-        };
+        public static List<string> GeneratedTypeHandlerSpecialTypes = new List<string>();
 
         public static object ReadObject(string input) {
             using (FileStream fis = new FileStream(input, FileMode.Open)) {
@@ -99,7 +111,11 @@ namespace FmbLib {
             return obj;
         }
 
-        public static T ReadObject<T>(BinaryReader reader, bool xnb, bool readPrependedData = true) {
+		public static T ReadObject<T>(BinaryReader reader, bool xnb) {
+			return ReadObject<T>(reader, xnb, true);
+		}
+
+        public static T ReadObject<T>(BinaryReader reader, bool xnb, bool readPrependedData) {
             TypeHandler handler;
 
             string[] readerNames = null;
@@ -387,10 +403,10 @@ namespace FmbLib {
                 .AppendLine("}")
                 .AppendLine("}");
 
-            CompilerParameters parameters = new CompilerParameters() {
-                GenerateInMemory = true,
-                CompilerOptions = "/optimize",
-            };
+            CompilerParameters parameters = new CompilerParameters();
+
+			parameters.GenerateInMemory=true;
+			parameters.CompilerOptions="/optimize";
 
             AssemblyName[] references = assembly.GetReferencedAssemblies();
             for (int i = 0; i < references.Length; i++) {

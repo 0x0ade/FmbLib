@@ -13,12 +13,7 @@ namespace FmbLib.TypeHandlers.Xna {
     public class QuaternionHandler : TypeHandler<Quaternion> {
 
         public override object Read(BinaryReader reader, bool xnb) {
-            return new Quaternion() {
-                X = reader.ReadSingle(),
-                Y = reader.ReadSingle(),
-                Z = reader.ReadSingle(),
-                W = reader.ReadSingle()
-            };
+            return new Quaternion(reader.ReadSingle(),reader.ReadSingle(),reader.ReadSingle(),reader.ReadSingle());
         }
 
         public override void Write(BinaryWriter writer, object obj_) {
