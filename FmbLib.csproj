@@ -133,6 +133,8 @@
     <Compile Include="FezSlim\FaceOrientation.cs" />
     <Compile Include="FezSlim\CollisionType.cs" />
     <Compile Include="FezSlim\SurfaceType.cs" />
+    <Compile Include="FezSlim\TrixelCluster.cs" />
+    <Compile Include="FezSlim\TrixelEmplacement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

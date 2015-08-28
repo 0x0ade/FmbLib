@@ -21,7 +21,7 @@ namespace FezEngine.Structure {
         public string CubemapPath;
         public Dictionary<FaceOrientation, CollisionType> Faces;
         public ShaderInstancedIndexedPrimitives<VertexPositionNormalTextureInstance, Vector4> Geometry;
-        //public TrixelCluster MissingTrixels; //TODO
+        public TrixelCluster MissingTrixels;
         //public TrileActorSettings ActorSettings; //TODO
         public bool Immaterial;
         public bool SeeThrough;
@@ -35,7 +35,7 @@ namespace FezEngine.Structure {
         public bool ForceKeep;
 
         public Trile() {
-            //MissingTrixels = new TrixelCluster(); //TODO
+            MissingTrixels = new TrixelCluster();
             //ActorSettings = new TrileActorSettings(); //TODO
             Name = "Untitled";
             #if !UNITY
