@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{EAF975D4-2F22-4E40-A758-C0484E071B9F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>FmbLib</RootNamespace>
     <AssemblyName>FmbLib</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
