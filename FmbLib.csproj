@@ -121,6 +121,10 @@
     <Compile Include="FmbLib\FmbHelper.cs" />
     <Compile Include="FmbLib\TypeHandlers\Fez\ShaderInstancedIndexedPrimitivesReader`2.cs" />
     <Compile Include="FmbLib\TypeHandlers\Fez\VertexPositionNormalTextureInstanceReader.cs" />
+    <Compile Include="XnaSlim\BoundingBox.cs" />
+    <Compile Include="XnaSlim\Matrix.cs" />
+    <Compile Include="XnaSlim\Point.cs" />
+    <Compile Include="XnaSlim\Rectangle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

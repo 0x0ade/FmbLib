@@ -2,17 +2,13 @@
 using FmbLib;
 using System.IO;
 
-#if XNA
+#if !UNITY
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-#elif UNITY
-using UnityEngine;
-#warning FmbLib slim XNA still WIP and no Unity Matrix found.
 #else
-#warning FmbLib slim XNA still WIP.
+using UnityEngine;
 #endif
 
-#if !UNITY
 namespace FmbLib.TypeHandlers.Xna {
     public class MatrixHandler : TypeHandler<Matrix> {
 
@@ -25,4 +21,3 @@ namespace FmbLib.TypeHandlers.Xna {
         }
     }
 }
-#endif
