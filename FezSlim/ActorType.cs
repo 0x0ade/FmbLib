@@ -1,5 +1,5 @@
 #if !FEZENGINE
-namespace FezEngine {
+namespace FezEngine.Structure {
     public enum ActorType {
         None,
         Ladder,

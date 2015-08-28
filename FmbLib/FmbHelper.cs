@@ -8,7 +8,7 @@ namespace FmbLib {
         
         private readonly static Dictionary<string, Type> CacheTypes = new Dictionary<string, Type>(128);
 
-        static FmbHelper(){
+        static FmbHelper() {
             BlacklistedAssemblies.Add("SDL2-CS");
             BlacklistedAssemblies.Add("System.Drawing");
         }
@@ -16,6 +16,10 @@ namespace FmbLib {
         public static List<string> BlacklistedAssemblies = new List<string>(); 
 
         public static Type FindType(string name) {
+            return FindType_(name, false);
+        }
+
+        private static Type FindType_(string name, bool remappedNamespace) {
             Type type_ = null;
             if (CacheTypes.TryGetValue(name, out type_)) {
                 return type_;
@@ -66,8 +70,18 @@ namespace FmbLib {
                 }
             }
 
-            CacheTypes[name] = null;
-            return null;
+            if (!remappedNamespace) {
+                string oldname = name;
+                for (int i = 0; i < FmbUtil.NamespaceRemap.Count; i++) {
+                    name = name.Replace(FmbUtil.NamespaceRemap[i].Key, FmbUtil.NamespaceRemap[i].Value);
+                }
+                Type foundType = FindType_(name, true);
+                CacheTypes[oldname] = foundType;
+                return foundType;
+            } else {
+                CacheTypes[name] = null;
+                return null;
+            }
         }
 
         public static TypeHandler GetGenericTypeHandler(Type typeHandlerType, params Type[] genericArgs) {

@@ -16,7 +16,7 @@ using UnityEngine;
 using FezEngine.Structure.Geometry;
 
 namespace FmbLib.TypeHandlers.Fez {
-    public class ShaderInstancedIndexedPrimitivesHandler<TemplateType, InstanceType> : TypeHandler<ShaderInstancedIndexedPrimitives<TemplateType, InstanceType>> where TemplateType : struct where InstanceType : struct {
+    public class ShaderInstancedIndexedPrimitivesHandler<TemplateType, InstanceType> : TypeHandler<ShaderInstancedIndexedPrimitives<TemplateType, InstanceType>> {
 
         public override object Read(BinaryReader reader, bool xnb) {
             PrimitiveType type = FmbUtil.ReadObject<PrimitiveType>(reader, xnb);

@@ -57,9 +57,9 @@ namespace FmbLib {
             GeneratedTypeHandlerSpecialTypes.Add("BoundingSphere");
 
             #if UNITY
-            GeneratedTypeHandlerUsingMap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework.Content", "UnityEngine"));
-            GeneratedTypeHandlerUsingMap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework.Graphics", "UnityEngine"));
-            GeneratedTypeHandlerUsingMap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework", "UnityEngine"));
+            NamespaceRemap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework.Content", "UnityEngine"));
+            NamespaceRemap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework.Graphics", "UnityEngine"));
+            NamespaceRemap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework", "UnityEngine"));
             #endif
         }
 
@@ -79,9 +79,9 @@ namespace FmbLib {
         public static List<string> GeneratedTypeHandlerSpecialTypes = new List<string>();
 
         /// <summary>
-        /// List of remappings regarding the usings of generated type handlers, f.e. XNA to Unity.
+        /// List of remappings regarding the usings of generated type handlers and other pieces of namespace-sensitive code, f.e. XNA to Unity.
         /// </summary>
-        public static List<KeyValuePair<string, string>> GeneratedTypeHandlerUsingMap = new List<KeyValuePair<string, string>>();
+        public static List<KeyValuePair<string, string>> NamespaceRemap = new List<KeyValuePair<string, string>>();
 
         public static object ReadObject(string input) {
             using (FileStream fis = new FileStream(input, FileMode.Open)) {
@@ -265,7 +265,6 @@ namespace FmbLib {
                 for (int i = 0; i < types.Length; i++) {
                     string typeName_ = getTypeName(types[i].Name, null);
                     if (typeName_ == handlerName && types[i].GetGenericArguments().Length == genericParams.Count) {
-                        //Console.WriteLine("Found " + types[i].Name);
                         return (TypeHandler) types[i].MakeGenericType(genericParams.ToArray()).GetConstructor(new Type[0]).Invoke(new object[0]);
                     }
                 }
@@ -339,8 +338,8 @@ namespace FmbLib {
 
                         if (!usingsComplete && line.StartsWith("using ")) {
                             line = line.Substring(6, line.Length - 6 - 1);
-                            for (int i = 0; i < GeneratedTypeHandlerUsingMap.Count; i++) {
-                                line = line.Replace(GeneratedTypeHandlerUsingMap[i].Key, GeneratedTypeHandlerUsingMap[i].Value);
+                            for (int i = 0; i < NamespaceRemap.Count; i++) {
+                                line = line.Replace(NamespaceRemap[i].Key, NamespaceRemap[i].Value);
                             }
                             line = "using " + line + ";\n";
                             if (!usings.Contains(line)) {
