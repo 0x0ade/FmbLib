@@ -127,6 +127,12 @@
     <Compile Include="XnaSlim\Rectangle.cs" />
     <Compile Include="FezSlim\VertexPositionNormalTextureInstance.cs" />
     <Compile Include="FezSlim\ShaderInstancedIndexedPrimitives.cs" />
+    <Compile Include="FezSlim\ArtObject.cs" />
+    <Compile Include="FezSlim\Trile.cs" />
+    <Compile Include="FezSlim\TrileSet.cs" />
+    <Compile Include="FezSlim\FaceOrientation.cs" />
+    <Compile Include="FezSlim\CollisionType.cs" />
+    <Compile Include="FezSlim\SurfaceType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
