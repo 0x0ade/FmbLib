@@ -32,10 +32,10 @@ namespace FezEngine.Structure.Geometry {
             #endif
         };
 
-        public Vector3 Position { get; set; }
-        public Vector3 Normal { get; set; }
-        public Vector2 TextureCoordinate { get; set; }
-        public float InstanceIndex { get; set; }
+        public Vector3 Position;
+        public Vector3 Normal;
+        public Vector2 TextureCoordinate;
+        public float InstanceIndex;
         
         public VertexPositionNormalTextureInstance(Vector3 position, Vector3 normal)
             : this(position, normal, -1f) {

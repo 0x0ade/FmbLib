@@ -15,12 +15,9 @@ namespace FezEngine.Structure.Geometry {
     public class ShaderInstancedIndexedPrimitives<TemplateType, InstanceType> {
 
         public int InstancesPerBatch; //usually private readonly, but who cares
-
-        public bool NeedsEffectCommit { get; set; }
-
-        public TemplateType[] Vertices { get; set; }
-        
-        public int[] Indices { get; set; }
+        public bool NeedsEffectCommit;
+        public TemplateType[] Vertices;
+        public int[] Indices;
         
         public ShaderInstancedIndexedPrimitives(PrimitiveType type, int instancesPerBatch) {
             InstancesPerBatch = instancesPerBatch;
