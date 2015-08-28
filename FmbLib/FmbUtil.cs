@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -17,6 +17,10 @@ using Microsoft.Xna.Framework;
 using FezEngine.Structure;
 #endif
 
+#if UNITY
+using UnityEngine;
+#endif
+
 namespace FmbLib {
     public static class FmbUtil {
 
@@ -29,7 +33,7 @@ namespace FmbLib {
         private static string[] ManifestResourceNames;
 
         static FmbUtil(){
-            #if XNA
+            #if XNA || UNITY
             ____dotnetassembliesneedtobereferenced____.Add(typeof(Vector3));
             #endif
             #if FEZENGINE
@@ -51,6 +55,12 @@ namespace FmbLib {
             GeneratedTypeHandlerSpecialTypes.Add("Vector4");
             GeneratedTypeHandlerSpecialTypes.Add("Color");
             GeneratedTypeHandlerSpecialTypes.Add("BoundingSphere");
+
+            #if UNITY
+            GeneratedTypeHandlerUsingMap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework.Content", "UnityEngine"));
+            GeneratedTypeHandlerUsingMap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework.Graphics", "UnityEngine"));
+            GeneratedTypeHandlerUsingMap.Add(new KeyValuePair<string, string>("Microsoft.Xna.Framework", "UnityEngine"));
+            #endif
         }
 
         /// <summary>
@@ -68,6 +78,11 @@ namespace FmbLib {
         /// </summary>
         public static List<string> GeneratedTypeHandlerSpecialTypes = new List<string>();
 
+        /// <summary>
+        /// List of remappings regarding the usings of generated type handlers, f.e. XNA to Unity.
+        /// </summary>
+        public static List<KeyValuePair<string, string>> GeneratedTypeHandlerUsingMap = new List<KeyValuePair<string, string>>();
+
         public static object ReadObject(string input) {
             using (FileStream fis = new FileStream(input, FileMode.Open)) {
                 using (BinaryReader reader = new BinaryReader(fis)) {
@@ -80,22 +95,20 @@ namespace FmbLib {
         public static object ReadObject(BinaryReader reader, bool xnb) {
             TypeHandler handler;
 
-            string[] readerNames = null;
+            //string[] readerNames = null;
             TypeHandler[] handlers = null;
-            int handlerIndex = -1;
-            object[] sharedResources = null;
-            string typeName = null;
+            //object[] sharedResources = null;
 
             if (xnb && reader.BaseStream.Position == 3) {
                 object[] xnbData = readXNB(reader);
-                readerNames = (string[]) xnbData[0];
+                //readerNames = (string[]) xnbData[0];
                 handlers = (TypeHandler[]) xnbData[1];
-                sharedResources = (object[]) xnbData[2];
-                handler = handlers[handlerIndex = (int) xnbData[3]];
+                //sharedResources = (object[]) xnbData[2];
+                handler = handlers[(int) xnbData[3]];
             } else if (xnb) {
                 throw new InvalidOperationException("Can't read a non-asset object without type from a XNB stream!");
             } else {
-                handler = GetTypeHandler(typeName = reader.ReadString());
+                handler = GetTypeHandler(reader.ReadString());
             }
 
             object obj = handler.Read(reader, xnb);
@@ -114,18 +127,16 @@ namespace FmbLib {
         public static T ReadObject<T>(BinaryReader reader, bool xnb, bool readPrependedData) {
             TypeHandler handler;
 
-            string[] readerNames = null;
+            //string[] readerNames = null;
             TypeHandler[] handlers = null;
-            int handlerIndex = -1;
-            object[] sharedResources = null;
-            string typeName = null;
+            //object[] sharedResources = null;
 
             if (xnb && reader.BaseStream.Position == 3) {
                 object[] xnbData = readXNB(reader);
-                readerNames = (string[]) xnbData[0];
+                //readerNames = (string[]) xnbData[0];
                 handlers = (TypeHandler[]) xnbData[1];
-                sharedResources = (object[]) xnbData[2];
-                handler = handlers[handlerIndex = (int) xnbData[3]];
+                //sharedResources = (object[]) xnbData[2];
+                handler = handlers[(int) xnbData[3]];
             } else {
                 if (readPrependedData) {
                     if (xnb) {
@@ -134,7 +145,7 @@ namespace FmbLib {
                         reader.ReadString();
                     }
                 }
-                typeName = (handler = GetTypeHandler<T>()).Type.Name;
+                handler = GetTypeHandler<T>();
             }
 
             T obj = handler.Read<T>(reader, xnb);
@@ -157,6 +168,9 @@ namespace FmbLib {
             reader.ReadByte(); //0x05
 
             byte flagBits = reader.ReadByte();
+            if ((flagBits & 0x80) == 0x80) {
+                throw new InvalidOperationException("Can not read compressed XNBs!");
+            }
             //TODO check if 0x80 is set, if so: decompressing codepath?
 
             reader.ReadInt32(); //file size, optionally compressed size
@@ -169,7 +183,7 @@ namespace FmbLib {
 
             for (int i = 0; i < readerNames.Length; i++) {
                 readerNames[i] = reader.ReadString();
-                int version = reader.ReadInt32(); //reader version
+                reader.ReadInt32(); //reader version
 
                 handlers[i] = GetTypeHandler(readerNames[i]);
             }
@@ -324,8 +338,14 @@ namespace FmbLib {
                         }
 
                         if (!usingsComplete && line.StartsWith("using ")) {
-                            usings += line;
-                            usings += "\n";
+                            line = line.Substring(6, line.Length - 6 - 1);
+                            for (int i = 0; i < GeneratedTypeHandlerUsingMap.Count; i++) {
+                                line = line.Replace(GeneratedTypeHandlerUsingMap[i].Key, GeneratedTypeHandlerUsingMap[i].Value);
+                            }
+                            line = "using " + line + ";\n";
+                            if (!usings.Contains(line)) {
+                                usings += line;
+                            }
                             continue;
                         }
                         usingsComplete = true;

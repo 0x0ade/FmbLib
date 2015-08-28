@@ -20,9 +20,9 @@ namespace FmbLib.TypeHandlers.Xna {
             }
 
             //Internal textures will not be loaded, just skipped
-            int surfaceFormat = reader.ReadInt32();
-            int width = reader.ReadInt32();
-            int height = reader.ReadInt32();
+            reader.ReadInt32(); //surfaceFormat
+            reader.ReadInt32(); //width
+            reader.ReadInt32(); //height
             int mips = reader.ReadInt32();
             for (int i = 0; i < mips; i++) {
                 int dataSize = reader.ReadInt32();
