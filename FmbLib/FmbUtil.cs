@@ -28,34 +28,30 @@ namespace FmbLib {
         private static Dictionary<Type, TypeHandler> TypeHandlerTypeMap = new Dictionary<Type, TypeHandler>();
         private static string[] ManifestResourceNames;
 
-		static FmbUtil(){
+		    static FmbUtil(){
+			      #if XNA
+			      ____dotnetassembliesneedtobereferenced____.Add(typeof(Vector3));
+			      #endif
+			      #if FEZENGINE
+			      ____dotnetassembliesneedtobereferenced____.Add(typeof(TrileSet));
+			      #endif
 
-			{
-				#if XNA
-				____dotnetassembliesneedtobereferenced____.Add(typeof(Vector3));
-				#endif
-				#if FEZENGINE
-				____dotnetassembliesneedtobereferenced____.Add(typeof(TrileSet));
-				#endif
-			}
+			      #if XNA
+			      GeneratedTypeHandlerAssemblies.Add("MonoGame.Framework");
+			      #endif
+			      #if FEZENGINE
+			      GeneratedTypeHandlerAssemblies.Add("FezEngine");
+			      GeneratedTypeHandlerAssemblies.Add("ContentSerialization");
+			      #endif
 
-			{
-				GeneratedTypeHandlerAssemblies.Add("MonoGame.Framework");
-				GeneratedTypeHandlerAssemblies.Add("FezEngine");
-				GeneratedTypeHandlerAssemblies.Add("ContentSerialization");
-			}
-
-			{
-				GeneratedTypeHandlerSpecialTypes.Add("Matrix");
-				GeneratedTypeHandlerSpecialTypes.Add("Quaternion");
-				GeneratedTypeHandlerSpecialTypes.Add("Vector2");
-				GeneratedTypeHandlerSpecialTypes.Add("Vector3");
-				GeneratedTypeHandlerSpecialTypes.Add("Vector4");
-				GeneratedTypeHandlerSpecialTypes.Add("Color");
-				GeneratedTypeHandlerSpecialTypes.Add("BoundingSphere");
-			}
-
-		}
+			      GeneratedTypeHandlerSpecialTypes.Add("Matrix");
+			      GeneratedTypeHandlerSpecialTypes.Add("Quaternion");
+			      GeneratedTypeHandlerSpecialTypes.Add("Vector2");
+			      GeneratedTypeHandlerSpecialTypes.Add("Vector3");
+			      GeneratedTypeHandlerSpecialTypes.Add("Vector4");
+			      GeneratedTypeHandlerSpecialTypes.Add("Color");
+			      GeneratedTypeHandlerSpecialTypes.Add("BoundingSphere");
+		    }
 
         /// <summary>
         /// List of types that need to be accessed so that the assembly containing them gets referenced

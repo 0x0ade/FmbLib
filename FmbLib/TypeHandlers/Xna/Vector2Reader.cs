@@ -13,7 +13,7 @@ namespace FmbLib.TypeHandlers.Xna {
     public class Vector2Handler : TypeHandler<Vector2> {
 
         public override object Read(BinaryReader reader, bool xnb) {
-            return new Vector2(reader.ReadSingle(),reader.ReadSingle());
+            return new Vector2(reader.ReadSingle(), reader.ReadSingle());
 		}
 
         public override void Write(BinaryWriter writer, object obj_) {
