@@ -21,7 +21,6 @@
     <WarningLevel>4</WarningLevel>
     <Externalconsole>True</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
-    <Commandlineparameters>../../cmycave.xnb</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <Optimize>True</Optimize>
@@ -40,7 +39,6 @@
     <DefineConstants>DEBUG;XNA;FEZENGINE;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Commandlineparameters>../../cmycave.xnb</Commandlineparameters>
     <Externalconsole>True</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
@@ -63,7 +61,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>True</Externalconsole>
-    <Commandlineparameters>../../cmycave.xnb</Commandlineparameters>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release +Unity|x86' ">
@@ -135,6 +132,8 @@
     <Compile Include="FezSlim\SurfaceType.cs" />
     <Compile Include="FezSlim\TrixelCluster.cs" />
     <Compile Include="FezSlim\TrixelEmplacement.cs" />
+    <Compile Include="FezSlim\TrileActorSettings.cs" />
+    <Compile Include="FezSlim\ActorType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
