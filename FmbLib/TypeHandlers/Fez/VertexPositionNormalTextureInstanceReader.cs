@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+#elif UNITY
+using UnityEngine;
 #else
 #warning FmbLib slim XNA still WIP.
 #endif
@@ -17,6 +19,7 @@ using FezEngine.Structure.Geometry;
 #warning FmbLib slim FezEngine still WIP.
 #endif
 
+#if FEZENGINE
 namespace FmbLib.TypeHandlers.Fez {
     public class VertexPositionNormalTextureInstanceHandler : TypeHandler<VertexPositionNormalTextureInstance> {
 
@@ -30,3 +33,4 @@ namespace FmbLib.TypeHandlers.Fez {
 
     }
 }
+#endif

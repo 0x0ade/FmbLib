@@ -5,10 +5,14 @@ using System.IO;
 #if XNA
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+#elif UNITY
+using UnityEngine;
+#warning FmbLib slim XNA still WIP and no Unity Rectangle found.
 #else
 #warning FmbLib slim XNA still WIP.
 #endif
 
+#if !UNITY
 namespace FmbLib.TypeHandlers.Xna {
     public class RectangleHandler : TypeHandler<Rectangle> {
 
@@ -24,3 +28,4 @@ namespace FmbLib.TypeHandlers.Xna {
         }
     }
 }
+#endif

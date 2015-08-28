@@ -508,6 +508,7 @@ namespace FmbLib {
 
             Console.WriteLine("Asset type: " + obj.GetType().FullName);
 
+            /*
             if (obj is TrileSet) {
                 TrileSet ts = (TrileSet) obj;
                 Console.WriteLine("TrileSet name: " + ts.Name);
@@ -516,6 +517,7 @@ namespace FmbLib {
                     Console.WriteLine(trile.Id + ": " + trile.Name);
                 }
             }
+            */
 
         }
     }

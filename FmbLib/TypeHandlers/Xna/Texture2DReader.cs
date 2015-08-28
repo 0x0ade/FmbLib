@@ -5,6 +5,8 @@ using System.IO;
 #if XNA
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+#elif UNITY
+using UnityEngine;
 #else
 #warning FmbLib slim XNA still WIP.
 #endif

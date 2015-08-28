@@ -3,13 +3,6 @@ using FmbLib;
 using System.IO;
 using System.Collections.Generic;
 
-#if XNA
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-#else
-#warning FmbLib slim XNA still WIP.
-#endif
-
 namespace FmbLib.TypeHandlers.Xna {
     public class DictionaryHandler<TKey, TValue> : TypeHandler<Dictionary<TKey, TValue>> {
 
