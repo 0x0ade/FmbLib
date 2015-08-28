@@ -20,7 +20,7 @@ namespace FezEngine.Structure {
         public string CubemapPath;
         public Texture2D Cubemap;
         public Vector3 Size;
-        //public ActorType ActorType; //TODO
+        public ActorType ActorType;
         public bool NoSilhouette;
         public TrixelCluster MissingTrixels;
         //public List<TrixelSurface> TrixelSurfaces; //TODO
