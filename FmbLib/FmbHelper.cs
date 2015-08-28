@@ -8,10 +8,10 @@ namespace FmbLib {
         
         private readonly static Dictionary<string, Type> CacheTypes = new Dictionary<string, Type>(128);
 
-		    static FmbHelper(){
-		        BlacklistedAssemblies.Add("SDL2-CS");
-		        BlacklistedAssemblies.Add("System.Drawing");
-		    }
+        static FmbHelper(){
+            BlacklistedAssemblies.Add("SDL2-CS");
+            BlacklistedAssemblies.Add("System.Drawing");
+        }
 
         public static List<string> BlacklistedAssemblies = new List<string>(); 
 

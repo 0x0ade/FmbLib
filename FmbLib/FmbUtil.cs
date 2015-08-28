@@ -28,30 +28,30 @@ namespace FmbLib {
         private static Dictionary<Type, TypeHandler> TypeHandlerTypeMap = new Dictionary<Type, TypeHandler>();
         private static string[] ManifestResourceNames;
 
-		    static FmbUtil(){
-			      #if XNA
-			      ____dotnetassembliesneedtobereferenced____.Add(typeof(Vector3));
-			      #endif
-			      #if FEZENGINE
-			      ____dotnetassembliesneedtobereferenced____.Add(typeof(TrileSet));
-			      #endif
+        static FmbUtil(){
+            #if XNA
+            ____dotnetassembliesneedtobereferenced____.Add(typeof(Vector3));
+            #endif
+            #if FEZENGINE
+            ____dotnetassembliesneedtobereferenced____.Add(typeof(TrileSet));
+            #endif
 
-			      #if XNA
-			      GeneratedTypeHandlerAssemblies.Add("MonoGame.Framework");
-			      #endif
-			      #if FEZENGINE
-			      GeneratedTypeHandlerAssemblies.Add("FezEngine");
-			      GeneratedTypeHandlerAssemblies.Add("ContentSerialization");
-			      #endif
+            #if XNA
+            GeneratedTypeHandlerAssemblies.Add("MonoGame.Framework");
+            #endif
+            #if FEZENGINE
+            GeneratedTypeHandlerAssemblies.Add("FezEngine");
+            GeneratedTypeHandlerAssemblies.Add("ContentSerialization");
+            #endif
 
-			      GeneratedTypeHandlerSpecialTypes.Add("Matrix");
-			      GeneratedTypeHandlerSpecialTypes.Add("Quaternion");
-			      GeneratedTypeHandlerSpecialTypes.Add("Vector2");
-			      GeneratedTypeHandlerSpecialTypes.Add("Vector3");
-			      GeneratedTypeHandlerSpecialTypes.Add("Vector4");
-			      GeneratedTypeHandlerSpecialTypes.Add("Color");
-			      GeneratedTypeHandlerSpecialTypes.Add("BoundingSphere");
-		    }
+            GeneratedTypeHandlerSpecialTypes.Add("Matrix");
+            GeneratedTypeHandlerSpecialTypes.Add("Quaternion");
+            GeneratedTypeHandlerSpecialTypes.Add("Vector2");
+            GeneratedTypeHandlerSpecialTypes.Add("Vector3");
+            GeneratedTypeHandlerSpecialTypes.Add("Vector4");
+            GeneratedTypeHandlerSpecialTypes.Add("Color");
+            GeneratedTypeHandlerSpecialTypes.Add("BoundingSphere");
+        }
 
         /// <summary>
         /// List of types that need to be accessed so that the assembly containing them gets referenced
@@ -61,8 +61,8 @@ namespace FmbLib {
         /// <summary>
         /// List of assemblies required for the generated typehandlers.
         /// </summary>
-		public static List<string> GeneratedTypeHandlerAssemblies = new List<string>();
-		
+        public static List<string> GeneratedTypeHandlerAssemblies = new List<string>();
+        
         /// <summary>
         /// List of types that are not found in BinaryReader, but in XNA's ContentReader
         /// </summary>
@@ -107,9 +107,9 @@ namespace FmbLib {
             return obj;
         }
 
-		public static T ReadObject<T>(BinaryReader reader, bool xnb) {
-			return ReadObject<T>(reader, xnb, true);
-		}
+        public static T ReadObject<T>(BinaryReader reader, bool xnb) {
+            return ReadObject<T>(reader, xnb, true);
+        }
 
         public static T ReadObject<T>(BinaryReader reader, bool xnb, bool readPrependedData) {
             TypeHandler handler;
@@ -401,8 +401,8 @@ namespace FmbLib {
 
             CompilerParameters parameters = new CompilerParameters();
 
-			parameters.GenerateInMemory=true;
-			parameters.CompilerOptions="/optimize";
+            parameters.GenerateInMemory=true;
+            parameters.CompilerOptions="/optimize";
 
             AssemblyName[] references = assembly.GetReferencedAssemblies();
             for (int i = 0; i < references.Length; i++) {
