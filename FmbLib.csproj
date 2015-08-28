@@ -125,6 +125,8 @@
     <Compile Include="XnaSlim\Matrix.cs" />
     <Compile Include="XnaSlim\Point.cs" />
     <Compile Include="XnaSlim\Rectangle.cs" />
+    <Compile Include="FezSlim\VertexPositionNormalTextureInstance.cs" />
+    <Compile Include="FezSlim\ShaderInstancedIndexedPrimitives.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -13,13 +13,8 @@ using UnityEngine;
 #warning FmbLib slim XNA still WIP.
 #endif
 
-#if FEZENGINE
 using FezEngine.Structure.Geometry;
-#else
-#warning FmbLib slim FezEngine still WIP.
-#endif
 
-#if FEZENGINE
 namespace FmbLib.TypeHandlers.Fez {
     public class VertexPositionNormalTextureInstanceHandler : TypeHandler<VertexPositionNormalTextureInstance> {
 
@@ -33,4 +28,3 @@ namespace FmbLib.TypeHandlers.Fez {
 
     }
 }
-#endif

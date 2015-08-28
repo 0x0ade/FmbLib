@@ -13,15 +13,10 @@ using UnityEngine;
 #warning FmbLib slim XNA still WIP.
 #endif
 
-#if FEZENGINE
 using FezEngine.Structure.Geometry;
-#else
-#warning FmbLib slim FezEngine still WIP.
-#endif
 
-#if FEZENGINE
 namespace FmbLib.TypeHandlers.Fez {
-    public class ShaderInstancedIndexedPrimitivesHandler<TemplateType, InstanceType> : TypeHandler<ShaderInstancedIndexedPrimitives<TemplateType, InstanceType>> where TemplateType : struct, IShaderInstantiatableVertex where InstanceType : struct {
+    public class ShaderInstancedIndexedPrimitivesHandler<TemplateType, InstanceType> : TypeHandler<ShaderInstancedIndexedPrimitives<TemplateType, InstanceType>> where TemplateType : struct where InstanceType : struct {
 
         public override object Read(BinaryReader reader, bool xnb) {
             PrimitiveType type = FmbUtil.ReadObject<PrimitiveType>(reader, xnb);
@@ -45,4 +40,3 @@ namespace FmbLib.TypeHandlers.Fez {
 
     }
 }
-#endif
