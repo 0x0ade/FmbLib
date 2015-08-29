@@ -4,7 +4,13 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
+#if !UNITY
+[assembly: AssemblyTitle("FmbLib-Unity")]
+#elif XNA
+[assembly: AssemblyTitle("FmbLib-XNAFEZ")]
+#else
 [assembly: AssemblyTitle("FmbLib")]
+#endif
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]

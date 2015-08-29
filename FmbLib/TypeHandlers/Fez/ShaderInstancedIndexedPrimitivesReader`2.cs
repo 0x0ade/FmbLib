@@ -16,7 +16,14 @@ using UnityEngine;
 using FezEngine.Structure.Geometry;
 
 namespace FmbLib.TypeHandlers.Fez {
+#if !UNITY
+    public class ShaderInstancedIndexedPrimitivesHandler<TemplateType, InstanceType> : TypeHandler<ShaderInstancedIndexedPrimitives<TemplateType, InstanceType>> where TemplateType : struct, IShaderInstantiatableVertex where InstanceType : struct {
+#else
     public class ShaderInstancedIndexedPrimitivesHandler<TemplateType, InstanceType> : TypeHandler<ShaderInstancedIndexedPrimitives<TemplateType, InstanceType>> {
+#endif
+#if NEVER
+    } //to fix MonoDevelop screwing up indentation
+#endif
 
         public override object Read(BinaryReader reader, bool xnb) {
             PrimitiveType type = FmbUtil.ReadObject<PrimitiveType>(reader, xnb);

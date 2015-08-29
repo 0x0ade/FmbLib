@@ -3,35 +3,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{EAF975D4-2F22-4E40-A758-C0484E071B9F}</ProjectGuid>
+    <ProjectGuid>{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>FmbLib</RootNamespace>
-    <AssemblyName>FmbLib</AssemblyName>
+    <AssemblyName>FmbLib-XNAFEZ</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>True</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Externalconsole>True</Externalconsole>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <Optimize>True</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Externalconsole>True</Externalconsole>
-    <PlatformTarget>x86</PlatformTarget>
-    <DebugType>none</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug +External|x86' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
@@ -42,7 +22,7 @@
     <Externalconsole>True</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release +External|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <Optimize>True</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <DefineConstants>XNA;FEZENGINE;</DefineConstants>
@@ -52,31 +32,19 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>none</DebugType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug +Unity|x86' ">
-    <DebugSymbols>True</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;UNITY;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Externalconsole>True</Externalconsole>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release +Unity|x86' ">
-    <DebugType>none</DebugType>
-    <Optimize>True</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <DefineConstants>UNITY;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Externalconsole>True</Externalconsole>
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="UnityEngine">
-      <HintPath>libs\UnityEngine.dll</HintPath>
+    <Reference Include="ContentSerialization">
+      <HintPath>libs\ContentSerialization.dll</HintPath>
+    </Reference>
+    <Reference Include="FezEngine">
+      <HintPath>libs\FezEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>libs\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SDL2-CS">
+      <HintPath>libs\SDL2-CS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
