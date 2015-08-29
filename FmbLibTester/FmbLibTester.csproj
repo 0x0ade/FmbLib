@@ -21,7 +21,6 @@
     <WarningLevel>4</WarningLevel>
     <Externalconsole>True</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
-    <Commandlineparameters>../../../cmycave.xnb</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -34,18 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="ContentSerialization">
-      <HintPath>..\libs\ContentSerialization.dll</HintPath>
-    </Reference>
-    <Reference Include="FezEngine">
-      <HintPath>..\libs\FezEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>..\libs\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="SDL2-CS">
-      <HintPath>..\libs\SDL2-CS.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -53,9 +40,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\FmbLib.XNAFEZ.csproj">
-      <Project>{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}</Project>
-      <Name>FmbLib.XNAFEZ</Name>
+    <ProjectReference Include="..\FmbLib.Unity.csproj">
+      <Project>{EAF975D4-2F22-4E40-A758-C0484E071B9F}</Project>
+      <Name>FmbLib.Unity</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ namespace FezEngine.Structure {
         public Texture2D Cubemap;
         public Vector3 Size;
         public ActorType ActorType;
-        public bool NoSilhouette;
+        public bool NoSihouette;
         public TrixelCluster MissingTrixels;
         //public List<TrixelSurface> TrixelSurfaces; //TODO
         public ShaderInstancedIndexedPrimitives<VertexPositionNormalTextureInstance, Matrix> Geometry;

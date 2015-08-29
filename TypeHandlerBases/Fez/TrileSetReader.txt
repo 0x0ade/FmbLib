@@ -6,4 +6,4 @@ using System.Collections.Generic;
 Name String
 Triles Object<Dictionary<int, Trile>>
 TextureAtlas Object<Texture2D>
-OnDeserialization
+#r OnDeserialization
