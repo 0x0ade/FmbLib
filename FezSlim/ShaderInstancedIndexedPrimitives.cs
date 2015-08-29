@@ -18,9 +18,15 @@ namespace FezEngine.Structure.Geometry {
         public bool NeedsEffectCommit;
         public TemplateType[] Vertices;
         public int[] Indices;
-        
+
+        //IndexedPrimitiveCollectionBase fields / properties
+        public PrimitiveType PrimitiveType;
+
         public ShaderInstancedIndexedPrimitives(PrimitiveType type, int instancesPerBatch) {
             InstancesPerBatch = instancesPerBatch;
+
+            //IndexedPrimitiveCollectionBase constructor
+            PrimitiveType = type;
         }
 
     }

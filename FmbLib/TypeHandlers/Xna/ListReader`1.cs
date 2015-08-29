@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FmbLib;
 using System.IO;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace FmbLib.TypeHandlers.Xna {
             writer.Write((byte) obj.Count);
 
             for (int i = 0; i < obj.Count; i++) {
-                FmbUtil.WriteAsset(writer, obj[i]);
+                FmbUtil.WriteObject(writer, obj[i]);
             }
         }
     }

@@ -33,7 +33,12 @@ namespace FmbLib.TypeHandlers.Xna {
         }
 
         public override void Write(BinaryWriter writer, object obj_) {
-            throw new NotImplementedException("Writing Texture2Ds will not be implemented - use external images and read / write manually!");
+            Console.WriteLine("Writing Texture2Ds will not be implemented - use external images and read / write manually!");
+            writer.Write((int) 0);
+            writer.Write((int) 0);
+            writer.Write((int) 0);
+            writer.Write((int) 0);
+            writer.Write((int) 0);
         }
     }
 }

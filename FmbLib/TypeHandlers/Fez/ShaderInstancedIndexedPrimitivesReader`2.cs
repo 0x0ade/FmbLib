@@ -34,15 +34,23 @@ namespace FmbLib.TypeHandlers.Fez {
 
             ushort[] indices = FmbUtil.ReadObject<ushort[]>(reader, xnb);
             obj.Indices = new int[indices.Length];
-            for (int index = 0; index < indices.Length; index++) {
-                obj.Indices[index] = (int) indices[index];
+            for (int i = 0; i < indices.Length; i++) {
+                obj.Indices[i] = (int) indices[i];
             }
 
             return obj;
         }
 
         public override void Write(BinaryWriter writer, object obj_) {
-            throw new NotImplementedException("Writing SIIP not implemented yet!");
+            ShaderInstancedIndexedPrimitives<TemplateType, InstanceType> obj = (ShaderInstancedIndexedPrimitives<TemplateType, InstanceType>) obj_;
+
+            FmbUtil.WriteObject(writer, obj.PrimitiveType);
+            FmbUtil.WriteObject(writer, obj.Vertices);
+            ushort[] indices = new ushort[obj.Indices.Length];
+            for (int i = 0; i < indices.Length; i++) {
+                indices[i] = (ushort) obj.Indices[i];
+            }
+            FmbUtil.WriteObject(writer, indices);
         }
 
     }

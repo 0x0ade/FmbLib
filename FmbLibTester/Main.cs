@@ -1,9 +1,30 @@
 using System;
 using FmbLib;
 using FezEngine.Structure;
+using System.IO;
 
 namespace FmbLibTester {
     class MainClass {
+
+        private static void Print(object obj) {
+            Console.WriteLine("Asset type: " + obj.GetType().FullName);
+            
+            if (obj is TrileSet) {
+                TrileSet ts = (TrileSet) obj;
+                Console.WriteLine("TrileSet name: " + ts.Name);
+                Console.WriteLine("trile count: " + ts.Triles.Count);
+                foreach (Trile trile in ts.Triles.Values) {
+                    Console.WriteLine(trile.Id + " Name: " + trile.Name);
+                    Console.WriteLine(trile.Id + " SurfaceType: " + trile.SurfaceType);
+                }
+            }
+            
+            if (obj is ArtObject) {
+                ArtObject ao = (ArtObject) obj;
+                Console.WriteLine("ArtObject name: " + ao.Name);
+                Console.WriteLine("ActorType: " + ao.ActorType);
+            }
+        }
 
         public static void Main(string[] args) {
             if (args.Length < 1) {
@@ -16,25 +37,20 @@ namespace FmbLibTester {
             for (int i = 0; i < args.Length; i++) {
                 Console.WriteLine("asset " + i + ": " + args[i]);
 
+                Console.WriteLine("reading xnb");
                 object obj = FmbUtil.ReadObject(args[i]);
-                
-                Console.WriteLine("Asset type: " + obj.GetType().FullName);
-                
-                if (obj is TrileSet) {
-                    TrileSet ts = (TrileSet) obj;
-                    Console.WriteLine("TrileSet name: " + ts.Name);
-                    Console.WriteLine("trile count: " + ts.Triles.Count);
-                    foreach (Trile trile in ts.Triles.Values) {
-                        Console.WriteLine(trile.Id + " Name: " + trile.Name);
-                        Console.WriteLine(trile.Id + " SurfaceType: " + trile.SurfaceType);
-                    }
-                }
+                Print(obj);
 
-                if (obj is ArtObject) {
-                    ArtObject ao = (ArtObject) obj;
-                    Console.WriteLine("ArtObject name: " + ao.Name);
-                    Console.WriteLine("ActorType: " + ao.ActorType);
+                Console.WriteLine("writing fmb");
+                string fmbPath = args[i].Substring(args[i].Length-3) + "fmb";
+                if (File.Exists(fmbPath)) {
+                    File.Delete(fmbPath);
                 }
+                FmbUtil.WriteObject(fmbPath, obj);
+
+                Console.WriteLine("reading fmb");
+                obj = FmbUtil.ReadObject(args[i]);
+                Print(obj);
             }
             
         }

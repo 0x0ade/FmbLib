@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FmbLib;
 using System.IO;
 using System.Collections.Generic;
@@ -23,7 +23,18 @@ namespace FmbLib.TypeHandlers.Fez {
         }
 
         public override void Write(BinaryWriter writer, object obj_) {
-            throw new NotImplementedException("Writing VPNTI not implemented yet!");
+            VertexPositionNormalTextureInstance obj = (VertexPositionNormalTextureInstance) obj_;
+
+            FmbUtil.WriteObject(writer, obj.Position);
+            byte normal = 0;
+            for (int i = 0; i < VertexPositionNormalTextureInstance.ByteToNormal.Length; i++) {
+                if (obj.Normal == VertexPositionNormalTextureInstance.ByteToNormal[i]) {
+                    normal = (byte) i;
+                    break;
+                }
+            }
+            writer.Write(normal);
+            FmbUtil.WriteObject(writer, obj.TextureCoordinate);
         }
 
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FmbLib;
 using System.IO;
 
@@ -16,7 +16,7 @@ namespace FmbLib.TypeHandlers.Xna {
         public override void Write(BinaryWriter writer, object obj_) {
             writer.Write(obj_ == null);
             if (obj_ != null) {
-                FmbUtil.WriteAsset(writer, obj_);
+                FmbUtil.WriteObject(writer, obj_);
             }
         }
     }

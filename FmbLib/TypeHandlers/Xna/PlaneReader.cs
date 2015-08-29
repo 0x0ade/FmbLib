@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FmbLib;
 using System.IO;
 
@@ -28,10 +28,10 @@ namespace FmbLib.TypeHandlers.Xna {
 
         public override void Write(BinaryWriter writer, object obj_) {
             #if !UNITY
-            FmbUtil.WriteAsset(writer, ((Plane) obj_).Normal);
+            FmbUtil.WriteObject(writer, ((Plane) obj_).Normal);
             writer.Write((float) ((Plane) obj_).D);
             #else
-            FmbUtil.WriteAsset(writer, ((Plane) obj_).normal);
+            FmbUtil.WriteObject(writer, ((Plane) obj_).normal);
             writer.Write((float) ((Plane) obj_).distance);
             #endif
         }

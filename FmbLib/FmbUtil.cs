@@ -156,9 +156,37 @@ namespace FmbLib {
             return obj;
         }
 
-        public static void WriteAsset(BinaryWriter writer, object obj_) {
+        public static void WriteObject(string output, object obj_) {
+            if (File.Exists(output)) {
+                return;
+            }
+            using (FileStream fos = new FileStream(output, FileMode.Create)) {
+                using (BinaryWriter writer = new BinaryWriter(fos)) {
+                    WriteObject(writer, obj_);
+                }
+            }
+        }
+
+        public static void WriteObject(BinaryWriter writer, object obj_) {
             writer.Write(obj_.GetType().Name);
-            TypeHandler handler = GetTypeHandler(obj_.GetType().Name);
+            TypeHandler handler = GetTypeHandler(obj_.GetType());
+            handler.Write(writer, obj_);
+        }
+
+        public static void WriteObject<T>(string output, T obj_) {
+            if (File.Exists(output)) {
+                return;
+            }
+            using (FileStream fos = new FileStream(output, FileMode.Create)) {
+                using (BinaryWriter writer = new BinaryWriter(fos)) {
+                    WriteObject<T>(writer, obj_);
+                }
+            }
+        }
+
+        public static void WriteObject<T>(BinaryWriter writer, T obj_) {
+            writer.Write(typeof(T).Name);
+            TypeHandler handler = GetTypeHandler(typeof(T));
             handler.Write(writer, obj_);
         }
 
@@ -391,7 +419,7 @@ namespace FmbLib {
 
                         string writingCall;
                         if (binaryType.StartsWith("Object<") || GeneratedTypeHandlerSpecialTypes.Contains(binaryType)) {
-                            writingCall = "FmbUtil.WriteAsset(writer, obj." + var + ");";
+                            writingCall = "FmbUtil.WriteObject(writer, obj." + var + ");";
                         } else {
                             writingCall = "writer.Write(obj." + var + ");";
                         }

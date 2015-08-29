@@ -9,7 +9,7 @@ namespace FmbLib.TypeHandlers.Xna {
         }
 
         public override void Write(BinaryWriter writer, object obj_) {
-            throw new NotImplementedException("Writing enums not implemented yet!");
+            FmbUtil.GetTypeHandler(Enum.GetUnderlyingType(obj_.GetType())).Write(writer, obj_);
         }
     }
 }
