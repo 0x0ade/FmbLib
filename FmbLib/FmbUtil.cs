@@ -420,8 +420,8 @@ namespace FmbLib {
 
             CompilerParameters parameters = new CompilerParameters();
 
-            parameters.GenerateInMemory=true;
-            parameters.CompilerOptions="/optimize";
+            parameters.GenerateInMemory = true;
+            parameters.CompilerOptions = "/optimize";
 
             AssemblyName[] references = assembly.GetReferencedAssemblies();
             for (int i = 0; i < references.Length; i++) {
@@ -494,7 +494,7 @@ namespace FmbLib {
                 typeName = readerName;
                 //Console.WriteLine("Input type name: " + typeName);
                 if (typeName.Contains("Readers")) {
-                    Console.WriteLine("debug warning: " + typeName + " contains \"Readers\". In case of failure, debug.");
+                    //Console.WriteLine("debug warning: " + typeName + " contains \"Readers\". In case of failure, debug.");
                     typeName = typeName.Replace("Readers", "Riidars");
                 }
                 if (typeName.Contains("[[")) {

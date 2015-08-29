@@ -16,14 +16,14 @@ namespace FmbLib.TypeHandlers.Xna {
             Dictionary<TKey, TValue> obj = new Dictionary<TKey, TValue>(capacity);
             for (int i = 0; i < capacity; i++) {
                 TKey key;
-                if (keyType.IsValueType || !xnb) {
+                if (FmbHelper.IsValueType(keyType) || !xnb) {
                     key = keyHandler.Read<TKey>(reader, xnb);
                 } else {
                     int readerIndex = reader.ReadByte(); //FmbLib ain't no care about reader index.
                     key = readerIndex > 0 ? keyHandler.Read<TKey>(reader, xnb) : default(TKey);
                 }
                 TValue value;
-                if (valueType.IsValueType || !xnb) {
+                if (FmbHelper.IsValueType(valueType) || !xnb) {
                     value = valueHandler.Read<TValue>(reader, xnb);
                 } else {
                     int readerIndex = reader.ReadByte(); //FmbLib ain't no care about reader index.

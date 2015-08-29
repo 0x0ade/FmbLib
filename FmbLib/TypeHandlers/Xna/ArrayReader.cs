@@ -8,7 +8,7 @@ namespace FmbLib.TypeHandlers.Xna {
         public override object Read(BinaryReader reader, bool xnb) {
             T[] obj = new T[(int) ((IntPtr) reader.ReadUInt32())];
 
-            if (typeof(T).IsValueType || !xnb) {
+            if (FmbHelper.IsValueType(typeof(T)) || !xnb) {
                 for (int i = 0; i < obj.Length; i++) {
                     obj[i] = FmbUtil.ReadObject<T>(reader, xnb, false);
                 }

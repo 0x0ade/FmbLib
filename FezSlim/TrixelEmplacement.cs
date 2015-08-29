@@ -14,7 +14,7 @@ using UnityEngine;
 #endif
 
 namespace FezEngine.Structure {
-    public class TrixelEmplacement {
+    public struct TrixelEmplacement {
 
         public int X;
         public int Y;

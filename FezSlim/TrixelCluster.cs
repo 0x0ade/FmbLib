@@ -16,7 +16,7 @@ using UnityEngine;
 namespace FezEngine.Structure {
     public class TrixelCluster {
 
-        private static readonly Vector3[] Directions = new Vector3[6] {
+        public static readonly Vector3[] Directions = new Vector3[6] { //Usually private, but used by FindBiggestBox and VisitChunk, which don't exist here
             #if !UNITY
             Vector3.Up,
             Vector3.Down,

@@ -13,7 +13,7 @@ namespace FmbLib.TypeHandlers.Xna {
             int capacity = reader.ReadInt32();
             List<T> obj = new List<T>(capacity);
             for (int i = 0; i < capacity; i++) {
-                if (typeof(T).IsValueType || !xnb) {
+                if (FmbHelper.IsValueType(typeof(T)) || !xnb) {
                     obj.Add(handler.Read<T>(reader, xnb));
                 } else {
                     int readerIndex = reader.ReadByte(); //FmbLib ain't no care about reader index.

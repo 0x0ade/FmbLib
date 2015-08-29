@@ -11,9 +11,22 @@ namespace FmbLib {
         static FmbHelper() {
             BlacklistedAssemblies.Add("SDL2-CS");
             BlacklistedAssemblies.Add("System.Drawing");
+
+            ValueTypes.Add("Matrix");
+            ValueTypes.Add("Quaternion");
+            ValueTypes.Add("Vector2");
+            ValueTypes.Add("Vector3");
+            ValueTypes.Add("Vector4");
+            ValueTypes.Add("Color");
+            ValueTypes.Add("BoundingSphere");
         }
 
-        public static List<string> BlacklistedAssemblies = new List<string>(); 
+        public static List<string> BlacklistedAssemblies = new List<string>();
+
+        /// <summary>
+        /// List of types that are value types in XNA but not value types in other frameworks / engines (f.e. UNITY)
+        /// </summary>
+        public static List<string> ValueTypes = new List<string>();
 
         public static Type FindType(string name) {
             return FindType_(name, false);
@@ -109,6 +122,10 @@ namespace FmbLib {
             } else {
                 throw new FormatException("Too many bytes in what should have been a 7 bit encoded Int32.");
             }
+        }
+
+        public static bool IsValueType(Type type) {
+            return type.IsValueType || ValueTypes.Contains(type.Name);
         }
 
     }

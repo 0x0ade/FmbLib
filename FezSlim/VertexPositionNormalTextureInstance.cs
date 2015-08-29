@@ -12,7 +12,7 @@ using UnityEngine;
 #endif
 
 namespace FezEngine.Structure.Geometry {
-    public class VertexPositionNormalTextureInstance {
+    public struct VertexPositionNormalTextureInstance {
 
         public static readonly Vector3[] ByteToNormal = new Vector3[6] {
             #if !UNITY
@@ -49,6 +49,7 @@ namespace FezEngine.Structure.Geometry {
         }
         
         public VertexPositionNormalTextureInstance(Vector3 position, Vector3 normal, float instanceIndex) {
+            TextureCoordinate = new Vector2(); //TODO unity-only?
             Position = position;
             Normal = normal;
             InstanceIndex = instanceIndex;
