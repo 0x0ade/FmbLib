@@ -16,7 +16,8 @@ AttachedGroup Object<int?>
 Billboard Boolean
 SyncWithSamples Boolean
 Crosshatch Boolean
-Boolean
+#r reader.ReadBoolean();
+#w writer.Write(false);
 AlwaysOnTop Boolean
 Fullbright Boolean
 PixelatedLightmap Boolean

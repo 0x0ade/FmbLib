@@ -86,22 +86,6 @@
     <Compile Include="FmbLib\FmbHelper.cs" />
     <Compile Include="FmbLib\TypeHandlers\Fez\ShaderInstancedIndexedPrimitivesReader`2.cs" />
     <Compile Include="FmbLib\TypeHandlers\Fez\VertexPositionNormalTextureInstanceReader.cs" />
-    <Compile Include="XnaSlim\BoundingBox.cs" />
-    <Compile Include="XnaSlim\Matrix.cs" />
-    <Compile Include="XnaSlim\Point.cs" />
-    <Compile Include="XnaSlim\Rectangle.cs" />
-    <Compile Include="FezSlim\VertexPositionNormalTextureInstance.cs" />
-    <Compile Include="FezSlim\ShaderInstancedIndexedPrimitives.cs" />
-    <Compile Include="FezSlim\ArtObject.cs" />
-    <Compile Include="FezSlim\Trile.cs" />
-    <Compile Include="FezSlim\TrileSet.cs" />
-    <Compile Include="FezSlim\FaceOrientation.cs" />
-    <Compile Include="FezSlim\CollisionType.cs" />
-    <Compile Include="FezSlim\SurfaceType.cs" />
-    <Compile Include="FezSlim\TrixelCluster.cs" />
-    <Compile Include="FezSlim\TrixelEmplacement.cs" />
-    <Compile Include="FezSlim\TrileActorSettings.cs" />
-    <Compile Include="FezSlim\ActorType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -110,8 +94,6 @@
     <Folder Include="FmbLib\TypeHandlers\" />
     <Folder Include="FmbLib\TypeHandlers\Xna\" />
     <Folder Include="FmbLib\TypeHandlers\Fez\" />
-    <Folder Include="XnaSlim\" />
-    <Folder Include="FezSlim\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TypeHandlerBases\Fez\AmbienceTrackReader.txt" />

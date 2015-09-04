@@ -77,22 +77,55 @@
     <Compile Include="FmbLib\FmbHelper.cs" />
     <Compile Include="FmbLib\TypeHandlers\Fez\ShaderInstancedIndexedPrimitivesReader`2.cs" />
     <Compile Include="FmbLib\TypeHandlers\Fez\VertexPositionNormalTextureInstanceReader.cs" />
+    <Compile Include="FezSlim\FaceOrientation.cs" />
+    <Compile Include="FezSlim\CollisionType.cs" />
+    <Compile Include="FezSlim\Structure\ActorType.cs" />
+    <Compile Include="FezSlim\Structure\ArtObject.cs" />
+    <Compile Include="FezSlim\Structure\Geometry\ShaderInstancedIndexedPrimitives.cs" />
+    <Compile Include="FezSlim\Structure\SurfaceType.cs" />
+    <Compile Include="FezSlim\Structure\TrileActorSettings.cs" />
+    <Compile Include="FezSlim\Structure\TrileSet.cs" />
+    <Compile Include="FezSlim\Structure\TrixelCluster.cs" />
+    <Compile Include="FezSlim\Structure\TrixelEmplacement.cs" />
+    <Compile Include="FezSlim\Structure\Geometry\VertexPositionNormalTextureInstance.cs" />
+    <Compile Include="FezSlim\Structure\Level.cs" />
+    <Compile Include="FezSlim\Structure\TrileFace.cs" />
+    <Compile Include="FezSlim\Structure\LiquidType.cs" />
+    <Compile Include="FezSlim\LevelNodeType.cs" />
+    <Compile Include="FezSlim\Structure\TrileEmplacement.cs" />
+    <Compile Include="FezSlim\Structure\Trile.cs" />
+    <Compile Include="FezSlim\Structure\TrileInstance.cs" />
     <Compile Include="XnaSlim\BoundingBox.cs" />
     <Compile Include="XnaSlim\Matrix.cs" />
     <Compile Include="XnaSlim\Point.cs" />
     <Compile Include="XnaSlim\Rectangle.cs" />
-    <Compile Include="FezSlim\VertexPositionNormalTextureInstance.cs" />
-    <Compile Include="FezSlim\ShaderInstancedIndexedPrimitives.cs" />
-    <Compile Include="FezSlim\ArtObject.cs" />
-    <Compile Include="FezSlim\Trile.cs" />
-    <Compile Include="FezSlim\TrileSet.cs" />
-    <Compile Include="FezSlim\FaceOrientation.cs" />
-    <Compile Include="FezSlim\CollisionType.cs" />
-    <Compile Include="FezSlim\SurfaceType.cs" />
-    <Compile Include="FezSlim\TrixelCluster.cs" />
-    <Compile Include="FezSlim\TrixelEmplacement.cs" />
-    <Compile Include="FezSlim\TrileActorSettings.cs" />
-    <Compile Include="FezSlim\ActorType.cs" />
+    <Compile Include="FezSlim\Structure\InstanceActorSettings.cs" />
+    <Compile Include="FezSlim\Structure\Volume.cs" />
+    <Compile Include="FezSlim\Structure\VolumeActorSettings.cs" />
+    <Compile Include="FezSlim\Structure\DotDialogueLine.cs" />
+    <Compile Include="FezSlim\Structure\Input\CodeInput.cs" />
+    <Compile Include="FezSlim\Structure\ArtObjectInstance.cs" />
+    <Compile Include="FezSlim\Structure\ArtObjectActorSettings.cs" />
+    <Compile Include="FezSlim\Viewpoint.cs" />
+    <Compile Include="FezSlim\Structure\PathSegment.cs" />
+    <Compile Include="FezSlim\Structure\BackgroundPlane.cs" />
+    <Compile Include="FezSlim\Structure\Scripting\Script.cs" />
+    <Compile Include="FezSlim\Structure\TrileGroup.cs" />
+    <Compile Include="FezSlim\Structure\NpcInstance.cs" />
+    <Compile Include="FezSlim\Structure\SpeechLine.cs" />
+    <Compile Include="FezSlim\Structure\NpcActionContent.cs" />
+    <Compile Include="FezSlim\Structure\Group.cs" />
+    <Compile Include="FezSlim\Structure\Scripting\ScriptTrigger.cs" />
+    <Compile Include="FezSlim\Structure\Scripting\ScriptPart.cs" />
+    <Compile Include="FezSlim\Structure\Scripting\Entity.cs" />
+    <Compile Include="FezSlim\Structure\Scripting\ScriptAction.cs" />
+    <Compile Include="FezSlim\Structure\Scripting\ScriptCondition.cs" />
+    <Compile Include="FezSlim\Structure\Scripting\ComparisonOperator.cs" />
+    <Compile Include="FezSlim\Structure\MovementPath.cs" />
+    <Compile Include="FezSlim\Structure\PathEndBehavior.cs" />
+    <Compile Include="FezSlim\Structure\AmbienceTrack.cs" />
+    <Compile Include="FezSlim\Structure\NpcAction.cs" />
+    <Compile Include="FezSlim\Structure\Input\VibrationMotor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -101,8 +134,12 @@
     <Folder Include="FmbLib\TypeHandlers\" />
     <Folder Include="FmbLib\TypeHandlers\Xna\" />
     <Folder Include="FmbLib\TypeHandlers\Fez\" />
-    <Folder Include="XnaSlim\" />
     <Folder Include="FezSlim\" />
+    <Folder Include="FezSlim\Structure\" />
+    <Folder Include="FezSlim\Structure\Geometry\" />
+    <Folder Include="FezSlim\Structure\Scripting\" />
+    <Folder Include="XnaSlim\" />
+    <Folder Include="FezSlim\Structure\Input\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TypeHandlerBases\Fez\AmbienceTrackReader.txt" />
@@ -152,5 +189,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FmbFileFormatThing.txt" />
+    <None Include="XnaSlim\README.md" />
   </ItemGroup>
 </Project>

@@ -13,7 +13,14 @@ namespace FmbLib.TypeHandlers.Xna {
             TypeHandler valueHandler = FmbUtil.GetTypeHandler(valueType);
 
             int capacity = reader.ReadInt32();
+            #if DEBUG
+            Console.WriteLine("TKey: " + keyType.FullName);
+            Console.WriteLine("TValue: " + valueType.FullName);
+            Console.WriteLine("Capacity: " + capacity);
+            Dictionary<TKey, TValue> obj = new Dictionary<TKey, TValue>(0);
+            #else
             Dictionary<TKey, TValue> obj = new Dictionary<TKey, TValue>(capacity);
+            #endif
             for (int i = 0; i < capacity; i++) {
                 TKey key;
                 if (FmbHelper.IsValueType(keyType) || !xnb) {

@@ -31,7 +31,7 @@ namespace FmbLibTester {
                 Console.WriteLine("FmbLib requires at least one parameter: the path to the xnb.");
                 Console.WriteLine("Example: FmbLib.exe level.xnb");
                 Console.WriteLine("Using default testing args instead.");
-                args = new string[] { "../../../cmycave.xnb", "../../../gateao.xnb" };
+                args = new string[] { /*"../../../cmycave.xnb", "../../../gateao.xnb",*/ "../../../fox.xnb" };
             }
 
             for (int i = 0; i < args.Length; i++) {

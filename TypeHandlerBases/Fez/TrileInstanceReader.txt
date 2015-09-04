@@ -4,8 +4,11 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 Position Vector3
 TrileId Int32
-byte orientation Byte
-SetPhiLight
-if (Boolean())
+#r obj.SetPhiLight(reader.ReadByte());
+#w Console.WriteLine("TODO: TrileInstanceReader write phi");
+#w writer.Write((byte) 0);
+#r if (reader.ReadBoolean()) {
+#w writer.Write(true);
 ActorSettings Object<InstanceActorSettings>
+#r }
 OverlappedTriles Object<List<TrileInstance>>

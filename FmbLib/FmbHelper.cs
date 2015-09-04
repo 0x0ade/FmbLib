@@ -7,6 +7,7 @@ namespace FmbLib {
     public static class FmbHelper {
         
         private readonly static Dictionary<string, Type> CacheTypes = new Dictionary<string, Type>(128);
+        private readonly static Dictionary<string, Type> CachePrefoundTypes = new Dictionary<string, Type>(1024);
 
         static FmbHelper() {
             BlacklistedAssemblies.Add("SDL2-CS");
@@ -37,6 +38,10 @@ namespace FmbLib {
             if (CacheTypes.TryGetValue(name, out type_)) {
                 return type_;
             }
+            if (CachePrefoundTypes.TryGetValue(name, out type_)) {
+                CacheTypes[name] = type_;
+                return type_;
+            }
 
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             List<Assembly> delayedAssemblies = new List<Assembly>();
@@ -53,6 +58,7 @@ namespace FmbLib {
                             CacheTypes[name] = type;
                             return type;
                         }
+                        CachePrefoundTypes[type.FullName] = CachePrefoundTypes[type.Name] = type;
                     }
                 } catch (ReflectionTypeLoadException e) {
                     Console.WriteLine("Failed searching a type in XmlHelper's FindType.");

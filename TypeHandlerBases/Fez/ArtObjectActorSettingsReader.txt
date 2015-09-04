@@ -4,4 +4,20 @@ using FezEngine.Structure;
 using FezEngine.Structure.Input;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
+Inactive Boolean
+ContainedTrile Object<ActorType>
+AttachedGroup Object<int?>
+SpinView Object<Viewpoint>
+SpinEvery Single
+SpinOffset Single
+OffCenter Boolean
+RotationCenter Vector3
+VibrationPattern Object<VibrationMotor[]>
+CodePattern Object<CodeInput[]>
+Segment Object<PathSegment>
+NextNode Object<int?>
+DestinationLevel Object<string>
+TreasureMapName Object<string>
+#r obj.InvisibleSides = new List<FaceOrientation>(FmbUtil.ReadObject<FaceOrientation[]>(reader, xnb));
+#w Console.WriteLine("TODO: AOASH WRITER");
 TimeswitchWindBackSpeed Single

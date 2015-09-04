@@ -4,6 +4,28 @@ using FezEngine.Structure;
 using FezEngine.Structure.Scripting;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
+
+Name Object<string>
+Size Vector3
+StartingPosition Object<TrileFace>
+SequenceSamplesPath Object<string>
+Flat Boolean
+SkipPostProcess Boolean
+BaseDiffuse Single
+BaseAmbient Single
+GomezHaloName Object<string>
+HaloFiltering Boolean
+BlinkingAlpha Boolean
+Loops Boolean
+WaterType Object<LiquidType>
+WaterHeight Single
+SkyName String
+TrileSetName Object<string>
+Volumes Object<Dictionary<int, Volume>>
+Scripts Object<Dictionary<int, Script>>
+SongName Object<string>
+FAPFadeOutStart Int32
+FAPFadeOutLength Int32
 Triles Object<Dictionary<TrileEmplacement, TrileInstance>>
 ArtObjects Object<Dictionary<int, ArtObjectInstance>>
 BackgroundPlanes Object<Dictionary<int, BackgroundPlane>>

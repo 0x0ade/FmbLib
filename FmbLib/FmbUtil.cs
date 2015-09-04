@@ -98,6 +98,7 @@ namespace FmbLib {
             TypeHandler[] handlers = null;
             //object[] sharedResources = null;
 
+            Console.WriteLine("Position pre xnb: " + reader.BaseStream.Position);
             if (xnb && reader.BaseStream.Position == 3) {
                 object[] xnbData = readXNB(reader);
                 //readerNames = (string[]) xnbData[0];
@@ -110,7 +111,9 @@ namespace FmbLib {
                 handler = GetTypeHandler(reader.ReadString());
             }
 
+            Console.WriteLine("Position pre main: " + reader.BaseStream.Position);
             object obj = handler.Read(reader, xnb);
+            Console.WriteLine("Position post main: " + reader.BaseStream.Position);
 
             if (xnb) {
                 //TODO read shared resources
@@ -147,7 +150,9 @@ namespace FmbLib {
                 handler = GetTypeHandler<T>();
             }
 
+            Console.WriteLine("Position pre " + handler.Type.Name + ": " + reader.BaseStream.Position);
             T obj = handler.Read<T>(reader, xnb);
+            Console.WriteLine("Position post " + handler.Type.Name + ": " + reader.BaseStream.Position);
 
             if (xnb) {
                 //TODO read shared resources
@@ -267,7 +272,9 @@ namespace FmbLib {
 
             Type[] types = Assembly.GetCallingAssembly().GetTypes();
 
-            if (typeName.Contains("[[") || (type != null && false)) {
+            //Console.WriteLine("typeName: " + typeName);
+
+            if (typeName.Contains("[[") || (type != null && type.IsGenericType)) {
                 handlerName = typeName.Substring(0, typeName.IndexOf("`")) + "Handler" + typeName.Substring(typeName.IndexOf("`"), typeName.IndexOf("[[") - typeName.IndexOf("`"));
 
                 MatchCollection matches = GenericSplitRegex.Matches(typeName.Substring(typeName.IndexOf("[[") + 1));
@@ -285,6 +292,7 @@ namespace FmbLib {
                         } else {
                             paramName = paramName.Substring(0, paramName.LastIndexOf(", "));
                         }
+                        //Console.WriteLine(i + ": " + paramName + ": " + FmbHelper.FindType(paramName));
                         genericParams.Add(FmbHelper.FindType(paramName));
                     }
                 }
@@ -315,6 +323,9 @@ namespace FmbLib {
             TypeHandler handler = null;
 
             string typeName = getTypeName(readerName, type);
+            if (type == null) {
+                type = FmbHelper.FindType(typeName);
+            }
 
             //Console.WriteLine("Generating TypeHandler for " + typeName);
 
@@ -391,13 +402,30 @@ namespace FmbLib {
                             if (line.StartsWith("#")) {
                                 line = line.Substring(3);
                             }
-                            if (!line.EndsWith(");")) {
-                                line = "obj." + line + "();\n";
+                            bool isMethod = type.GetMethod(line) != null;
+                            if (isMethod) {
+                                if (read) {
+                                    reader += "obj.";
+                                } else {
+                                    writer += "obj.";
+                                }
                             }
                             if (read) {
                                 reader += line;
                             } else {
                                 writer += line;
+                            }
+                            if (isMethod) {
+                                if (read) {
+                                    reader += "();";
+                                } else {
+                                    writer += "();";
+                                }
+                            }
+                            if (read) {
+                                reader += "\n";
+                            } else {
+                                writer += "\n";
                             }
                             continue;
                         }
@@ -431,7 +459,7 @@ namespace FmbLib {
 
             StringBuilder builder = new StringBuilder()
                 .AppendLine(usings)
-                .AppendLine("public class JITTypeHandler : TypeHandler<"+typeName+"> {")
+                .AppendLine("public class JIT" + typeName + "Handler : TypeHandler<"+typeName+"> {")
                 .AppendLine()
                 .AppendLine("public override object Read(BinaryReader reader, bool xnb) {")
                 .AppendLine(readerObjectConstruction)
@@ -479,7 +507,7 @@ namespace FmbLib {
                             Console.WriteLine(parameters.ReferencedAssemblies[i]);
                         }
                     } else {
-                        Type compiledType = results.CompiledAssembly.GetType("JITTypeHandler");
+                        Type compiledType = results.CompiledAssembly.GetType("JIT" + typeName + "Handler");
                         handler = (TypeHandler) compiledType.GetConstructor(new Type[0]).Invoke(new object[0]);
                     }
                 } catch (Exception e) {
