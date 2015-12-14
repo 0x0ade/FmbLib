@@ -126,6 +126,7 @@
     <Compile Include="FezSlim\Structure\AmbienceTrack.cs" />
     <Compile Include="FezSlim\Structure\NpcAction.cs" />
     <Compile Include="FezSlim\Structure\Input\VibrationMotor.cs" />
+    <Compile Include="FezSlim\Structure\CameraNodeData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

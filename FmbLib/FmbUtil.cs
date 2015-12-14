@@ -98,7 +98,7 @@ namespace FmbLib {
             TypeHandler[] handlers = null;
             //object[] sharedResources = null;
 
-            Console.WriteLine("Position pre xnb: " + reader.BaseStream.Position);
+            //Console.WriteLine("Position pre xnb: " + reader.BaseStream.Position);
             if (xnb && reader.BaseStream.Position == 3) {
                 object[] xnbData = readXNB(reader);
                 //readerNames = (string[]) xnbData[0];
@@ -144,9 +144,9 @@ namespace FmbLib {
                 if (readPrependedData) {
                     if (xnb) {
                         int id = FmbHelper.Read7BitEncodedInt(reader);
-                        Console.WriteLine("debug: id: " + (id - 1) + ": " + handler.GetType().FullName);
+                        //Console.WriteLine("debug: id: " + (id - 1) + ": " + handler.GetType().FullName);
                         if (id == 0) {
-                            return default(T);
+                            return handler.GetDefault<T>();
                         }
                     } else {
                         reader.ReadString();
@@ -154,9 +154,9 @@ namespace FmbLib {
                 }
             }
 
-            Console.WriteLine("Position pre " + handler.Type.Name + ": " + reader.BaseStream.Position);
+            //Console.WriteLine("Position pre " + handler.Type.Name + ": " + reader.BaseStream.Position);
             T obj = handler.Read<T>(reader, xnb);
-            Console.WriteLine("Position post " + handler.Type.Name + ": " + reader.BaseStream.Position);
+            //Console.WriteLine("Position post " + handler.Type.Name + ": " + reader.BaseStream.Position);
 
             if (xnb) {
                 //TODO read shared resources
@@ -221,7 +221,7 @@ namespace FmbLib {
                 readerNames[i] = reader.ReadString();
                 reader.ReadInt32(); //reader version
 
-                Console.WriteLine("debug: handler: " + i + ": " + readerNames[i]);
+                //Console.WriteLine("debug: handler: " + i + ": " + readerNames[i]);
                 handlers[i] = GetTypeHandler(readerNames[i]);
             }
 
@@ -394,12 +394,13 @@ namespace FmbLib {
 
                         if (line.StartsWith("#rc ") || line.StartsWith("#wc ")) {
                             bool read = !line.StartsWith("#wc ");
-                            line = line.Substring(3);
+                            line = line.Substring(4);
                             if (read) {
                                 readerObjectConstruction = line + "\n";
                             } else {
                                 writerObjectCast = line + "\n";
                             }
+                            continue;
                         }
 
                         if (!line.Contains(" ") || line.StartsWith("#r ") || line.StartsWith("#w ")) {

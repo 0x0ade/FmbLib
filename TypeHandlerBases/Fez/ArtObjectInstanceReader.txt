@@ -1,6 +1,8 @@
-﻿
+
 using FezEngine.Structure;
 using Microsoft.Xna.Framework.Content;
+#rc ArtObjectInstance obj = new ArtObjectInstance(reader.ReadString());
+#w writer.Write(obj.ArtObjectName);
 Position Vector3
 Rotation Quaternion
 Scale Vector3

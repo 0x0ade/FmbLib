@@ -57,22 +57,27 @@ namespace FezEngine.Structure {
         //public TrackedSong Song; //TODO
         
         public Level() {
-            Triles = new Dictionary<TrileEmplacement, TrileInstance>();
-            Volumes = new Dictionary<int, Volume>();
-            ArtObjects = new Dictionary<int, ArtObjectInstance>();
-            BackgroundPlanes = new Dictionary<int, BackgroundPlane>();
-            Groups = new Dictionary<int, TrileGroup>();
-            Scripts = new Dictionary<int, Script>();
-            NonPlayerCharacters = new Dictionary<int, NpcInstance>();
-            Paths = new Dictionary<int, MovementPath>();
-            MutedLoops = new List<string>();
-            AmbienceTracks = new List<AmbienceTrack>();
+            _init();
             BaseDiffuse = 1f;
             BaseAmbient = 0.35f;
             HaloFiltering = true;
         }
+
+        private void _init() {
+            Triles = Triles ?? new Dictionary<TrileEmplacement, TrileInstance>();
+            Volumes = Volumes ?? new Dictionary<int, Volume>();
+            ArtObjects = ArtObjects ?? new Dictionary<int, ArtObjectInstance>();
+            BackgroundPlanes = BackgroundPlanes ?? new Dictionary<int, BackgroundPlane>();
+            Groups = Groups ?? new Dictionary<int, TrileGroup>();
+            Scripts = Scripts ?? new Dictionary<int, Script>();
+            NonPlayerCharacters = NonPlayerCharacters ?? new Dictionary<int, NpcInstance>();
+            Paths = Paths ?? new Dictionary<int, MovementPath>();
+            MutedLoops = MutedLoops ?? new List<string>();
+            AmbienceTracks = AmbienceTracks ?? new List<AmbienceTrack>();
+        }
         
         public void OnDeserialization() {
+            _init();
             foreach (TrileEmplacement key in Triles.Keys) {
                 TrileInstance trile = Triles[key];
                 /*if (Triles[key].Emplacement != key) {
@@ -80,7 +85,8 @@ namespace FezEngine.Structure {
                 }*/
                 //trile.Update();
                 trile.OriginalEmplacement = key;
-                if (trile.OverlappedTriles.Count > 0) {
+                //FIXME remove trile.OverlappedTriles != null
+                if (trile.OverlappedTriles != null && trile.OverlappedTriles.Count > 0) {
                     foreach (TrileInstance trileOverlapping in trile.OverlappedTriles) {
                         trileOverlapping.OriginalEmplacement = key;
                     }
@@ -107,14 +113,15 @@ namespace FezEngine.Structure {
             foreach (int id in Groups.Keys)  {
                 TrileGroup trileGroup = Groups[id];
                 trileGroup.Id = id;
-                TrileEmplacement[] trileEmplacementArray = new TrileEmplacement[trileGroup.Triles.Count];
+                /*TrileEmplacement[] trileEmplacementArray = new TrileEmplacement[trileGroup.Triles.Count];
                 for (int i = 0; i < trileEmplacementArray.Length; i++) {
                     trileEmplacementArray[i] = trileGroup.Triles[i].Emplacement;
                 }
                 trileGroup.Triles.Clear();
+                //FIXME crashes here as key cannot be found in Triles
                 foreach (TrileEmplacement key in trileEmplacementArray) {
                     trileGroup.Triles.Add(Triles[key]);
-                }
+                }*/
             }
         }
         

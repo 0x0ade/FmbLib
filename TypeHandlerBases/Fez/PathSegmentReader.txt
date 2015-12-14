@@ -10,5 +10,7 @@ Acceleration Single
 Deceleration Single
 JitterFactor Single
 Orientation Quaternion
-if (Boolean())
-CustomData = 
+#r if (reader.ReadBoolean()) {
+#w writer.Write(true);
+CustomData Object<CameraNodeData>
+#r }

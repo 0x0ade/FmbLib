@@ -6,7 +6,9 @@ namespace FmbLib.TypeHandlers.Xna {
     public class NullableHandler<T> : TypeHandler<T?> where T : struct {
 
         public override object Read(BinaryReader reader, bool xnb) {
-            if (reader.ReadBoolean()) {
+            if (/*reader.ReadBoolean()*/ true) {
+                //FIXME this should read a boolean, but reading it kills everything by one byte...
+                //possible reading boolean means simply checking if ID > 0, but that's already happening in FmbUtil
                 return FmbUtil.GetTypeHandler(typeof(T)).Read<T>(reader, xnb);
             }
             return null;

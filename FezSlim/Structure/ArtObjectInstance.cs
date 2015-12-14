@@ -44,6 +44,11 @@ namespace FezEngine.Structure {
             ActorSettings = new ArtObjectActorSettings();
             Enabled = true;
         }
+
+        public ArtObjectInstance(string artObjectName)
+            : this() {
+            ArtObjectName = artObjectName;
+        }
     	
     }
 }

@@ -24,6 +24,13 @@ namespace FmbLib {
         }
 
         public abstract void Write(BinaryWriter writer, object obj_);
+
+        public virtual object GetDefault() {
+            return null;
+        }
+        public virtual T GetDefault<T>() {
+            return (T) (GetDefault() ?? (object) default(T));
+        }
     }
 
     public abstract class TypeHandler<T> : TypeHandler {
