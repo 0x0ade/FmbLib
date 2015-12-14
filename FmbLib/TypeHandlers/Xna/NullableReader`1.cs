@@ -7,14 +7,13 @@ namespace FmbLib.TypeHandlers.Xna {
 
         public override object Read(BinaryReader reader, bool xnb) {
             if (reader.ReadBoolean()) {
-                return FmbUtil.ReadObject<T>(reader, xnb);
-            } else {
-                return null;
+                return FmbUtil.GetTypeHandler(typeof(T)).Read<T>(reader, xnb);
             }
+            return null;
         }
 
         public override void Write(BinaryWriter writer, object obj_) {
-            writer.Write(obj_ == null);
+            writer.Write(obj_ != null);
             if (obj_ != null) {
                 FmbUtil.WriteObject(writer, obj_);
             }

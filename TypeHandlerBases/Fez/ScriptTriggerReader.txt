@@ -3,3 +3,4 @@ using FezEngine.Structure.Scripting;
 using Microsoft.Xna.Framework.Content;
 Object Object<Entity>
 Event String
+#r Console.WriteLine("debug: Trigger: " + obj.Event);

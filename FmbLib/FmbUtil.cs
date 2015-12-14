@@ -111,9 +111,9 @@ namespace FmbLib {
                 handler = GetTypeHandler(reader.ReadString());
             }
 
-            Console.WriteLine("Position pre main: " + reader.BaseStream.Position);
+            //Console.WriteLine("Position pre main: " + reader.BaseStream.Position);
             object obj = handler.Read(reader, xnb);
-            Console.WriteLine("Position post main: " + reader.BaseStream.Position);
+            //Console.WriteLine("Position post main: " + reader.BaseStream.Position);
 
             if (xnb) {
                 //TODO read shared resources
@@ -140,14 +140,18 @@ namespace FmbLib {
                 //sharedResources = (object[]) xnbData[2];
                 handler = handlers[(int) xnbData[3]];
             } else {
+                handler = GetTypeHandler<T>();
                 if (readPrependedData) {
                     if (xnb) {
-                        FmbHelper.Read7BitEncodedInt(reader);
+                        int id = FmbHelper.Read7BitEncodedInt(reader);
+                        Console.WriteLine("debug: id: " + (id - 1) + ": " + handler.GetType().FullName);
+                        if (id == 0) {
+                            return default(T);
+                        }
                     } else {
                         reader.ReadString();
                     }
                 }
-                handler = GetTypeHandler<T>();
             }
 
             Console.WriteLine("Position pre " + handler.Type.Name + ": " + reader.BaseStream.Position);
@@ -217,6 +221,7 @@ namespace FmbLib {
                 readerNames[i] = reader.ReadString();
                 reader.ReadInt32(); //reader version
 
+                Console.WriteLine("debug: handler: " + i + ": " + readerNames[i]);
                 handlers[i] = GetTypeHandler(readerNames[i]);
             }
 
@@ -388,7 +393,7 @@ namespace FmbLib {
                         usingsComplete = true;
 
                         if (line.StartsWith("#rc ") || line.StartsWith("#wc ")) {
-                            bool read = !line.StartsWith("#w ");
+                            bool read = !line.StartsWith("#wc ");
                             line = line.Substring(3);
                             if (read) {
                                 readerObjectConstruction = line + "\n";

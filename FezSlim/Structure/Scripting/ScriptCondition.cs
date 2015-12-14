@@ -26,6 +26,10 @@ namespace FezEngine.Structure.Scripting {
         public ScriptCondition() {
             Operator = ComparisonOperator.None;
         }
+
+        public void OnDeserialization() {
+            //would call Process, but stub here
+        }
     	
     }
 }
