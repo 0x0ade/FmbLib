@@ -149,7 +149,10 @@ namespace FmbLib {
                             return handler.GetDefault<T>();
                         }
                     } else {
-                        reader.ReadString();
+                        string type = reader.ReadString();
+                        if (type == "null") {
+                            return handler.GetDefault<T>();
+                        }
                     }
                 }
             }
@@ -194,6 +197,10 @@ namespace FmbLib {
         }
 
         public static void WriteObject<T>(BinaryWriter writer, T obj_) {
+            if (obj_ == null) {
+                writer.Write("null");
+                return;
+            }
             writer.Write(typeof(T).Name);
             TypeHandler handler = GetTypeHandler(typeof(T));
             handler.Write(writer, obj_);

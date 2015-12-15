@@ -5,14 +5,18 @@ using FezEngine.Structure.Scripting;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 
+#w Console.WriteLine("debug: Level: Name: " + obj.Name);
 Name Object<string>
 Size Vector3
 StartingPosition Object<TrileFace>
+#w Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 SequenceSamplesPath Object<string>
+#r Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 Flat Boolean
 SkipPostProcess Boolean
 BaseDiffuse Single
 BaseAmbient Single
+#w Console.WriteLine("debug: Level: GomezHaloName: " + obj.GomezHaloName);
 GomezHaloName Object<string>
 HaloFiltering Boolean
 BlinkingAlpha Boolean
@@ -20,6 +24,7 @@ Loops Boolean
 WaterType Object<LiquidType>
 WaterHeight Single
 SkyName String
+#w Console.WriteLine("debug: Level: TrileSetName: " + obj.TrileSetName);
 TrileSetName Object<string>
 Volumes Object<Dictionary<int, Volume>>
 Scripts Object<Dictionary<int, Script>>
