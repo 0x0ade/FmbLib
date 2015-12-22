@@ -1,10 +1,11 @@
 ﻿
 using FezEngine;
 using FezEngine.Structure;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 ##Orientations = new HashSet<FaceOrientation>((IEnumerable<FaceOrientation>) input.ReadObject<FaceOrientation[]>(), (IEqualityComparer<FaceOrientation>) FaceOrientationComparer.Default);
-#r obj.Orientations = new List<FaceOrientation>(FmbUtil.ReadObject<FaceOrientation[]>(reader, xnb));
+#r obj.Orientations = FmbHelper.HashSetOrList<FaceOrientation>(FmbUtil.ReadObject<FaceOrientation[]>(reader, xnb), FaceOrientationComparer.Default);
 #w Console.WriteLine("TODO: VOLUME WRITER");
 From Vector3
 To Vector3

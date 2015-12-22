@@ -4,6 +4,6 @@ Place your own copies of
 * FezEngine.dll
 * MonoGame.Framework.dll
 * SDL2-CS.dll
-* SDL2#.dll
+* Common.dll
 
 here. The versions here are versions stripped with the FmbLibStripper tool.

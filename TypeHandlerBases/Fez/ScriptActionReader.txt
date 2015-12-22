@@ -6,4 +6,6 @@ Operation String
 Arguments Object<string[]>
 Killswitch Boolean
 Blocking Boolean
+#if !TEST
 OnDeserialization
+#endif

@@ -1,4 +1,5 @@
 ﻿#if !FEZENGINE
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FezEngine.Structure.Geometry;
@@ -16,11 +17,12 @@ using UnityEngine;
 namespace FezEngine.Structure {
     public class TrileInstance {
 
+        //For some reason, Mathf.Sin works in Unity, but not outside of it...
         private static readonly Quaternion[] QuatLookup = new Quaternion[4] {
-            new Quaternion(0.0f, (float) Mathf.Sin(-3.141593f / 2f), 0.0f, (float) Mathf.Cos(-3.141593f / 2f)),
-            new Quaternion(0.0f, (float) Mathf.Sin(-1.570796f / 2f), 0.0f, (float) Mathf.Cos(-1.570796f / 2f)),
-            new Quaternion(0.0f, (float) Mathf.Sin(-0.0f / 2f), 0.0f, (float) Mathf.Cos(0.0f / 2f)),
-            new Quaternion(0.0f, (float) Mathf.Sin(1.570796f / 2f), 0.0f, (float) Mathf.Cos(1.570796f / 2f)),
+            new Quaternion(0.0f, (float) Math.Sin(-3.141593f / 2f), 0.0f, (float) Math.Cos(-3.141593f / 2f)),
+            new Quaternion(0.0f, (float) Math.Sin(-1.570796f / 2f), 0.0f, (float) Math.Cos(-1.570796f / 2f)),
+            new Quaternion(0.0f, (float) Math.Sin(-0.0f / 2f), 0.0f, (float) Math.Cos(0.0f / 2f)),
+            new Quaternion(0.0f, (float) Math.Sin(1.570796f / 2f), 0.0f, (float) Math.Cos(1.570796f / 2f)),
         };
         private static readonly FaceOrientation[] OrientationLookup = new FaceOrientation[4] {
             FaceOrientation.Back,

@@ -1,6 +1,7 @@
 ﻿using System;
 using Mono.Cecil;
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 
 namespace FmbLib {
     internal class FmbStripper {
@@ -13,6 +14,7 @@ namespace FmbLib {
             "FezEngine.Structure.Geometry.IndexedPrimitiveCollectionBase`2.UpdatePrimitiveCount",
 
             "ToString",
+            "GetHashCode",
             "OnDeserialization",
             "Finalize",
             "Dispose",

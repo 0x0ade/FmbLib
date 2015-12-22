@@ -8,8 +8,6 @@
     <RootNamespace>FmbLib</RootNamespace>
     <AssemblyName>FmbLib-Unity</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <ProductVersion>10.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>True</DebugSymbols>
@@ -127,6 +125,7 @@
     <Compile Include="FezSlim\Structure\NpcAction.cs" />
     <Compile Include="FezSlim\Structure\Input\VibrationMotor.cs" />
     <Compile Include="FezSlim\Structure\CameraNodeData.cs" />
+    <Compile Include="FezSlim\FaceOrientationComparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

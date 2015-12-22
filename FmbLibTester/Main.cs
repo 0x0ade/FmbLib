@@ -27,6 +27,8 @@ namespace FmbLibTester {
         }
 
         public static void Main(string[] args) {
+            FmbUtil.IsTEST = true;
+
             if (args.Length < 1) {
                 Console.WriteLine("FmbLib requires at least one parameter: the path to the xnb.");
                 Console.WriteLine("Example: FmbLib.exe level.xnb");

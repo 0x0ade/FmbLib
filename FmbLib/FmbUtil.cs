@@ -31,6 +31,26 @@ namespace FmbLib {
         private static Dictionary<Type, TypeHandler> TypeHandlerTypeMap = new Dictionary<Type, TypeHandler>();
         private static string[] ManifestResourceNames;
 
+        #if XNA
+        public static bool IsXNA = true;
+        #else
+        public static bool IsXNA = false;
+        #endif
+
+        #if UNITY
+        public static bool IsUNITY = true;
+        #else
+        public static bool IsUNITY = false;
+        #endif
+
+        #if FEZENGINE
+        public static bool IsFEZENGINE = true;
+        #else
+        public static bool IsFEZENGINE = false;
+        #endif
+
+        public static bool IsTEST = false;
+
         static FmbUtil(){
             #if XNA || UNITY
             ____dotnetassembliesneedtobereferenced____.Add(typeof(Vector3));
@@ -383,6 +403,42 @@ namespace FmbLib {
 
                         line = line.Trim();
                         if (line.Length == 0) {
+                            continue;
+                        }
+
+                        if (line.StartsWith("#if ")) {
+                            line = line.Substring(4);
+                            bool not = line.StartsWith("!");
+                            if (not) {
+                                line = line.Substring(1);
+                            }
+                            if (line == "XNA") {
+                                line = "FmbUtil.IsXNA";
+                            } else if (line == "UNITY") {
+                                line = "FmbUtil.IsUNITY";
+                            } else if (line == "FEZENGINE") {
+                                line = "FmbUtil.IsFEZENGINE";
+                            } else if (line == "TEST") {
+                                line = "FmbUtil.IsTEST";
+                            }
+                            if (not) {
+                                line = "!" + line;
+                            }
+                            line = "if (" + line + ") {\n";
+                            reader += line;
+                            writer += line;
+                            continue;
+                        }
+                        if (line == ("#endif")) {
+                            line = "}\n";
+                            reader += line;
+                            writer += line;
+                            continue;
+                        }
+                        if (line == ("#endif")) {
+                            line = "}\n";
+                            reader += line;
+                            writer += line;
                             continue;
                         }
 

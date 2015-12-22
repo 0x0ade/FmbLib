@@ -134,6 +134,17 @@ namespace FmbLib {
             return type.IsValueType || ValueTypes.Contains(type.Name);
         }
 
+        #if FEZENGINE
+        public static HashSet<T> HashSetOrList<T>(T[] arr, IEqualityComparer<T> comp) {
+            return new HashSet<T>(arr, comp);
+        }
+        #else
+        public static List<T> HashSetOrList<T>(T[] arr, object comp) {
+            return new List<T>(arr);
+        }
+        #endif
+
+
     }
 }
 
