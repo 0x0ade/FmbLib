@@ -29,7 +29,10 @@ namespace FmbLib.TypeHandlers.Fez {
             PrimitiveType type = FmbUtil.ReadObject<PrimitiveType>(reader, xnb);
 
             ShaderInstancedIndexedPrimitives<TemplateType, InstanceType> obj = new ShaderInstancedIndexedPrimitives<TemplateType, InstanceType>(type, typeof (InstanceType) == typeof (Matrix) ? 60 : 220);
+            #if !FNA
+            //FEZMod integration - SIIPs in FEZ 1.12 don't seem to have the "NeedsEffectCommit" flag anymore
             obj.NeedsEffectCommit = true;
+            #endif
             obj.Vertices = FmbUtil.ReadObject<TemplateType[]>(reader, xnb);
 
             ushort[] indices = FmbUtil.ReadObject<ushort[]>(reader, xnb);
