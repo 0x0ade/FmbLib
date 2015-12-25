@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.IO;
+using System.Text;
 
 namespace FmbLib {
     public static class FmbHelper {
@@ -143,6 +144,11 @@ namespace FmbLib {
             return new List<T>(arr);
         }
         #endif
+
+        public static void AppendTo(string str, StringBuilder b1, StringBuilder b2) {
+            b1.Append(str);
+            b2.Append(str);
+        }
 
 
     }
