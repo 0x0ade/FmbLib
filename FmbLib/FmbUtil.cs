@@ -23,26 +23,6 @@ using UnityEngine;
 namespace FmbLib {
     public static class FmbUtil {
 
-        private static string assemblyPrefix;
-        public static string AssemblyPrefix {
-            get {
-                if (assemblyPrefix != null) {
-                    return assemblyPrefix;
-                }
-
-                string name = assemblyPrefix = Assembly.GetExecutingAssembly().GetName().Name;
-                if (name.StartsWith("FmbLib")) {
-                    assemblyPrefix = "FmbLib";
-                }
-
-                return AssemblyPrefix;
-            }
-
-            set {
-                assemblyPrefix = value;
-            }
-        }
-
         private static Regex GenericSplitRegex = new Regex(@"(\[.*?\])");
 
         private static char[] XNBMagic = { 'X', 'N', 'B' };
@@ -387,17 +367,16 @@ namespace FmbLib {
                 ManifestResourceNames = assembly.GetManifestResourceNames();
             }
 
-            string readerType = "Fallback";
+            string path = null;
 
-            string xnapath = AssemblyPrefix + ".TypeHandlerBases.Xna." + typeName + "Reader.txt";
-            string fezpath = AssemblyPrefix + ".TypeHandlerBases.Fez." + typeName + "Reader.txt";
+            string comparisonReader = typeName + "Reader.txt";
+            string comparisonHandler = typeName + "Handler.txt";
             for (int i = 0; i < ManifestResourceNames.Length; i++) {
-                if (xnapath == ManifestResourceNames[i]) {
-                    readerType = "Xna";
-                    break;
-                }
-                if (fezpath == ManifestResourceNames[i]) {
-                    readerType = "Fez";
+                if (
+                    ManifestResourceNames[i].EndsWith(comparisonReader) ||
+                    ManifestResourceNames[i].EndsWith(comparisonHandler)
+                ) {
+                    path = ManifestResourceNames[i];
                     break;
                 }
             }
@@ -408,8 +387,7 @@ namespace FmbLib {
             string readerObjectConstruction = typeName + " obj = new " + typeName + "();\n";
             string writerObjectCast = typeName + " obj = (" + typeName + ") obj_;\n";
 
-            string path = AssemblyPrefix + ".TypeHandlerBases." + readerType + "." + typeName + "Reader.txt";
-            Console.WriteLine("Base typehandler: " + path);
+            Console.WriteLine("TypeHandler<" + typeName + "> base: " + path);
 
             using (Stream s = assembly.GetManifestResourceStream(path)) {
                 if (s == null) {
