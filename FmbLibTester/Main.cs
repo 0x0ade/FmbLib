@@ -33,15 +33,17 @@ namespace FmbLibTester {
             if (args.Length < 1) {
                 Console.WriteLine("FmbLib requires at least one parameter: the path to the xnb.");
                 Console.WriteLine("Example: FmbLib.exe level.xnb");
-                Console.WriteLine("Alternatively, run with --preparse / -pp as only parameter");
+                Console.WriteLine("Alternatively, run with --preparse / -pp + path as parameters");
                 Console.WriteLine("to generate the .cs sources for the TypeHandlerBase .txts.");
                 Console.WriteLine("Using default testing args instead.");
                 //args = new string[] { /*"../../../cmycave.xnb", "../../../gateao.xnb",*/ "../../../fox.xnb" };
-                args = new string[] { "-pp" };
+                args = new string[] { "-pp", "../../../PreParsedBases/" + (FmbUtil.IsUNITY ? "UNITY" : "XNAFEZ") };
             }
 
-            if (args.Length == 1 && (args[0] == "-pp" || args[0] == "--preparse")) {
+            if (args.Length == 2 && (args[0] == "-pp" || args[0] == "--preparse")) {
                 Console.WriteLine("Pre-parsing all TypeHandlerBases...");
+
+                Directory.CreateDirectory(args[1]);
 
                 Assembly assembly = typeof(FmbUtil).Assembly;
                 string[] manifestResourceNames = assembly.GetManifestResourceNames();
@@ -74,7 +76,13 @@ namespace FmbLibTester {
                         }
                     }
 
-                    Console.WriteLine(source);
+                    Console.Write(source);
+
+                    using (Stream s = File.OpenWrite(Path.Combine(args[1], split[split.Length - 1] + "Handler.cs"))) {
+                        using (StreamWriter sw = new StreamWriter(s)) {
+                            sw.Write(source);
+                        }
+                    }
                 }
 
                 return;
