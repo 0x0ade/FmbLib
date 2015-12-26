@@ -264,7 +264,7 @@ namespace FmbLib {
                 return handler;
             }
 
-            handler = getHandler(readerName, null) ?? genHandler(readerName, null);
+            handler = getHandler(readerName, null) ?? GenerateHandler(readerName, null);
 
             TypeHandlerReaderMap[readerName] = handler;
             return handler;
@@ -280,7 +280,7 @@ namespace FmbLib {
                 return handler;
             }
 
-            handler = getHandler(null, type) ?? genHandler(null, type);
+            handler = getHandler(null, type) ?? GenerateHandler(null, type);
 
             TypeHandlerTypeMap[type] = handler;
             return handler;
@@ -303,7 +303,7 @@ namespace FmbLib {
 
             //Console.WriteLine("Getting TypeHandler for " + typeName);
 
-            Type[] types = Assembly.GetCallingAssembly().GetTypes();
+            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
 
             //Console.WriteLine("typeName: " + typeName);
 
@@ -352,7 +352,7 @@ namespace FmbLib {
             return null;
         }
 
-        private static TypeHandler genHandler(string readerName, Type type) {
+        public static TypeHandler GenerateHandler(string readerName, Type type) {
             TypeHandler handler = null;
 
             string typeName = getTypeName(readerName, type);
@@ -362,7 +362,7 @@ namespace FmbLib {
 
             //Console.WriteLine("Generating TypeHandler for " + typeName);
 
-            Assembly assembly = Assembly.GetCallingAssembly();
+            Assembly assembly = Assembly.GetExecutingAssembly();
             if (ManifestResourceNames == null) {
                 ManifestResourceNames = assembly.GetManifestResourceNames();
             }
@@ -381,156 +381,18 @@ namespace FmbLib {
                 }
             }
 
-            string usings = "using FmbLib;\nusing System;\nusing System.IO;\n";
-            StringBuilder readerBuilder = new StringBuilder();
-            StringBuilder writerBuilder = new StringBuilder();
-            string readerObjectConstruction = typeName + " obj = new " + typeName + "();\n";
-            string writerObjectCast = typeName + " obj = (" + typeName + ") obj_;\n";
+            Console.WriteLine("Generating TypeHandler<" + typeName + "> from " + path);
 
-            Console.WriteLine("TypeHandler<" + typeName + "> base: " + path);
-
+            string source;
             using (Stream s = assembly.GetManifestResourceStream(path)) {
                 if (s == null) {
                     Console.WriteLine("Resource cannot be loaded.");
                     return null;
                 }
                 using (StreamReader sr = new StreamReader(s)) {
-                    bool usingsComplete = false;
-                    string line;
-                    while ((line = sr.ReadLine()) != null) {
-                        if (line.StartsWith("##")) {
-                            continue;
-                        }
-
-                        line = line.Trim();
-                        if (line.Length == 0) {
-                            continue;
-                        }
-
-                        if (line.StartsWith("#if ")) {
-                            line = line.Substring(4);
-                            bool not = line.StartsWith("!");
-                            if (not) {
-                                line = line.Substring(1);
-                            }
-                            if (line == "XNA") {
-                                line = "FmbUtil.IsXNA";
-                            } else if (line == "UNITY") {
-                                line = "FmbUtil.IsUNITY";
-                            } else if (line == "FEZENGINE") {
-                                line = "FmbUtil.IsFEZENGINE";
-                            } else if (line == "TEST") {
-                                line = "FmbUtil.IsTEST";
-                            }
-                            FmbHelper.AppendTo("if (", readerBuilder, writerBuilder);
-                            if (not) {
-                                FmbHelper.AppendTo("!", readerBuilder, writerBuilder);
-                            }
-                            FmbHelper.AppendTo(line, readerBuilder, writerBuilder);
-                            FmbHelper.AppendTo(") {\n", readerBuilder, writerBuilder);
-                            continue;
-                        }
-                        if (line == ("#endif")) {
-                            FmbHelper.AppendTo("}\n", readerBuilder, writerBuilder);
-                            continue;
-                        }
-
-                        if (!usingsComplete && line.StartsWith("using ")) {
-                            line = line.Substring(6, line.Length - 6 - 1);
-                            for (int i = 0; i < NamespaceRemap.Count; i++) {
-                                line = line.Replace(NamespaceRemap[i].Key, NamespaceRemap[i].Value);
-                            }
-                            line = "using " + line + ";\n";
-                            if (!usings.Contains(line)) {
-                                usings += line;
-                            }
-                            continue;
-                        }
-                        usingsComplete = true;
-
-                        if (line.StartsWith("#rc ") || line.StartsWith("#wc ")) {
-                            bool read = !line.StartsWith("#wc ");
-                            line = line.Substring(4);
-                            if (read) {
-                                readerObjectConstruction = line + "\n";
-                            } else {
-                                writerObjectCast = line + "\n";
-                            }
-                            continue;
-                        }
-
-                        if (!line.Contains(" ") || line.StartsWith("#r ") || line.StartsWith("#w ")) {
-                            bool read = !line.StartsWith("#w ");
-                            if (line.StartsWith("#")) {
-                                line = line.Substring(3);
-                            }
-                            bool isMethod = type.GetMethod(line) != null;
-                            if (isMethod) {
-                                if (read) {
-                                    readerBuilder.Append("obj.");
-                                } else {
-                                    writerBuilder.Append("obj.");
-                                }
-                            }
-                            if (read) {
-                                readerBuilder.Append(line);
-                            } else {
-                                writerBuilder.Append(line);
-                            }
-                            if (isMethod) {
-                                if (read) {
-                                    readerBuilder.Append("();");
-                                } else {
-                                    writerBuilder.Append("();");
-                                }
-                            }
-                            if (read) {
-                                readerBuilder.Append("\n");
-                            } else {
-                                writerBuilder.Append("\n");
-                            }
-                            continue;
-                        }
-
-                        int indexSplit = line.IndexOf(" ");
-                        string var = line.Substring(0, indexSplit);
-                        string binaryType = line.Substring(indexSplit + 1);
-
-                        readerBuilder.Append("obj.").Append(var).Append(" = ");
-                        if (binaryType.StartsWith("Object<")) {
-                            readerBuilder.Append("FmbUtil.Read").Append(binaryType).Append("(reader, xnb);");
-                        } else if (GeneratedTypeHandlerSpecialTypes.Contains(binaryType)) {
-                            readerBuilder.Append("FmbUtil.ReadObject<").Append(binaryType).Append(">(reader, xnb, false);");
-                        } else {
-                            readerBuilder.Append("reader.Read").Append(binaryType).Append("();");
-                        }
-                        readerBuilder.Append("\n");
-
-                        if (binaryType.StartsWith("Object<") || GeneratedTypeHandlerSpecialTypes.Contains(binaryType)) {
-                            writerBuilder.Append("FmbUtil.WriteObject(writer, obj.").Append(var);
-                        } else {
-                            writerBuilder.Append("writer.Write(obj.").Append(var);
-                        }
-                        writerBuilder.Append(");\n");
-                    }
+                    source = GenerateHandlerSource(sr, typeName, type);
                 }
             }
-
-            StringBuilder builder = new StringBuilder()
-                .AppendLine(usings)
-                .Append("public class JIT").Append(typeName).Append("Handler : TypeHandler<").Append(typeName).AppendLine("> {")
-                .AppendLine()
-                .AppendLine("public override object Read(BinaryReader reader, bool xnb) {")
-                .AppendLine(readerObjectConstruction)
-                .AppendLine(readerBuilder.ToString())
-                .AppendLine("return obj;")
-                .AppendLine("}")
-                .AppendLine()
-                .AppendLine("public override void Write(BinaryWriter writer, object obj_) {")
-                .AppendLine(writerObjectCast)
-                .AppendLine(writerBuilder.ToString())
-                .AppendLine("}")
-                .AppendLine("}");
 
             CompilerParameters parameters = new CompilerParameters();
 
@@ -552,7 +414,7 @@ namespace FmbLib {
 
             using (CSharpCodeProvider provider = new CSharpCodeProvider()) {
                 try {
-                    CompilerResults results = provider.CompileAssemblyFromSource(parameters, builder.ToString());
+                    CompilerResults results = provider.CompileAssemblyFromSource(parameters, source);
 
                     if (results.Errors.HasErrors) {
                         Console.WriteLine("Errors while generating TypeHandler:");
@@ -560,7 +422,7 @@ namespace FmbLib {
                             Console.WriteLine(error);
                         }
                         Console.WriteLine("GeneratedTypeHandler source:");
-                        Console.WriteLine(builder);
+                        Console.WriteLine(source);
                         Console.WriteLine("Referenced assemblies:");
                         for (int i = 0; i < parameters.ReferencedAssemblies.Count; i++) {
                             Console.WriteLine(parameters.ReferencedAssemblies[i]);
@@ -573,7 +435,7 @@ namespace FmbLib {
                     Console.WriteLine("Error while generating TypeHandler:");
                     Console.WriteLine(e);
                     Console.WriteLine("GeneratedTypeHandler source:");
-                    Console.WriteLine(builder);
+                    Console.WriteLine(source);
                     Console.WriteLine("Referenced assemblies:");
                     for (int i = 0; i < parameters.ReferencedAssemblies.Count; i++) {
                         Console.WriteLine(parameters.ReferencedAssemblies[i]);
@@ -582,6 +444,161 @@ namespace FmbLib {
             }
 
             return handler;
+        }
+
+        public static string GenerateHandlerSource(StreamReader sr, string typeName, Type type) {
+            return GenerateHandlerSource(sr, typeName, type, "JIT" + typeName + "Handler", null);
+        }
+
+        public static string GenerateHandlerSource(StreamReader sr, string typeName, Type type, string handlerName, string @namespace) {
+            if (type == null) {
+                type = FmbHelper.FindType(typeName);
+            }
+            if (type == null) {
+                Console.WriteLine("Type not found for handler to generate: " + typeName);
+            }
+            string tab = @namespace == null ? "" : "\t";
+
+            string usings = "using FmbLib;\nusing System;\nusing System.IO;\n";
+            StringBuilder readerBuilder = new StringBuilder();
+            StringBuilder writerBuilder = new StringBuilder();
+            string readerObjectConstruction = typeName + " obj = new " + typeName + "();\n";
+            string writerObjectCast = typeName + " obj = (" + typeName + ") obj_;\n";
+
+            bool usingsComplete = false;
+            string line;
+            while ((line = sr.ReadLine()) != null) {
+                if (line.StartsWith("##")) {
+                    continue;
+                }
+
+                line = line.Trim();
+                if (line.Length == 0) {
+                    continue;
+                }
+
+                if (line.StartsWith("#if ")) {
+                    line = line.Substring(4);
+                    bool not = line.StartsWith("!");
+                    if (not) {
+                        line = line.Substring(1);
+                    }
+                    if (line == "XNA") {
+                        line = "FmbUtil.IsXNA";
+                    } else if (line == "UNITY") {
+                        line = "FmbUtil.IsUNITY";
+                    } else if (line == "FEZENGINE") {
+                        line = "FmbUtil.IsFEZENGINE";
+                    } else if (line == "TEST") {
+                        line = "FmbUtil.IsTEST";
+                    }
+                    FmbHelper.AppendTo(tab, readerBuilder, writerBuilder);
+                    FmbHelper.AppendTo("\t\t", readerBuilder, writerBuilder);
+                    FmbHelper.AppendTo("if (", readerBuilder, writerBuilder);
+                    if (not) {
+                        FmbHelper.AppendTo("!", readerBuilder, writerBuilder);
+                    }
+                    FmbHelper.AppendTo(line, readerBuilder, writerBuilder);
+                    FmbHelper.AppendTo(") {\n", readerBuilder, writerBuilder);
+                    continue;
+                }
+                if (line == ("#endif")) {
+                    FmbHelper.AppendTo(tab, readerBuilder, writerBuilder);
+                    FmbHelper.AppendTo("\t\t}\n", readerBuilder, writerBuilder);
+                    continue;
+                }
+
+                if (!usingsComplete && line.StartsWith("using ")) {
+                    line = line.Substring(6, line.Length - 6 - 1);
+                    for (int i = 0; i < NamespaceRemap.Count; i++) {
+                        line = line.Replace(NamespaceRemap[i].Key, NamespaceRemap[i].Value);
+                    }
+                    line = "using " + line + ";\n";
+                    if (!usings.Contains(line)) {
+                        usings += line;
+                    }
+                    continue;
+                }
+                usingsComplete = true;
+
+                if (line.StartsWith("#rc ") || line.StartsWith("#wc ")) {
+                    bool read = !line.StartsWith("#wc ");
+                    line = line.Substring(4);
+                    if (read) {
+                        readerObjectConstruction = line + "\n";
+                    } else {
+                        writerObjectCast = line + "\n";
+                    }
+                    continue;
+                }
+
+                if (!line.Contains(" ") || line.StartsWith("#r ") || line.StartsWith("#w ")) {
+                    bool read = !line.StartsWith("#w ");
+                    if (line.StartsWith("#")) {
+                        line = line.Substring(3);
+                    }
+                    bool isMethod = type != null && type.GetMethod(line) != null;
+                    StringBuilder lineBuilder = read ? readerBuilder : writerBuilder;
+                    lineBuilder.Append(tab).Append("\t\t");
+                    if (isMethod) {
+                        lineBuilder.Append("obj.");
+                    }
+                    lineBuilder.Append(line);
+                    if (isMethod) {
+                        lineBuilder.Append("();");
+                    }
+                    lineBuilder.AppendLine();
+                    continue;
+                }
+
+                FmbHelper.AppendTo(tab, readerBuilder, writerBuilder);
+                FmbHelper.AppendTo("\t\t", readerBuilder, writerBuilder);
+
+                int indexSplit = line.IndexOf(" ");
+                string var = line.Substring(0, indexSplit);
+                string binaryType = line.Substring(indexSplit + 1);
+
+                readerBuilder.Append("obj.").Append(var).Append(" = ");
+                if (binaryType.StartsWith("Object<")) {
+                    readerBuilder.Append("FmbUtil.Read").Append(binaryType).Append("(reader, xnb);");
+                } else if (GeneratedTypeHandlerSpecialTypes.Contains(binaryType)) {
+                    readerBuilder.Append("FmbUtil.ReadObject<").Append(binaryType).Append(">(reader, xnb, false);");
+                } else {
+                    readerBuilder.Append("reader.Read").Append(binaryType).Append("();");
+                }
+                readerBuilder.AppendLine();
+
+                if (binaryType.StartsWith("Object<") || GeneratedTypeHandlerSpecialTypes.Contains(binaryType)) {
+                    writerBuilder.Append("FmbUtil.WriteObject(writer, obj.").Append(var);
+                } else {
+                    writerBuilder.Append("writer.Write(obj.").Append(var);
+                }
+                writerBuilder.Append(");\n");
+            }
+
+            StringBuilder builder = new StringBuilder()
+                .AppendLine(usings);
+            if (@namespace != null) {
+                builder.Append("namespace ").Append(@namespace).AppendLine(" {");
+            }
+            builder.Append(tab).Append("public class ").Append(handlerName).Append(" : TypeHandler<").Append(typeName).AppendLine("> {")
+                .AppendLine()
+                .Append(tab).AppendLine("\tpublic override object Read(BinaryReader reader, bool xnb) {")
+                .Append(tab).Append("\t\t").AppendLine(readerObjectConstruction)
+                .AppendLine(readerBuilder.ToString())
+                .Append(tab).AppendLine("\t\treturn obj;")
+                .Append(tab).AppendLine("\t}")
+                .AppendLine()
+                .Append(tab).AppendLine("\tpublic override void Write(BinaryWriter writer, object obj_) {")
+                .Append(tab).Append("\t\t").AppendLine(writerObjectCast)
+                .Append(writerBuilder.ToString())
+                .Append(tab).AppendLine("\t}")
+                .Append(tab).AppendLine("}");
+            if (@namespace != null) {
+                builder.AppendLine("}");
+            }
+
+            return builder.ToString();
         }
 
         private static string getTypeName(string readerName, Type type) {

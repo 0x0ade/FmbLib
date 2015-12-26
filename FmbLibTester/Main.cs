@@ -2,6 +2,7 @@ using System;
 using FmbLib;
 using FezEngine.Structure;
 using System.IO;
+using System.Reflection;
 
 namespace FmbLibTester {
     class MainClass {
@@ -32,8 +33,51 @@ namespace FmbLibTester {
             if (args.Length < 1) {
                 Console.WriteLine("FmbLib requires at least one parameter: the path to the xnb.");
                 Console.WriteLine("Example: FmbLib.exe level.xnb");
+                Console.WriteLine("Alternatively, run with --preparse / -pp as only parameter");
+                Console.WriteLine("to generate the .cs sources for the TypeHandlerBase .txts.");
                 Console.WriteLine("Using default testing args instead.");
-                args = new string[] { /*"../../../cmycave.xnb", "../../../gateao.xnb",*/ "../../../fox.xnb" };
+                //args = new string[] { /*"../../../cmycave.xnb", "../../../gateao.xnb",*/ "../../../fox.xnb" };
+                args = new string[] { "-pp" };
+            }
+
+            if (args.Length == 1 && (args[0] == "-pp" || args[0] == "--preparse")) {
+                Console.WriteLine("Pre-parsing all TypeHandlerBases...");
+
+                Assembly assembly = typeof(FmbUtil).Assembly;
+                string[] manifestResourceNames = assembly.GetManifestResourceNames();
+
+                for (int i = 0; i < manifestResourceNames.Length; i++) {
+                    if (!(
+                        manifestResourceNames[i].EndsWith("Reader.txt") ||
+                        manifestResourceNames[i].EndsWith("Handler.txt")
+                    )) {
+                        continue;
+                    }
+
+                    string path = manifestResourceNames[i];
+                    if (path.EndsWith("Reader.txt")) {
+                        path = path.Substring(0, path.Length - 10);
+                    } else if (path.EndsWith("Handler.txt")) {
+                        path = path.Substring(0, path.Length - 11);
+                    }
+
+                    string[] split = path.Split('.');
+
+                    string source;
+                    using (Stream s = assembly.GetManifestResourceStream(manifestResourceNames[i])) {
+                        if (s == null) {
+                            Console.WriteLine(manifestResourceNames[i] + " cannot be loaded.");
+                            continue;
+                        }
+                        using (StreamReader sr = new StreamReader(s)) {
+                            source = FmbUtil.GenerateHandlerSource(sr, split[split.Length - 1], null, split[split.Length - 1] + "Handler", "FmbLib.TypeHandlers." + split[split.Length - 2]);
+                        }
+                    }
+
+                    Console.WriteLine(source);
+                }
+
+                return;
             }
 
             for (int i = 0; i < args.Length; i++) {
