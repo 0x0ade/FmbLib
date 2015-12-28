@@ -233,7 +233,7 @@ namespace FmbLib {
 
             byte flagBits = reader.ReadByte();
             if ((flagBits & 0x80) == 0x80) {
-                throw new InvalidOperationException("Can not read compressed XNBs!");
+                throw new InvalidOperationException("Cannot read compressed XNBs!");
             }
             //TODO check if 0x80 is set, if so: decompressing codepath?
 
