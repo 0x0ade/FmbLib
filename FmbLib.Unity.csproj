@@ -153,6 +153,7 @@
     <Compile Include="PreParsedBases\UNITY\TrileSetHandler.cs" />
     <Compile Include="PreParsedBases\UNITY\VolumeActorSettingsHandler.cs" />
     <Compile Include="PreParsedBases\UNITY\VolumeHandler.cs" />
+    <Compile Include="FezSlim\Structure\TrileInstanceData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

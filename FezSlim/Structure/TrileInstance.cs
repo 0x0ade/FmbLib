@@ -44,7 +44,25 @@ namespace FezEngine.Structure {
 
         public List<TrileInstance> OverlappedTriles = new List<TrileInstance>();
 
-        public Vector3 Position;
+        private Vector3 cachedPosition;
+        public Vector3 Position {
+            get {
+                return cachedPosition;
+            }
+            set {
+                #if !UNITY
+                Data.PositionPhi.X = value.X;
+                Data.PositionPhi.Y = value.Y;
+                Data.PositionPhi.Z = value.Z;
+                #else
+                Data.PositionPhi.x = value.x;
+                Data.PositionPhi.y = value.y;
+                Data.PositionPhi.z = value.z;
+                #endif
+                cachedPosition = value;
+                cachedEmplacement = new TrileEmplacement(cachedPosition);
+            }
+        }
 
         public int? VisualTrileId;
         public int InstanceId;
@@ -61,9 +79,27 @@ namespace FezEngine.Structure {
 
         //public InstancePhysicsState PhysicsState; //TODO
 
-        public TrileEmplacement Emplacement;
+        private TrileEmplacement cachedEmplacement;
+        public TrileEmplacement Emplacement {
+            get {
+                return cachedEmplacement;
+            }
+            set {
+                #if !UNITY
+                Data.PositionPhi.X = value.X;
+                Data.PositionPhi.Y = value.Y;
+                Data.PositionPhi.Z = value.Z;
+                #else
+                Data.PositionPhi.x = value.X;
+                Data.PositionPhi.y = value.Y;
+                Data.PositionPhi.z = value.Z;
+                #endif
+                cachedPosition = new Vector3(value.X, value.Y, value.Z);
+                cachedEmplacement = value;
+            }
+        }
 
-        //public TrileInstanceData Data; //TODO
+        public TrileInstanceData Data; //TODO
 
         public bool IsMovingGroup;
         public TrileEmplacement OriginalEmplacement;
@@ -81,9 +117,14 @@ namespace FezEngine.Structure {
         }
 
         public void SetPhiLight(byte orientation) {
-            //Data.PositionPhi.W = (float) ((int) orientation - 2) * 1.570796f; //TODO
-            phiQuat = TrileInstance.QuatLookup[(int) orientation];
-            phiOri = TrileInstance.OrientationLookup[(int) orientation];
+            #if !UNITY
+            Data.PositionPhi.W = (float) ((int) orientation - 2) * 1.570796f;
+            #else
+            Data.PositionPhi.w = (float) ((int) orientation - 2) * 1.570796f;
+            #endif
+            
+            phiQuat = TrileInstance.QuatLookup[orientation];
+            phiOri = TrileInstance.OrientationLookup[orientation];
         }
     	
     }

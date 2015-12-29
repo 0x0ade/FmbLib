@@ -27,8 +27,8 @@ namespace FmbLib.TypeHandlers.Fez {
 
 			FmbUtil.WriteObject(writer, obj.Position);
 			writer.Write(obj.TrileId);
-			Console.WriteLine("TODO: TrileInstanceReader write phi");
-			writer.Write((byte) 0);
+			Console.WriteLine("TODO: TrileInstanceReader precision of phi");
+			writer.Write((byte) Math.Floor(FmbHelper.GetW(obj.Data.PositionPhi) / 1.570796f - 2));
 			writer.Write(true);
 			FmbUtil.WriteObject(writer, obj.ActorSettings);
 			FmbUtil.WriteObject(writer, obj.OverlappedTriles);

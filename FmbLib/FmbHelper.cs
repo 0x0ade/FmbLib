@@ -150,6 +150,27 @@ namespace FmbLib {
             b2.Append(str);
         }
 
+        #if !UNITY
+        public static float GetX(Microsoft.Xna.Framework.Vector2 v) {return v.X;}
+        public static float GetX(Microsoft.Xna.Framework.Vector3 v) {return v.X;}
+        public static float GetX(Microsoft.Xna.Framework.Vector4 v) {return v.X;}
+        public static float GetY(Microsoft.Xna.Framework.Vector2 v) {return v.Y;}
+        public static float GetY(Microsoft.Xna.Framework.Vector3 v) {return v.Y;}
+        public static float GetY(Microsoft.Xna.Framework.Vector4 v) {return v.Y;}
+        public static float GetZ(Microsoft.Xna.Framework.Vector3 v) {return v.Z;}
+        public static float GetZ(Microsoft.Xna.Framework.Vector4 v) {return v.Z;}
+        public static float GetW(Microsoft.Xna.Framework.Vector4 v) {return v.W;}
+        #else
+        public static float GetX(UnityEngine.Vector2 v) {return v.x;}
+        public static float GetX(UnityEngine.Vector3 v) {return v.x;}
+        public static float GetX(UnityEngine.Vector4 v) {return v.x;}
+        public static float GetY(UnityEngine.Vector2 v) {return v.y;}
+        public static float GetY(UnityEngine.Vector3 v) {return v.y;}
+        public static float GetY(UnityEngine.Vector4 v) {return v.y;}
+        public static float GetZ(UnityEngine.Vector3 v) {return v.z;}
+        public static float GetZ(UnityEngine.Vector4 v) {return v.z;}
+        public static float GetW(UnityEngine.Vector4 v) {return v.w;}
+        #endif
 
     }
 }
