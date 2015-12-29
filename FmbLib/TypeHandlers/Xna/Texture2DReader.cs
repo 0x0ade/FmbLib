@@ -88,7 +88,7 @@ namespace FmbLib.TypeHandlers.Xna {
             #elif UNITY
             //Oh, Unity, why do we need to merge all levels into a single blob? RIP loading time.
             if (levels == 1) {
-                texture.LoadRawTextureData(reader.ReadBytes(reader.ReadInt32()));
+                texture.LoadRawTextureData(Remap(reader.ReadBytes(reader.ReadInt32()), surfaceFormat));
             } else {
                 int dataSize = 0;
                 
@@ -96,7 +96,7 @@ namespace FmbLib.TypeHandlers.Xna {
                 for (int i = 0; i < levels; i++) {
                     int levelSize = reader.ReadInt32();
                     dataSize += levelSize;
-                    levelDatas[i] = reader.ReadBytes(levelSize);
+                    levelDatas[i] = Remap(reader.ReadBytes(levelSize), surfaceFormat);
                 }
                 
                 byte[] data = new byte[dataSize];
@@ -122,5 +122,63 @@ namespace FmbLib.TypeHandlers.Xna {
             writer.Write((int) 0); //mips
             //writer.Write((int) 0); //data length
         }
+        
+        public static byte[] Remap(byte[] data, SurfaceFormat format) {
+            int[] map = {2, 1, 0};
+
+            switch (format) {
+            case SurfaceFormat.Color:
+                map = new int[] {2, 1, 0, 3};
+                break;
+            }
+
+            int size = Size(format);
+            int length = data.Length / size;
+            byte[] mapped = new byte[length];
+            for (int i = 0; i < length; i++) {
+                for (int ii = 0; ii < size; ii++) {
+                    mapped[ii] = data[i * size + map[ii]];
+                }
+                for (int ii = 0; ii < size; ii++) {
+                    data[i * size + + ii] = mapped[ii];
+                }
+            }
+            
+            return data;
+        }
+        
+        public static int Size(SurfaceFormat format) {
+            switch (format) {
+            case SurfaceFormat.Dxt1:
+                return 8;
+            case SurfaceFormat.Dxt3:
+            case SurfaceFormat.Dxt5:
+                return 16;
+            case SurfaceFormat.Alpha8:
+                return 1;
+            case SurfaceFormat.Bgr565:
+            case SurfaceFormat.Bgra4444:
+            case SurfaceFormat.Bgra5551:
+            case SurfaceFormat.HalfSingle:
+            case SurfaceFormat.NormalizedByte2:
+                return 2;
+            case SurfaceFormat.Color:
+            case SurfaceFormat.Single:
+            case SurfaceFormat.Rg32:
+            case SurfaceFormat.HalfVector2:
+            case SurfaceFormat.NormalizedByte4:
+            case SurfaceFormat.Rgba1010102:
+                return 4;
+            case SurfaceFormat.HalfVector4:
+            case SurfaceFormat.Rgba64:
+            case SurfaceFormat.Vector2:
+                return 8;
+            case SurfaceFormat.Vector4:
+                return 16;
+            default:
+                return 0;
+            }
+        }
+        
     }
 }

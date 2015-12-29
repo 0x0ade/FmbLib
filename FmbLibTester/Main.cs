@@ -36,8 +36,13 @@ namespace FmbLibTester {
                 Console.WriteLine("Alternatively, run with --preparse / -pp + path as parameters");
                 Console.WriteLine("to generate the .cs sources for the TypeHandlerBase .txts.");
                 Console.WriteLine("Using default testing args instead.");
-                args = new string[] { /*"../../../cmycave.xnb",*/ "../../../gateao.xnb"/*, "../../../fox.xnb"*/ };
-                //args = new string[] { "-pp", "../../../PreParsedBases/" + (FmbUtil.IsUNITY ? "UNITY" : "XNAFEZ") };
+                args = new string[] {
+                    //"../../../cmycave.xnb"
+                    //"../../../gateao.xnb"
+                    //"../../../fox.xnb"
+                    "../../../waterfront.xnb"
+                    //"-pp", "../../../PreParsedBases/" + (FmbUtil.IsUNITY ? "UNITY" : "XNAFEZ")
+                };
             }
 
             if (args.Length == 2 && (args[0] == "-pp" || args[0] == "--preparse")) {
