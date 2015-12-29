@@ -15,6 +15,7 @@ using UnityEngine;
 #endif
 
 namespace FezEngine.Structure {
+    [System.Serializable]
     public class TrileInstance {
 
         //For some reason, Mathf.Sin works in Unity, but not outside of it...

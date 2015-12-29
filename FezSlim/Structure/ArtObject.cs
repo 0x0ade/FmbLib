@@ -14,6 +14,7 @@ using UnityEngine;
 #endif
 
 namespace FezEngine.Structure {
+    [System.Serializable]
     public class ArtObject {
         
         public string Name;
