@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FmbLibStripper", "FmbLibStripper\FmbLibStripper.csproj", "{8F7484C6-A5CD-4823-BA9B-7315BAD79B5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FmbLibTester", "FmbLibTester\FmbLibTester.csproj", "{8B395CF9-A957-4EC1-AB38-C5321AB672FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FmbLib.Unity", "FmbLib.Unity.csproj", "{EAF975D4-2F22-4E40-A758-C0484E071B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FmbLib.XNAFEZ", "FmbLib.XNAFEZ.csproj", "{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}.Debug|x86.ActiveCfg = Debug|x86
+		{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}.Debug|x86.Build.0 = Debug|x86
+		{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}.Release|x86.ActiveCfg = Release|x86
+		{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}.Release|x86.Build.0 = Release|x86
+		{8B395CF9-A957-4EC1-AB38-C5321AB672FB}.Debug|x86.ActiveCfg = Debug|x86
+		{8B395CF9-A957-4EC1-AB38-C5321AB672FB}.Debug|x86.Build.0 = Debug|x86
+		{8B395CF9-A957-4EC1-AB38-C5321AB672FB}.Release|x86.ActiveCfg = Release|x86
+		{8B395CF9-A957-4EC1-AB38-C5321AB672FB}.Release|x86.Build.0 = Release|x86
+		{8F7484C6-A5CD-4823-BA9B-7315BAD79B5B}.Debug|x86.ActiveCfg = Debug|x86
+		{8F7484C6-A5CD-4823-BA9B-7315BAD79B5B}.Debug|x86.Build.0 = Debug|x86
+		{8F7484C6-A5CD-4823-BA9B-7315BAD79B5B}.Release|x86.ActiveCfg = Release|x86
+		{8F7484C6-A5CD-4823-BA9B-7315BAD79B5B}.Release|x86.Build.0 = Release|x86
+		{EAF975D4-2F22-4E40-A758-C0484E071B9F}.Debug|x86.ActiveCfg = Debug|x86
+		{EAF975D4-2F22-4E40-A758-C0484E071B9F}.Debug|x86.Build.0 = Debug|x86
+		{EAF975D4-2F22-4E40-A758-C0484E071B9F}.Release|x86.ActiveCfg = Release|x86
+		{EAF975D4-2F22-4E40-A758-C0484E071B9F}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = FmbLibTester\FmbLibTester.csproj
+	EndGlobalSection
+EndGlobal

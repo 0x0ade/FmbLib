@@ -23,6 +23,17 @@ using UnityEngine;
 namespace FmbLib {
     public static class FmbUtil {
 
+        public static class Setup {
+            #if XNA
+            public static Microsoft.Xna.Framework.Graphics.GraphicsDevice GraphicsDevice;
+            #endif
+            
+            #if UNITY
+            public static bool TexturesLinear = false;
+            public static bool TexturesWriteOnly = false;
+            #endif
+        }
+
         private static Regex GenericSplitRegex = new Regex(@"(\[.*?\])");
 
         private static char[] XNBMagic = { 'X', 'N', 'B' };
