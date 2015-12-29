@@ -154,6 +154,7 @@
     <Compile Include="PreParsedBases\UNITY\VolumeActorSettingsHandler.cs" />
     <Compile Include="PreParsedBases\UNITY\VolumeHandler.cs" />
     <Compile Include="FezSlim\Structure\TrileInstanceData.cs" />
+    <Compile Include="XnaSlim\SurfaceFormat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
