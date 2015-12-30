@@ -181,27 +181,27 @@ namespace FmbLib.TypeHandlers.Xna {
         }
 
         #if UNITY
-        public static UnityEngine.TextureFormat[] SurfaceFormatToTextureFormat = {
-            UnityEngine.TextureFormat.ARGB32, //Color
-            UnityEngine.TextureFormat.RGB565, //Bgr565 //TODO swap R and B in Texture2DHandler for Bgr565 > RGB565
-            UnityEngine.TextureFormat.ARGB32, //Bgra5551 //TODO Bgra5551 is missing in Unity; Convert data!
-            UnityEngine.TextureFormat.RGBA4444, //Bgra4444 //TODO swap R and B in Texture2DHandler for Bgra4444 > RGBA4444
-            UnityEngine.TextureFormat.DXT1, //Dxt1
-            UnityEngine.TextureFormat.ARGB32, //Dxt3 //TODO Dxt5 is missing in Unity; Convert data!
-            UnityEngine.TextureFormat.DXT5, //Dxt5
-            UnityEngine.TextureFormat.ARGB32, //NormalizedByte2 //TODO NormalizedByte2 is missing in Unity; Convert data!
-            UnityEngine.TextureFormat.ARGB32, //NormalizedByte4 //TODO NormalizedByte4 is missing in Unity; Convert data!
-            UnityEngine.TextureFormat.ARGB32, //Rgba1010102 //TODO Rgba1010102 is missing in Unity; Convert data!
-            UnityEngine.TextureFormat./*RGHalf*/ ARGB32, //Rg32 //TODO Update UnityEngine assembly
-            UnityEngine.TextureFormat./*RGBAHalf*/ ARGB32, //Rgba64 //TODO Update UnityEngine assembly
-            UnityEngine.TextureFormat.Alpha8, //Alpha8
-            UnityEngine.TextureFormat./*RFloat*/ ARGB32, //Single //TODO Update UnityEngine assembly
-            UnityEngine.TextureFormat./*RGFloat*/ ARGB32, //Vector2 //TODO Update UnityEngine assembly
-            UnityEngine.TextureFormat./*RGBAFloat*/ ARGB32, //Vector4 //TODO Update UnityEngine assembly
-            UnityEngine.TextureFormat./*RHalf*/ ARGB32, //HalfSingle //TODO Update UnityEngine assembly
-            UnityEngine.TextureFormat./*RGHalf*/ ARGB32, //HalfVector2 //TODO Update UnityEngine assembly
-            UnityEngine.TextureFormat./*RGBAHalf*/ ARGB32, //HalfVector4 //TODO Update UnityEngine assembly
-            UnityEngine.TextureFormat.ARGB32 //HdrBlendable //TODO HdrBlendable is missing in Unity; Convert data!
+        public static TextureFormat[] SurfaceFormatToTextureFormat = {
+            TextureFormat.ARGB32, //Color
+            TextureFormat.RGB565, //Bgr565 //TODO swap R and B in Texture2DHandler for Bgr565 > RGB565
+            TextureFormat.ARGB32, //Bgra5551 //TODO Bgra5551 is missing in Unity; Convert data!
+            TextureFormat.RGBA4444, //Bgra4444 //TODO swap R and B in Texture2DHandler for Bgra4444 > RGBA4444
+            TextureFormat.DXT1, //Dxt1
+            TextureFormat.ARGB32, //Dxt3 //TODO Dxt5 is missing in Unity; Convert data!
+            TextureFormat.DXT5, //Dxt5
+            TextureFormat.ARGB32, //NormalizedByte2 //TODO NormalizedByte2 is missing in Unity; Convert data!
+            TextureFormat.ARGB32, //NormalizedByte4 //TODO NormalizedByte4 is missing in Unity; Convert data!
+            TextureFormat.ARGB32, //Rgba1010102 //TODO Rgba1010102 is missing in Unity; Convert data!
+            TextureFormat./*RGHalf*/ ARGB32, //Rg32 //TODO Update UnityEngine assembly
+            TextureFormat./*RGBAHalf*/ ARGB32, //Rgba64 //TODO Update UnityEngine assembly
+            TextureFormat.Alpha8, //Alpha8
+            TextureFormat./*RFloat*/ ARGB32, //Single //TODO Update UnityEngine assembly
+            TextureFormat./*RGFloat*/ ARGB32, //Vector2 //TODO Update UnityEngine assembly
+            TextureFormat./*RGBAFloat*/ ARGB32, //Vector4 //TODO Update UnityEngine assembly
+            TextureFormat./*RHalf*/ ARGB32, //HalfSingle //TODO Update UnityEngine assembly
+            TextureFormat./*RGHalf*/ ARGB32, //HalfVector2 //TODO Update UnityEngine assembly
+            TextureFormat./*RGBAHalf*/ ARGB32, //HalfVector4 //TODO Update UnityEngine assembly
+            TextureFormat.ARGB32 //HdrBlendable //TODO HdrBlendable is missing in Unity; Convert data!
         };
         #endif
         

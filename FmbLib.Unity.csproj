@@ -156,6 +156,7 @@
     <Compile Include="FezSlim\Structure\TrileInstanceData.cs" />
     <Compile Include="XnaSlim\SurfaceFormat.cs" />
     <Compile Include="FezSlim\Structure\Sky.cs" />
+    <Compile Include="FezSlim\Structure\SkyLayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
