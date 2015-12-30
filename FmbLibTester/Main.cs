@@ -13,7 +13,7 @@ namespace FmbLibTester {
             if (obj is TrileSet) {
                 TrileSet ts = (TrileSet) obj;
                 Console.WriteLine("TrileSet name: " + ts.Name);
-                Console.WriteLine("trile count: " + ts.Triles.Count);
+                Console.WriteLine("Trile count: " + ts.Triles.Count);
                 foreach (Trile trile in ts.Triles.Values) {
                     Console.WriteLine(trile.Id + " Name: " + trile.Name);
                     Console.WriteLine(trile.Id + " SurfaceType: " + trile.SurfaceType);
@@ -24,6 +24,17 @@ namespace FmbLibTester {
                 ArtObject ao = (ArtObject) obj;
                 Console.WriteLine("ArtObject name: " + ao.Name);
                 Console.WriteLine("ActorType: " + ao.ActorType);
+            }
+
+            if (obj is Sky) {
+                Sky sky = (Sky) obj;
+                Console.WriteLine("Sky name: " + sky.Name);
+                Console.WriteLine("Background: " + sky.Background);
+                Console.WriteLine("Stars: " + sky.Stars);
+                Console.WriteLine("Layer count: " + sky.Layers.Count);
+                for (int i = 0; i < sky.Layers.Count; i++) {
+                    Console.WriteLine(i + ": " + sky.Layers[i].Name);
+                }
             }
         }
 

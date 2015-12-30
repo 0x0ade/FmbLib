@@ -157,6 +157,8 @@
     <Compile Include="XnaSlim\SurfaceFormat.cs" />
     <Compile Include="FezSlim\Structure\Sky.cs" />
     <Compile Include="FezSlim\Structure\SkyLayer.cs" />
+    <Compile Include="PreParsedBases\UNITY\SkyHandler.cs" />
+    <Compile Include="PreParsedBases\UNITY\SkyLayerHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

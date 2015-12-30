@@ -37,6 +37,7 @@ namespace FmbLib {
         private static Regex GenericSplitRegex = new Regex(@"(\[.*?\])");
 
         private static char[] XNBMagic = { 'X', 'N', 'B' };
+        private static char[] FMBMagic = { 'X', 'N', 'B' };
 
         private static Dictionary<string, TypeHandler> TypeHandlerReaderMap = new Dictionary<string, TypeHandler>();
         private static Dictionary<Type, TypeHandler> TypeHandlerTypeMap = new Dictionary<Type, TypeHandler>();
@@ -113,13 +114,21 @@ namespace FmbLib {
         /// </summary>
         public static List<KeyValuePair<string, string>> NamespaceRemap = new List<KeyValuePair<string, string>>();
 
+        public static T ReadObject<T>(string input) {
+            return (T) ReadObject(input);
+        }
+
         public static object ReadObject(string input) {
             using (FileStream fis = new FileStream(input, FileMode.Open)) {
                 using (BinaryReader reader = new BinaryReader(fis)) {
-                    char[] magic = reader.ReadChars(3);
-                    return ReadObject(reader, magic[0] == XNBMagic[0] && magic[1] == XNBMagic[1] && magic[2] == XNBMagic[2]);
+                    return ReadObject(reader);
                 }
             }
+        }
+
+        public static object ReadObject(BinaryReader reader) {
+            char[] magic = reader.ReadChars(3);
+            return ReadObject(reader, magic[0] == XNBMagic[0] && magic[1] == XNBMagic[1] && magic[2] == XNBMagic[2]);
         }
 
         public static object ReadObject(BinaryReader reader, bool xnb) {
@@ -205,6 +214,7 @@ namespace FmbLib {
             }
             using (FileStream fos = new FileStream(output, FileMode.Create)) {
                 using (BinaryWriter writer = new BinaryWriter(fos)) {
+                    writer.Write(FMBMagic);
                     WriteObject(writer, obj_);
                 }
             }
@@ -223,6 +233,7 @@ namespace FmbLib {
             }
             using (FileStream fos = new FileStream(output, FileMode.Create)) {
                 using (BinaryWriter writer = new BinaryWriter(fos)) {
+                    writer.Write(FMBMagic);
                     WriteObject<T>(writer, obj_);
                 }
             }
