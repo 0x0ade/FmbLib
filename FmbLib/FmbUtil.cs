@@ -21,9 +21,12 @@ using UnityEngine;
 #endif
 
 namespace FmbLib {
+    public delegate ILzxDecompressor CreateLzxDecompressor(int window);
     public static class FmbUtil {
 
         public static class Setup {
+            public static CreateLzxDecompressor CreateLzxDecompressor;
+            
             #if XNA
             public static Microsoft.Xna.Framework.Graphics.GraphicsDevice GraphicsDevice;
             #endif
@@ -63,7 +66,7 @@ namespace FmbLib {
 
         public static bool IsTEST = false;
 
-        static FmbUtil(){
+        static FmbUtil() {
             #if XNA || UNITY
             ____dotnetassembliesneedtobereferenced____.Add(typeof(Vector3));
             #endif
@@ -132,6 +135,7 @@ namespace FmbLib {
         }
 
         public static object ReadObject(BinaryReader reader, bool xnb) {
+            BinaryReader origReader = reader;
             TypeHandler handler;
 
             //string[] readerNames = null;
@@ -140,7 +144,7 @@ namespace FmbLib {
 
             //Console.WriteLine("Position pre xnb: " + reader.BaseStream.Position);
             if (xnb && reader.BaseStream.Position == 3) {
-                object[] xnbData = readXNB(reader);
+                object[] xnbData = readXNB(ref reader);
                 //readerNames = (string[]) xnbData[0];
                 handlers = (TypeHandler[]) xnbData[1];
                 //sharedResources = (object[]) xnbData[2];
@@ -158,6 +162,10 @@ namespace FmbLib {
             if (xnb) {
                 //TODO read shared resources
             }
+            
+            if (reader != origReader) {
+                reader.Close();
+            }
 
             return obj;
         }
@@ -167,6 +175,7 @@ namespace FmbLib {
         }
 
         public static T ReadObject<T>(BinaryReader reader, bool xnb, bool readPrependedData) {
+            BinaryReader origReader = reader;
             TypeHandler handler;
 
             //string[] readerNames = null;
@@ -174,7 +183,7 @@ namespace FmbLib {
             //object[] sharedResources = null;
 
             if (xnb && reader.BaseStream.Position == 3) {
-                object[] xnbData = readXNB(reader);
+                object[] xnbData = readXNB(ref reader);
                 //readerNames = (string[]) xnbData[0];
                 handlers = (TypeHandler[]) xnbData[1];
                 //sharedResources = (object[]) xnbData[2];
@@ -203,6 +212,10 @@ namespace FmbLib {
 
             if (xnb) {
                 //TODO read shared resources
+            }
+            
+            if (reader != origReader) {
+                reader.Close();
             }
 
             return obj;
@@ -249,20 +262,58 @@ namespace FmbLib {
             handler.Write(writer, obj_);
         }
 
-        private static object[] readXNB(BinaryReader reader) {
+        private static object[] readXNB(ref BinaryReader reader) {
             reader.ReadByte(); //w
             reader.ReadByte(); //0x05
 
             byte flagBits = reader.ReadByte();
-            if ((flagBits & 0x80) == 0x80) {
-                throw new InvalidOperationException("Cannot read compressed XNBs!");
+            bool isCompressed = (flagBits & 0x80) == 0x80;
+            
+            int size = reader.ReadInt32(); //file size, optionally compressed size
+            
+            //FmbLib is currently forced to use an extension for Lzx.
+            //Most, if not all current Lzx decompressors in C# require
+            //FmbLib to become MSPL / LGPL, not MIT. This further would
+            //cause other dependencies to need to change their licenses, too.
+            if (isCompressed) {
+                if (FmbUtil.Setup.CreateLzxDecompressor == null) {
+                    throw new InvalidOperationException("Cannot read compressed XNBs with FmbUtil.Setup.CreateLzxDecompressor == null");
+                }
+                
+                MemoryStream stream = new MemoryStream(reader.ReadInt32());
+                
+                ILzxDecompressor lzx = FmbUtil.Setup.CreateLzxDecompressor(16);
+                long startPos = reader.BaseStream.Position;
+                long pos = startPos;
+    
+                while (pos - startPos < (size - 14)) {
+                    int high = reader.BaseStream.ReadByte();
+                    int low = reader.BaseStream.ReadByte();
+                    int blockSize = (high << 8) | low;
+                    int frameSize = 0x8000;
+                    if (high == 0xFF) {
+                        high = low;
+                        low = reader.BaseStream.ReadByte();
+                        frameSize = (high << 8) | low;
+                        high = reader.BaseStream.ReadByte();
+                        low = reader.BaseStream.ReadByte();
+                        blockSize = (high << 8) | low;
+                        pos += 5;
+                    } else {
+                        pos += 2;
+                    }
+                    if (blockSize == 0 || frameSize == 0) {
+                        break;
+                    }
+                    lzx.Decompress(reader.BaseStream, blockSize, stream, frameSize);
+                    pos += blockSize;
+                    reader.BaseStream.Seek(pos, SeekOrigin.Begin);
+                }
+                stream.Seek(0, SeekOrigin.Begin);
+                
+                reader.Close();
+                reader = new BinaryReader(stream);
             }
-            //TODO check if 0x80 is set, if so: decompressing codepath?
-
-            reader.ReadInt32(); //file size, optionally compressed size
-            //decompressed size when compressed
-
-            //everything from here on is compressed if 0x80 is set
 
             string[] readerNames = new string[FmbHelper.Read7BitEncodedInt(reader)];
             TypeHandler[] handlers = new TypeHandler[readerNames.Length];
