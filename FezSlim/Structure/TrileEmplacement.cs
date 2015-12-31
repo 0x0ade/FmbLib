@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using FezEngine.Structure.Geometry;
+using System;
 
 #if XNA
 using Microsoft.Xna.Framework;
@@ -26,9 +27,9 @@ namespace FezEngine.Structure {
             Y = Mathf.RoundToInt(position.Y);
             Z = Mathf.RoundToInt(position.Z);
             #else
-            X = Mathf.RoundToInt(position.x);
-            Y = Mathf.RoundToInt(position.y);
-            Z = Mathf.RoundToInt(position.z);
+            X = (int) Math.Round(position.x);
+            Y = (int) Math.Round(position.y);
+            Z = (int) Math.Round(position.z);
             #endif
         }
         

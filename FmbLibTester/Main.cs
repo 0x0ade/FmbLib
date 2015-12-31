@@ -50,8 +50,8 @@ namespace FmbLibTester {
                 args = new string[] {
                     //"../../../cmycave.xnb"
                     //"../../../gateao.xnb"
-                    //"../../../fox.xnb"
-                    "../../../waterfront.xnb"
+                    "../../../fox.xnb"
+                    //"../../../waterfront.xnb"
                     //"-pp", "../../../PreParsedBases/" + (FmbUtil.IsUNITY ? "UNITY" : "XNAFEZ")
                 };
             }

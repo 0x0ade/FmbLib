@@ -18,7 +18,7 @@ namespace FezEngine.Structure {
     [System.Serializable]
     public class TrileInstance {
 
-        //For some reason, Mathf.Sin works in Unity, but not outside of it...
+        //For some reason, Mathf hates me.
         private static readonly Quaternion[] QuatLookup = new Quaternion[4] {
             new Quaternion(0.0f, (float) Math.Sin(-3.141593f / 2f), 0.0f, (float) Math.Cos(-3.141593f / 2f)),
             new Quaternion(0.0f, (float) Math.Sin(-1.570796f / 2f), 0.0f, (float) Math.Cos(-1.570796f / 2f)),

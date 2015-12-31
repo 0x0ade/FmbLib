@@ -25,10 +25,6 @@ namespace FezEngine.Structure {
             }
         }
 
-        public TrileInstanceData() {
-            PositionPhi = new Vector4();
-        }
-
         public TrileInstanceData(Vector3 position, float phi) {
             #if !UNITY
             PositionPhi = new Vector4(position, phi);
