@@ -44,17 +44,14 @@ namespace FmbLib.TypeHandlers.Xna {
 
         public override void Write(BinaryWriter writer, object obj_) {
             Dictionary<TKey, TValue> obj = (Dictionary<TKey, TValue>) obj_;
+            TypeHandler keyHandler = FmbUtil.GetTypeHandler(typeof(TKey));
+            TypeHandler valueHandler = FmbUtil.GetTypeHandler(typeof(TValue));
 
-            writer.Write((byte) obj.Count);
+            writer.Write((int) obj.Count);
 
-            TKey[] keys = new TKey[obj.Count];
-            obj.Keys.CopyTo(keys, 0);
-            TValue[] values = new TValue[obj.Count];
-            obj.Values.CopyTo(values, 0);
-
-            for (int i = 0; i < obj.Count; i++) {
-                FmbUtil.WriteObject(writer, keys[i]);
-                FmbUtil.WriteObject(writer, values[i]);
+            foreach (KeyValuePair<TKey, TValue> pair in obj) {
+                keyHandler.Write(writer, pair.Key);
+                valueHandler.Write(writer, pair.Value);
             }
         }
 

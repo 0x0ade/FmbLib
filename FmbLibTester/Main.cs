@@ -112,7 +112,7 @@ namespace FmbLibTester {
                 Print(obj);
 
                 Console.WriteLine("writing fmb");
-                string fmbPath = args[i].Substring(args[i].Length-3) + "fmb";
+                string fmbPath = args[i].Substring(0, args[i].Length-3) + "fmb";
                 if (File.Exists(fmbPath)) {
                     File.Delete(fmbPath);
                 }

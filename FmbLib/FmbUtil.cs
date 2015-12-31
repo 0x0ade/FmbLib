@@ -40,7 +40,7 @@ namespace FmbLib {
         private static Regex GenericSplitRegex = new Regex(@"(\[.*?\])");
 
         private static char[] XNBMagic = { 'X', 'N', 'B' };
-        private static char[] FMBMagic = { 'X', 'N', 'B' };
+        private static char[] FMBMagic = { 'F', 'M', 'B' };
 
         private static Dictionary<string, TypeHandler> TypeHandlerReaderMap = new Dictionary<string, TypeHandler>();
         private static Dictionary<Type, TypeHandler> TypeHandlerTypeMap = new Dictionary<Type, TypeHandler>();

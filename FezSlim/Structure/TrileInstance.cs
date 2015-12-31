@@ -100,7 +100,7 @@ namespace FezEngine.Structure {
             }
         }
 
-        public TrileInstanceData Data; //TODO
+        public TrileInstanceData Data = new TrileInstanceData();
 
         public bool IsMovingGroup;
         public TrileEmplacement OriginalEmplacement;

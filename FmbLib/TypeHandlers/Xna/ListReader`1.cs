@@ -27,11 +27,12 @@ namespace FmbLib.TypeHandlers.Xna {
 
         public override void Write(BinaryWriter writer, object obj_) {
             List<T> obj = (List<T>) obj_;
+            TypeHandler handler = FmbUtil.GetTypeHandler(typeof(T));
 
-            writer.Write((byte) obj.Count);
+            writer.Write((int) obj.Count);
 
             for (int i = 0; i < obj.Count; i++) {
-                FmbUtil.WriteObject(writer, obj[i]);
+                handler.Write(writer, obj[i]);
             }
         }
     }

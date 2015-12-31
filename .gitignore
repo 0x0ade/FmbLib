@@ -4,5 +4,6 @@ obj/
 FmbLibStripper/bin/
 FmbLibStripper/obj/
 *.xnb
+*.fmb
 waterfront/
 
