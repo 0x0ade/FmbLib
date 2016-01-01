@@ -17,7 +17,7 @@ namespace FmbLib.TypeHandlers.Xna {
         public override void Write(BinaryWriter writer, object obj_) {
             writer.Write(obj_ != null);
             if (obj_ != null) {
-                FmbUtil.WriteObject(writer, obj_);
+                FmbUtil.GetTypeHandler(typeof(T)).Write(writer, obj_);
             }
         }
     }

@@ -13,7 +13,6 @@ using UnityEngine;
 #endif
 
 namespace FezEngine.Structure {
-    [System.Serializable]
     public class TrileSet {
 
     	public string Name;

@@ -14,7 +14,6 @@ using UnityEngine;
 #endif
 
 namespace FezEngine.Structure {
-    [System.Serializable]
     public class ArtObjectInstance {
 
         public int Id;

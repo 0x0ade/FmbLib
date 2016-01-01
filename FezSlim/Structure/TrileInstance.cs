@@ -15,7 +15,6 @@ using UnityEngine;
 #endif
 
 namespace FezEngine.Structure {
-    [System.Serializable]
     public class TrileInstance {
 
         //For some reason, Mathf hates me.

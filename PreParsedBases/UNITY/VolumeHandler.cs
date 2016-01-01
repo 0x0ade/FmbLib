@@ -15,9 +15,6 @@ namespace FmbLib.TypeHandlers.Fez {
 			obj.Orientations = FmbHelper.HashSetOrList<FaceOrientation>(FmbUtil.ReadObject<FaceOrientation[]>(reader, xnb), FaceOrientationComparer.Default);
             Console.WriteLine("debug: Volume: Orientations: " + obj.Orientations.Count);
             Console.WriteLine("debug: Volume: Orientations[0]: " + obj.Orientations[0]);
-            //obj.Orientations[0] is what should be the FaceOrientation string.
-            //It's an int, thus 4 bytes: <lengthbyte>Fac
-            //uuh, wait... why is it not reading the type string if it.. is it a value type?
             obj.From = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
             Console.WriteLine("debug: Volume: From: " + obj.From.x + ", " + obj.From.y + ", " + obj.From.z);
 			obj.To = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
