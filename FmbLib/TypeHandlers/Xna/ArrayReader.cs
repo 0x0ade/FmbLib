@@ -24,11 +24,12 @@ namespace FmbLib.TypeHandlers.Xna {
 
         public override void Write(BinaryWriter writer, object obj_) {
             T[] obj = (T[]) obj_;
+            TypeHandler handler = FmbUtil.GetTypeHandler(typeof(T));
 
             writer.Write((uint) obj.Length);
 
             for (int i = 0; i < obj.Length; i++) {
-                FmbUtil.WriteObject(writer, obj[i]);
+                handler.Write(writer, obj[i]);
             }
         }
     }

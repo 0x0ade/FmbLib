@@ -11,7 +11,13 @@ namespace FmbLib.TypeHandlers.Xna {
             TypeHandler handler = FmbUtil.GetTypeHandler(type);
 
             int capacity = reader.ReadInt32();
+            #if DEBUG
+            Console.WriteLine("T: " + type.FullName);
+            Console.WriteLine("Capacity: " + capacity);
+            List<T> obj = new List<T>(0);
+            #else
             List<T> obj = new List<T>(capacity);
+            #endif
             bool isValueType = FmbHelper.IsValueType(type);
             for (int i = 0; i < capacity; i++) {
                 if (isValueType || !xnb) {
