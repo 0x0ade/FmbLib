@@ -6,7 +6,7 @@ using System.Collections.Generic;
 Position Vector3
 TrileId Int32
 #r obj.SetPhiLight(reader.ReadByte());
-#w Console.WriteLine("TODO: TrileInstanceReader precision of phi");
+##TODO: TrileInstanceReader precision of phi
 #w writer.Write((byte) Math.Floor(FmbHelper.GetW(obj.Data.PositionPhi) / 1.570796f - 2));
 #r if (reader.ReadBoolean()) {
 #w writer.Write(true);

@@ -21,16 +21,18 @@ namespace FmbLib.TypeHandlers.Xna {
             #else
             Dictionary<TKey, TValue> obj = new Dictionary<TKey, TValue>(capacity);
             #endif
+            bool keyIsValueType = FmbHelper.IsValueType(keyType);
+            bool valueIsValueType = FmbHelper.IsValueType(valueType);
             for (int i = 0; i < capacity; i++) {
                 TKey key;
-                if (FmbHelper.IsValueType(keyType) || !xnb) {
+                if (keyIsValueType || !xnb) {
                     key = keyHandler.Read<TKey>(reader, xnb);
                 } else {
                     int readerIndex = reader.ReadByte(); //FmbLib ain't no care about reader index.
                     key = readerIndex > 0 ? keyHandler.Read<TKey>(reader, xnb) : default(TKey);
                 }
                 TValue value;
-                if (FmbHelper.IsValueType(valueType) || !xnb) {
+                    if (valueIsValueType || !xnb) {
                     value = valueHandler.Read<TValue>(reader, xnb);
                 } else {
                     int readerIndex = reader.ReadByte(); //FmbLib ain't no care about reader index.

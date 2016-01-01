@@ -14,12 +14,8 @@ namespace FmbLib.TypeHandlers.Fez {
 			Level obj = new Level();
 
 			obj.Name = FmbUtil.ReadObject<string>(reader, xnb);
-            Console.WriteLine("debug: Level: Name: " + obj.Name);
 			obj.Size = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
-            Console.WriteLine("debug: Level: Size: " + obj.Size.x + ", " + obj.Size.y + ", " + obj.Size.z);
 			obj.StartingPosition = FmbUtil.ReadObject<TrileFace>(reader, xnb);
-            Console.WriteLine("debug: Level: StartingPosition: Id: " + obj.StartingPosition.Id);
-            Console.WriteLine("debug: Level: StartingPosition: Face: " + obj.StartingPosition.Face);
 			obj.SequenceSamplesPath = FmbUtil.ReadObject<string>(reader, xnb);
 			Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 			obj.Flat = reader.ReadBoolean();
@@ -27,7 +23,6 @@ namespace FmbLib.TypeHandlers.Fez {
 			obj.BaseDiffuse = reader.ReadSingle();
 			obj.BaseAmbient = reader.ReadSingle();
 			obj.GomezHaloName = FmbUtil.ReadObject<string>(reader, xnb);
-            Console.WriteLine("debug: Level: GomezHaloName: " + obj.GomezHaloName);
 			obj.HaloFiltering = reader.ReadBoolean();
 			obj.BlinkingAlpha = reader.ReadBoolean();
 			obj.Loops = reader.ReadBoolean();
@@ -35,7 +30,6 @@ namespace FmbLib.TypeHandlers.Fez {
 			obj.WaterHeight = reader.ReadSingle();
 			obj.SkyName = reader.ReadString();
 			obj.TrileSetName = FmbUtil.ReadObject<string>(reader, xnb);
-            Console.WriteLine("debug: Level: TrileSetName: " + obj.TrileSetName);
 			obj.Volumes = FmbUtil.ReadObject<Dictionary<int, Volume>>(reader, xnb);
 			obj.Scripts = FmbUtil.ReadObject<Dictionary<int, Script>>(reader, xnb);
 			obj.SongName = FmbUtil.ReadObject<string>(reader, xnb);
@@ -64,7 +58,7 @@ namespace FmbLib.TypeHandlers.Fez {
 
 			Console.WriteLine("debug: Level: Name: " + obj.Name);
 			FmbUtil.WriteObject(writer, obj.Name);
-            FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);//<Vector3>(reader, xnb, false); means name is skipped
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);
 			FmbUtil.WriteObject(writer, obj.StartingPosition);
 			Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 			FmbUtil.WriteObject(writer, obj.SequenceSamplesPath);

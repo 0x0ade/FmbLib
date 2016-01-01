@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 ##Orientations = new HashSet<FaceOrientation>((IEnumerable<FaceOrientation>) input.ReadObject<FaceOrientation[]>(), (IEqualityComparer<FaceOrientation>) FaceOrientationComparer.Default);
 #r obj.Orientations = FmbHelper.HashSetOrList<FaceOrientation>(FmbUtil.ReadObject<FaceOrientation[]>(reader, xnb), FaceOrientationComparer.Default);
-#w Console.WriteLine("TODO: VOLUME WRITER");
+#w FmbUtil.WriteObject(writer, FmbHelper.HashSetOrListToArray<FaceOrientation>(obj.Orientations));
 From Vector3
 To Vector3
 ActorSettings Object<VolumeActorSettings>

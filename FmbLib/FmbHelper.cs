@@ -139,9 +139,19 @@ namespace FmbLib {
         public static HashSet<T> HashSetOrList<T>(T[] arr, IEqualityComparer<T> comp) {
             return new HashSet<T>(arr, comp);
         }
+
+        public static T[] HashSetOrListToArray<T>(HashSet<T> set) {
+            T[] arr = new T[set.Count];
+            set.CopyTo(arr);
+            return arr;
+        }
         #else
         public static List<T> HashSetOrList<T>(T[] arr, object comp) {
             return new List<T>(arr);
+        }
+
+        public static T[] HashSetOrListToArray<T>(List<T> set) {
+            return set.ToArray();
         }
         #endif
 

@@ -641,8 +641,10 @@ namespace FmbLib {
                 }
                 readerBuilder.AppendLine();
 
-                if (binaryType.StartsWith("Object<") || GeneratedTypeHandlerSpecialTypes.Contains(binaryType)) {
+                if (binaryType.StartsWith("Object<")) {
                     writerBuilder.Append("FmbUtil.WriteObject(writer, obj.").Append(var);
+                } else if (GeneratedTypeHandlerSpecialTypes.Contains(binaryType)) {
+                    writerBuilder.Append("FmbUtil.GetTypeHandler<").Append(binaryType).Append(">().Write(writer, obj.").Append(var);
                 } else {
                     writerBuilder.Append("writer.Write(obj.").Append(var);
                 }

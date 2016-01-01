@@ -42,7 +42,7 @@ namespace FmbLib.TypeHandlers.Fez {
 			writer.Write(obj.GeyserPauseFor);
 			writer.Write(obj.GeyserLiftFor);
 			writer.Write(obj.GeyserApexHeight);
-			FmbUtil.WriteObject(writer, obj.SpinCenter);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.SpinCenter);
 			writer.Write(obj.SpinClockwise);
 			writer.Write(obj.SpinFrequency);
 			writer.Write(obj.SpinNeedsTriggering);

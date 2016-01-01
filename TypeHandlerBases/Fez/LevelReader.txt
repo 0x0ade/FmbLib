@@ -9,6 +9,9 @@ using System.Collections.Generic;
 #w Console.WriteLine("debug: Level: Name: " + obj.Name);
 Name Object<string>
 Size Vector3
+##r obj.Size = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
+##Because of the auto-generated ", false", we need to use the handler directly here.
+##w FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);
 StartingPosition Object<TrileFace>
 #w Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 SequenceSamplesPath Object<string>
