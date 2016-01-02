@@ -192,15 +192,15 @@ namespace FmbLib.TypeHandlers.Xna {
             TextureFormat.ARGB32, //NormalizedByte2 //TODO NormalizedByte2 is missing in Unity; Convert data!
             TextureFormat.ARGB32, //NormalizedByte4 //TODO NormalizedByte4 is missing in Unity; Convert data!
             TextureFormat.ARGB32, //Rgba1010102 //TODO Rgba1010102 is missing in Unity; Convert data!
-            TextureFormat./*RGHalf*/ ARGB32, //Rg32 //TODO Update UnityEngine assembly
-            TextureFormat./*RGBAHalf*/ ARGB32, //Rgba64 //TODO Update UnityEngine assembly
+            TextureFormat.RGHalf, //Rg32
+            TextureFormat.RGBAHalf, //Rgba64
             TextureFormat.Alpha8, //Alpha8
-            TextureFormat./*RFloat*/ ARGB32, //Single //TODO Update UnityEngine assembly
-            TextureFormat./*RGFloat*/ ARGB32, //Vector2 //TODO Update UnityEngine assembly
-            TextureFormat./*RGBAFloat*/ ARGB32, //Vector4 //TODO Update UnityEngine assembly
-            TextureFormat./*RHalf*/ ARGB32, //HalfSingle //TODO Update UnityEngine assembly
-            TextureFormat./*RGHalf*/ ARGB32, //HalfVector2 //TODO Update UnityEngine assembly
-            TextureFormat./*RGBAHalf*/ ARGB32, //HalfVector4 //TODO Update UnityEngine assembly
+            TextureFormat.RFloat, //Single
+            TextureFormat.RGFloat, //Vector2
+            TextureFormat.RGBAFloat, //Vector4
+            TextureFormat.RHalf, //HalfSingle
+            TextureFormat.RGHalf, //HalfVector2
+            TextureFormat.RGBAHalf, //HalfVector4
             TextureFormat.ARGB32 //HdrBlendable //TODO HdrBlendable is missing in Unity; Convert data!
         };
         #endif
