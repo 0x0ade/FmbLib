@@ -37,13 +37,13 @@ namespace FmbLib {
             #endif
         }
 
-        private static Regex GenericSplitRegex = new Regex(@"(\[.*?\])");
+        private readonly static Regex GenericSplitRegex = new Regex(@"(\[.*?\])");
 
-        private static char[] XNBMagic = { 'X', 'N', 'B' };
-        private static char[] FMBMagic = { 'F', 'M', 'B' };
+        private readonly static char[] XNBMagic = { 'X', 'N', 'B' };
+        private readonly static char[] FMBMagic = { 'F', 'M', 'B' };
 
-        private static Dictionary<string, TypeHandler> TypeHandlerReaderMap = new Dictionary<string, TypeHandler>();
-        private static Dictionary<Type, TypeHandler> TypeHandlerTypeMap = new Dictionary<Type, TypeHandler>();
+        private readonly static Dictionary<string, TypeHandler> TypeHandlerReaderMap = new Dictionary<string, TypeHandler>();
+        private readonly static Dictionary<Type, TypeHandler> TypeHandlerTypeMap = new Dictionary<Type, TypeHandler>();
         private static string[] ManifestResourceNames;
 
         #if XNA
@@ -199,7 +199,7 @@ namespace FmbLib {
                         }
                     } else {
                         string type = reader.ReadString();
-                        if (type == "null") {
+                        if (type == "") {
                             return handler.GetDefault<T>();
                         }
                     }
@@ -254,7 +254,7 @@ namespace FmbLib {
 
         public static void WriteObject<T>(BinaryWriter writer, T obj_) {
             if (obj_ == null) {
-                writer.Write("null");
+                writer.Write("");
                 return;
             }
             writer.Write(typeof(T).Name);

@@ -28,14 +28,14 @@ namespace FmbLib.TypeHandlers.Fez {
 		public override void Write(BinaryWriter writer, object obj_) {
 			PathSegment obj = (PathSegment) obj_;
 
-			FmbUtil.WriteObject(writer, obj.Destination);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Destination);
 			FmbUtil.WriteObject(writer, obj.Duration);
 			FmbUtil.WriteObject(writer, obj.WaitTimeOnStart);
 			FmbUtil.WriteObject(writer, obj.WaitTimeOnFinish);
 			writer.Write(obj.Acceleration);
 			writer.Write(obj.Deceleration);
 			writer.Write(obj.JitterFactor);
-			FmbUtil.WriteObject(writer, obj.Orientation);
+			FmbUtil.GetTypeHandler<Quaternion>().Write(writer, obj.Orientation);
 			writer.Write(true);
 			FmbUtil.WriteObject(writer, obj.CustomData);
 		}

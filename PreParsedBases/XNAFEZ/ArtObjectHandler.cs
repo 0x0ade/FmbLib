@@ -28,7 +28,7 @@ namespace FmbLib.TypeHandlers.Fez {
 
 			writer.Write(obj.Name);
 			FmbUtil.WriteObject(writer, obj.Cubemap);
-			FmbUtil.WriteObject(writer, obj.Size);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);
 			FmbUtil.WriteObject(writer, obj.Geometry);
 			FmbUtil.WriteObject(writer, obj.ActorType);
 			writer.Write(obj.NoSihouette);

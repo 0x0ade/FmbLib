@@ -30,8 +30,8 @@ namespace FmbLib.TypeHandlers.Fez {
 			NpcInstance obj = (NpcInstance) obj_;
 
 			writer.Write(obj.Name);
-			FmbUtil.WriteObject(writer, obj.Position);
-			FmbUtil.WriteObject(writer, obj.DestinationOffset);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Position);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.DestinationOffset);
 			writer.Write(obj.WalkSpeed);
 			writer.Write(obj.RandomizeSpeech);
 			writer.Write(obj.SayFirstSpeechLineOnce);

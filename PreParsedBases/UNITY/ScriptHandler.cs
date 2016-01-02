@@ -14,7 +14,6 @@ namespace FmbLib.TypeHandlers.Fez {
 			obj.Name = reader.ReadString();
 			obj.Timeout = FmbUtil.ReadObject<TimeSpan?>(reader, xnb);
 			obj.Triggers = FmbUtil.ReadObject<List<ScriptTrigger>>(reader, xnb);
-            //This (Conditions) screws up. Capacity for FOX should be 1, but it's 1819635204.
 			obj.Conditions = FmbUtil.ReadObject<List<ScriptCondition>>(reader, xnb);
 			obj.Actions = FmbUtil.ReadObject<List<ScriptAction>>(reader, xnb);
 			obj.OneTime = reader.ReadBoolean();

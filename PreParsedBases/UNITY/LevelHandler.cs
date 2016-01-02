@@ -29,9 +29,7 @@ namespace FmbLib.TypeHandlers.Fez {
 			obj.WaterType = FmbUtil.ReadObject<LiquidType>(reader, xnb);
 			obj.WaterHeight = reader.ReadSingle();
 			obj.SkyName = reader.ReadString();
-            Console.WriteLine("debug: Level: SkyName: " + obj.SkyName);
 			obj.TrileSetName = FmbUtil.ReadObject<string>(reader, xnb);
-            Console.WriteLine("debug: Level: TrileSetName: " + obj.TrileSetName);
 			obj.Volumes = FmbUtil.ReadObject<Dictionary<int, Volume>>(reader, xnb);
 			obj.Scripts = FmbUtil.ReadObject<Dictionary<int, Script>>(reader, xnb);
 			obj.SongName = FmbUtil.ReadObject<string>(reader, xnb);

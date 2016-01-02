@@ -13,12 +13,8 @@ namespace FmbLib.TypeHandlers.Fez {
 			Volume obj = new Volume();
 
 			obj.Orientations = FmbHelper.HashSetOrList<FaceOrientation>(FmbUtil.ReadObject<FaceOrientation[]>(reader, xnb), FaceOrientationComparer.Default);
-            Console.WriteLine("debug: Volume: Orientations: " + obj.Orientations.Count);
-            Console.WriteLine("debug: Volume: Orientations[0]: " + obj.Orientations[0]);
-            obj.From = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
-            Console.WriteLine("debug: Volume: From: " + obj.From.x + ", " + obj.From.y + ", " + obj.From.z);
+			obj.From = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
 			obj.To = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
-            Console.WriteLine("debug: Volume: To: " + obj.To.x + ", " + obj.To.y + ", " + obj.To.z);
 			obj.ActorSettings = FmbUtil.ReadObject<VolumeActorSettings>(reader, xnb);
 
 			return obj;

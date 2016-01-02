@@ -7,7 +7,7 @@ Position Vector3
 TrileId Int32
 #r obj.SetPhiLight(reader.ReadByte());
 ##TODO: TrileInstanceReader precision of phi
-#w writer.Write((byte) Math.Floor(FmbHelper.GetW(obj.Data.PositionPhi) / 1.570796f - 2));
+#w writer.Write((byte) Math.Floor(FmbHelper.GetW(obj.Data.PositionPhi) / 1.570796f + 2));
 #r if (reader.ReadBoolean()) {
 #w writer.Write(true);
 ActorSettings Object<InstanceActorSettings>

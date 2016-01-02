@@ -50,7 +50,7 @@ namespace FmbLib.TypeHandlers.Fez {
 			FmbUtil.WriteObject(writer, obj.NextNode);
 			FmbUtil.WriteObject(writer, obj.DestinationLevel);
 			FmbUtil.WriteObject(writer, obj.TreasureMapName);
-			Console.WriteLine("TODO: AOASH WRITER");
+			FmbUtil.WriteObject(writer, FmbHelper.HashSetOrListToArray<FaceOrientation>(obj.InvisibleSides));
 			writer.Write(obj.TimeswitchWindBackSpeed);
 		}
 	}

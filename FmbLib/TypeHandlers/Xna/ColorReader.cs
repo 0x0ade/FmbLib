@@ -25,10 +25,10 @@ namespace FmbLib.TypeHandlers.Xna {
             writer.Write(((Color) obj_).B);
             writer.Write(((Color) obj_).A);
             #else
-            writer.Write(((Color) obj_).r);
-            writer.Write(((Color) obj_).g);
-            writer.Write(((Color) obj_).b);
-            writer.Write(((Color) obj_).a);
+            writer.Write((byte) Math.Floor(((Color) obj_).r * 255f));
+            writer.Write((byte) Math.Floor(((Color) obj_).g * 255f));
+            writer.Write((byte) Math.Floor(((Color) obj_).b * 255f));
+            writer.Write((byte) Math.Floor(((Color) obj_).a * 255f));
             #endif
         }
     }

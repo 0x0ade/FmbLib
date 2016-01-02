@@ -41,7 +41,3 @@ namespace FmbLib.TypeHandlers.Fez {
 		}
 	}
 }
-TEXTURE WRITER");
-		}
-	}
-}

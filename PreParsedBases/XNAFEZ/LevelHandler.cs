@@ -59,7 +59,7 @@ namespace FmbLib.TypeHandlers.Fez {
 
 			Console.WriteLine("debug: Level: Name: " + obj.Name);
 			FmbUtil.WriteObject(writer, obj.Name);
-			FmbUtil.WriteObject(writer, obj.Size);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);
 			FmbUtil.WriteObject(writer, obj.StartingPosition);
 			Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 			FmbUtil.WriteObject(writer, obj.SequenceSamplesPath);

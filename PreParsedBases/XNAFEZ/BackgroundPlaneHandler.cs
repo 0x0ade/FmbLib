@@ -43,14 +43,14 @@ namespace FmbLib.TypeHandlers.Fez {
 		public override void Write(BinaryWriter writer, object obj_) {
 			BackgroundPlane obj = (BackgroundPlane) obj_;
 
-			FmbUtil.WriteObject(writer, obj.Position);
-			FmbUtil.WriteObject(writer, obj.Rotation);
-			FmbUtil.WriteObject(writer, obj.Scale);
-			FmbUtil.WriteObject(writer, obj.Size);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Position);
+			FmbUtil.GetTypeHandler<Quaternion>().Write(writer, obj.Rotation);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Scale);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);
 			writer.Write(obj.TextureName);
 			writer.Write(obj.LightMap);
 			writer.Write(obj.AllowOverbrightness);
-			FmbUtil.WriteObject(writer, obj.Filter);
+			FmbUtil.GetTypeHandler<Color>().Write(writer, obj.Filter);
 			writer.Write(obj.Animated);
 			writer.Write(obj.Doublesided);
 			writer.Write(obj.Opacity);

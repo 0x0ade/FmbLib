@@ -23,9 +23,9 @@ namespace FmbLib.TypeHandlers.Fez {
 			ArtObjectInstance obj = (ArtObjectInstance) obj_;
 
 			writer.Write(obj.ArtObjectName);
-			FmbUtil.WriteObject(writer, obj.Position);
-			FmbUtil.WriteObject(writer, obj.Rotation);
-			FmbUtil.WriteObject(writer, obj.Scale);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Position);
+			FmbUtil.GetTypeHandler<Quaternion>().Write(writer, obj.Rotation);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Scale);
 			FmbUtil.WriteObject(writer, obj.ActorSettings);
 		}
 	}

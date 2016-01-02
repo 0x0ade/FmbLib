@@ -20,5 +20,5 @@ NextNode Object<int?>
 DestinationLevel Object<string>
 TreasureMapName Object<string>
 #r obj.InvisibleSides =  FmbHelper.HashSetOrList<FaceOrientation>(FmbUtil.ReadObject<FaceOrientation[]>(reader, xnb), FaceOrientationComparer.Default);
-#w Console.WriteLine("TODO: AOASH WRITER");
+#w FmbUtil.WriteObject(writer, FmbHelper.HashSetOrListToArray<FaceOrientation>(obj.InvisibleSides));
 TimeswitchWindBackSpeed Single

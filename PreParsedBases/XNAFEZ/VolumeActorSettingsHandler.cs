@@ -28,7 +28,7 @@ namespace FmbLib.TypeHandlers.Fez {
 		public override void Write(BinaryWriter writer, object obj_) {
 			VolumeActorSettings obj = (VolumeActorSettings) obj_;
 
-			FmbUtil.WriteObject(writer, obj.FarawayPlaneOffset);
+			FmbUtil.GetTypeHandler<Vector2>().Write(writer, obj.FarawayPlaneOffset);
 			writer.Write(obj.IsPointOfInterest);
 			FmbUtil.WriteObject(writer, obj.DotDialogue);
 			writer.Write(obj.WaterLocked);

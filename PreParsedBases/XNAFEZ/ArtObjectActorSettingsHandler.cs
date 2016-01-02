@@ -44,14 +44,14 @@ namespace FmbLib.TypeHandlers.Fez {
 			writer.Write(obj.SpinEvery);
 			writer.Write(obj.SpinOffset);
 			writer.Write(obj.OffCenter);
-			FmbUtil.WriteObject(writer, obj.RotationCenter);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.RotationCenter);
 			FmbUtil.WriteObject(writer, obj.VibrationPattern);
 			FmbUtil.WriteObject(writer, obj.CodePattern);
 			FmbUtil.WriteObject(writer, obj.Segment);
 			FmbUtil.WriteObject(writer, obj.NextNode);
 			FmbUtil.WriteObject(writer, obj.DestinationLevel);
 			FmbUtil.WriteObject(writer, obj.TreasureMapName);
-			Console.WriteLine("TODO: AOASH WRITER");
+			FmbUtil.WriteObject(writer, FmbHelper.HashSetOrListToArray<FaceOrientation>(obj.InvisibleSides));
 			writer.Write(obj.TimeswitchWindBackSpeed);
 		}
 	}

@@ -24,9 +24,9 @@ namespace FmbLib.TypeHandlers.Fez {
 		public override void Write(BinaryWriter writer, object obj_) {
 			Volume obj = (Volume) obj_;
 
-			Console.WriteLine("TODO: VOLUME WRITER");
-			FmbUtil.WriteObject(writer, obj.From);
-			FmbUtil.WriteObject(writer, obj.To);
+			FmbUtil.WriteObject(writer, FmbHelper.HashSetOrListToArray<FaceOrientation>(obj.Orientations));
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.From);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.To);
 			FmbUtil.WriteObject(writer, obj.ActorSettings);
 		}
 	}

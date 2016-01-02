@@ -37,8 +37,8 @@ namespace FmbLib.TypeHandlers.Fez {
 
 			writer.Write(obj.Name);
 			writer.Write(obj.CubemapPath);
-			FmbUtil.WriteObject(writer, obj.Size);
-			FmbUtil.WriteObject(writer, obj.Offset);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);
+			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Offset);
 			writer.Write(obj.Immaterial);
 			writer.Write(obj.SeeThrough);
 			writer.Write(obj.Thin);
@@ -48,7 +48,7 @@ namespace FmbLib.TypeHandlers.Fez {
 			FmbUtil.WriteObject(writer, obj.ActorSettings.Type);
 			FmbUtil.WriteObject(writer, obj.ActorSettings.Face);
 			FmbUtil.WriteObject(writer, obj.SurfaceType);
-			FmbUtil.WriteObject(writer, obj.AtlasOffset);
+			FmbUtil.GetTypeHandler<Vector2>().Write(writer, obj.AtlasOffset);
 		}
 	}
 }

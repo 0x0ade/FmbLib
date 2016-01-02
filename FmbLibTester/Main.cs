@@ -52,7 +52,7 @@ namespace FmbLibTester {
                     //"../../../gateao.xnb"
                     "../../../fox.xnb"
                     //"../../../waterfront.xnb"
-                    //"-pp", "../../../PreParsedBases/" + (FmbUtil.IsUNITY ? "UNITY" : "XNAFEZ")
+                    //-pp", "../../../PreParsedBases/" + (FmbUtil.IsUNITY ? "UNITY" : "XNAFEZ")
                 };
             }
 
@@ -94,7 +94,11 @@ namespace FmbLibTester {
 
                     Console.Write(source);
 
-                    using (Stream s = File.OpenWrite(Path.Combine(args[1], split[split.Length - 1] + "Handler.cs"))) {
+                    string pathExternal = Path.Combine(args[1], split[split.Length - 1] + "Handler.cs");
+                    if (File.Exists(pathExternal)) {
+                        File.Delete(pathExternal);
+                    }
+                    using (Stream s = File.OpenWrite(pathExternal)) {
                         using (StreamWriter sw = new StreamWriter(s)) {
                             sw.Write(source);
                         }

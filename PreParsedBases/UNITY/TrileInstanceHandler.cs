@@ -27,7 +27,7 @@ namespace FmbLib.TypeHandlers.Fez {
 
 			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Position);
 			writer.Write(obj.TrileId);
-			writer.Write((byte) Math.Floor(FmbHelper.GetW(obj.Data.PositionPhi) / 1.570796f - 2));
+			writer.Write((byte) Math.Floor(FmbHelper.GetW(obj.Data.PositionPhi) / 1.570796f + 2));
 			writer.Write(true);
 			FmbUtil.WriteObject(writer, obj.ActorSettings);
 			FmbUtil.WriteObject(writer, obj.OverlappedTriles);

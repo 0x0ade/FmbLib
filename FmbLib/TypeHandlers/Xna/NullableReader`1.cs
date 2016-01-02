@@ -15,10 +15,14 @@ namespace FmbLib.TypeHandlers.Xna {
         }
 
         public override void Write(BinaryWriter writer, object obj_) {
-            writer.Write(obj_ != null);
+            //writer.Write(obj_ != null);//FIXME this should read a boolean, but writing it kills reading
             if (obj_ != null) {
                 FmbUtil.GetTypeHandler(typeof(T)).Write(writer, obj_);
             }
+        }
+        
+        public override object GetDefault() {
+            return new Nullable<T>();
         }
     }
 }
