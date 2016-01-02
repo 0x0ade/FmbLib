@@ -19,13 +19,31 @@ namespace FmbLib.TypeHandlers.Xna {
 		}
 
         public override void Write(BinaryWriter writer, object obj_) {
-            #if !UNITY
-            writer.Write((float) ((Vector2) obj_).X);
-            writer.Write((float) ((Vector2) obj_).Y);
-            #else
-            writer.Write((float) ((Vector2) obj_).x);
-            writer.Write((float) ((Vector2) obj_).y);
-            #endif
+            if (obj_ is Vector2) {
+                #if !UNITY
+                writer.Write((float) ((Vector2) obj_).X);
+                writer.Write((float) ((Vector2) obj_).Y);
+                #else
+                writer.Write((float) ((Vector2) obj_).x);
+                writer.Write((float) ((Vector2) obj_).y);
+                #endif
+            } else if (obj_ is Vector3) {
+                #if !UNITY
+                writer.Write((float) ((Vector3) obj_).X);
+                writer.Write((float) ((Vector3) obj_).Y);
+                #else
+                writer.Write((float) ((Vector3) obj_).x);
+                writer.Write((float) ((Vector3) obj_).y);
+                #endif
+            } else if (obj_ is Vector4) {
+                #if !UNITY
+                writer.Write((float) ((Vector4) obj_).X);
+                writer.Write((float) ((Vector4) obj_).Y);
+                #else
+                writer.Write((float) ((Vector4) obj_).x);
+                writer.Write((float) ((Vector4) obj_).y);
+                #endif
+            }
         }
     }
 }

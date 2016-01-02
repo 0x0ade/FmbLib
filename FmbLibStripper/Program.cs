@@ -13,6 +13,14 @@ namespace FmbLib {
             "FezEngine.Structure.Geometry.ShaderInstancedIndexedPrimitives`2.UpdateBuffers", //Required for set_Vertices and set_Indices
             "FezEngine.Structure.Geometry.IndexedPrimitiveCollectionBase`2.UpdatePrimitiveCount",
 
+            //ToString and other possible methods are referenced in debug builds.
+            //Operands may be referenced in the release builds.
+            //Default values (colors, directions) are referenced.
+            "Vector2",
+            "Vector3",
+            "Vector4",
+            "Color",
+
             "ToString",
             "GetHashCode",
             "OnDeserialization",
@@ -26,7 +34,7 @@ namespace FmbLib {
                 patch(module, type.NestedTypes[i]);
             }
 
-            if (blacklist.Contains(type.FullName)) {
+            if (blacklist.Contains(type.FullName) || blacklist.Contains(type.Name)) {
                 return;
             }
 

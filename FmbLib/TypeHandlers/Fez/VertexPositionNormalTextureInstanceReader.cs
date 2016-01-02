@@ -25,16 +25,14 @@ namespace FmbLib.TypeHandlers.Fez {
         public override void Write(BinaryWriter writer, object obj_) {
             VertexPositionNormalTextureInstance obj = (VertexPositionNormalTextureInstance) obj_;
 
-            FmbUtil.WriteObject(writer, obj.Position);
-            byte normal = 0;
+            FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Position);
             for (int i = 0; i < VertexPositionNormalTextureInstance.ByteToNormal.Length; i++) {
                 if (obj.Normal == VertexPositionNormalTextureInstance.ByteToNormal[i]) {
-                    normal = (byte) i;
+                    writer.Write((byte) i);
                     break;
                 }
             }
-            writer.Write(normal);
-            FmbUtil.WriteObject(writer, obj.TextureCoordinate);
+            FmbUtil.GetTypeHandler<Vector2>().Write(writer, obj.TextureCoordinate);
         }
 
     }
