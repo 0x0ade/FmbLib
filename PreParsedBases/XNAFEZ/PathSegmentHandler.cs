@@ -2,6 +2,7 @@ using FmbLib;
 using System;
 using System.IO;
 using FezEngine.Structure;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 namespace FmbLib.TypeHandlers.Fez {
