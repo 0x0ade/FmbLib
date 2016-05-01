@@ -7,6 +7,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>FmbLibTester</RootNamespace>
     <AssemblyName>FmbLibTester</AssemblyName>
+    <FezType Condition=" '$(FezType)' == '' ">Unity</FezType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>True</DebugSymbols>
@@ -28,8 +29,42 @@
     <Externalconsole>True</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - XNAFEZ|x86' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\DebugXNAFEZ</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>True</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+    <FezType>XNAFEZ</FezType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release - XNAFEZ|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\ReleaseXNAFEZ</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>True</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+    <FezType>XNAFEZ</FezType>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="ContentSerialization" Condition=" '$(FezType)' == 'XNAFEZ' ">
+      <HintPath>..\libs\ContentSerialization.dll</HintPath>
+    </Reference>
+    <Reference Include="FezEngine" Condition=" '$(FezType)' == 'XNAFEZ' ">
+      <HintPath>..\libs\FezEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework" Condition=" '$(FezType)' == 'XNAFEZ' ">
+      <HintPath>..\libs\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SDL2-CS" Condition=" '$(FezType)' == 'XNAFEZ' ">
+      <HintPath>..\libs\SDL2-CS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -37,9 +72,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\FmbLib.Unity.csproj">
+    <ProjectReference Include="..\FmbLib.Unity.csproj" Condition=" '$(FezType)' == 'Unity' ">
       <Project>{EAF975D4-2F22-4E40-A758-C0484E071B9F}</Project>
       <Name>FmbLib.Unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FmbLib.XNAFEZ.csproj" Condition=" '$(FezType)' == 'XNAFEZ' ">
+      <Project>{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}</Project>
+      <Name>FmbLib.XNAFEZ</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

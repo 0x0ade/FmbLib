@@ -10,10 +10,9 @@ namespace FmbLib.TypeHandlers.Fez {
 		public override object Read(BinaryReader reader, bool xnb) {
 			TrixelIdentifier obj = new TrixelIdentifier();
 
-			obj.X = reader.ReadInt32(),();
-			obj.Y = reader.ReadInt32(),();
+			obj.X = reader.ReadInt32()();
+			obj.Y = reader.ReadInt32()();
 			obj.Z = reader.ReadInt32()();
-			;
 
 			return obj;
 		}

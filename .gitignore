@@ -6,4 +6,4 @@ FmbLibStripper/obj/
 *.xnb
 *.fmb
 waterfront/
-
+.vscode/.browse.VC.db*

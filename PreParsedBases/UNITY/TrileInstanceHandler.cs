@@ -13,7 +13,12 @@ namespace FmbLib.TypeHandlers.Fez {
 
 			obj.Position = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
 			obj.TrileId = reader.ReadInt32();
+			byte pPhi = reader.ReadByte();
+			if (pPhi != 137) {
 			obj.SetPhiLight(reader.ReadByte());
+			} else {
+			obj.Phi = reader.ReadSingle();
+			}
 			if (reader.ReadBoolean()) {
 			obj.ActorSettings = FmbUtil.ReadObject<InstanceActorSettings>(reader, xnb);
 			}
@@ -27,7 +32,8 @@ namespace FmbLib.TypeHandlers.Fez {
 
 			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Position);
 			writer.Write(obj.TrileId);
-			writer.Write((byte) Math.Floor(FmbHelper.GetW(obj.Data.PositionPhi) / 1.570796f + 2));
+			writer.Write((byte) 137);
+			writer.Write(obj.Phi);
 			writer.Write(true);
 			FmbUtil.WriteObject(writer, obj.ActorSettings);
 			FmbUtil.WriteObject(writer, obj.OverlappedTriles);

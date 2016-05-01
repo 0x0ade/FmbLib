@@ -8,6 +8,7 @@
     <RootNamespace>FmbLib</RootNamespace>
     <AssemblyName>FmbLib-Unity</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <EnablePreParsed Condition=" '$(EnablePreParsed)' == '' ">1</EnablePreParsed>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>True</DebugSymbols>
@@ -126,40 +127,40 @@
     <Compile Include="FezSlim\Structure\Input\VibrationMotor.cs" />
     <Compile Include="FezSlim\Structure\CameraNodeData.cs" />
     <Compile Include="FezSlim\FaceOrientationComparer.cs" />
-    <Compile Include="PreParsedBases\UNITY\AmbienceTrackHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\ArtObjectActorSettingsHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\ArtObjectHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\ArtObjectInstanceHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\BackgroundPlaneHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\CameraNodeDataHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\DotDialogueLineHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\EntityHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\InstanceActorSettingsHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\LevelHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\MovementPathHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\NpcActionContentHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\NpcInstanceHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\PathSegmentHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\ScriptActionHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\ScriptConditionHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\ScriptHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\ScriptTriggerHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\SpeechLineHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\TrileEmplacementHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\TrileFaceHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\TrileGroupHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\TrileHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\TrileInstanceHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\TrileSetHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\VolumeActorSettingsHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\VolumeHandler.cs" />
     <Compile Include="FezSlim\Structure\TrileInstanceData.cs" />
     <Compile Include="XnaSlim\SurfaceFormat.cs" />
     <Compile Include="FezSlim\Structure\Sky.cs" />
     <Compile Include="FezSlim\Structure\SkyLayer.cs" />
-    <Compile Include="PreParsedBases\UNITY\SkyHandler.cs" />
-    <Compile Include="PreParsedBases\UNITY\SkyLayerHandler.cs" />
     <Compile Include="FmbLib\ILzxDecompressor.cs" />
+    <Compile Include="PreParsedBases\UNITY\AmbienceTrackHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\ArtObjectActorSettingsHandler.cs"  Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\ArtObjectHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\ArtObjectInstanceHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\BackgroundPlaneHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\CameraNodeDataHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\DotDialogueLineHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\EntityHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\InstanceActorSettingsHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\LevelHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\MovementPathHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\NpcActionContentHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\NpcInstanceHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\PathSegmentHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\ScriptActionHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\ScriptConditionHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\ScriptHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\ScriptTriggerHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\SpeechLineHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\TrileEmplacementHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\TrileFaceHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\TrileGroupHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\TrileHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\TrileInstanceHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\TrileSetHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\VolumeActorSettingsHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\VolumeHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\SkyHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\SkyLayerHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

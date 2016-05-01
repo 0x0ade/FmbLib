@@ -11,7 +11,6 @@ namespace FmbLib.TypeHandlers.Fez {
 			FezVertexPositionNormalTexture obj = new FezVertexPositionNormalTexture();
 
 			obj.TextureCoordinate = reader.ReadVector2()();
-			;
 
 			return obj;
 		}

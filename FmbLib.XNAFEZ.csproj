@@ -7,8 +7,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FmbLib</RootNamespace>
     <AssemblyName>FmbLib-XNAFEZ</AssemblyName>
+    <EnablePreParsed Condition=" '$(EnablePreParsed)' == '' ">1</EnablePreParsed>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' Or '$(Configuration)|$(Platform)' == 'Debug - XNAFEZ|x86' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
@@ -19,7 +20,7 @@
     <Externalconsole>True</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' Or '$(Configuration)|$(Platform)' == 'Release - XNAFEZ|x86' ">
     <Optimize>True</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <DefineConstants>XNA;FEZENGINE;</DefineConstants>

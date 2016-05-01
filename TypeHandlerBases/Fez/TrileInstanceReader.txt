@@ -5,9 +5,15 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 Position Vector3
 TrileId Int32
+##The precision of phi (obj.Data.PositionPhi.W) is less than optimal.
+##Let's just r/w phi in the FMB when FmbLib's new enough.
+#r byte pPhi = reader.ReadByte();
+#r if (pPhi != 137) {
 #r obj.SetPhiLight(reader.ReadByte());
-##TODO: TrileInstanceReader precision of phi
-#w writer.Write((byte) Math.Floor(FmbHelper.GetW(obj.Data.PositionPhi) / 1.570796f + 2));
+#r } else {
+#w writer.Write((byte) 137);
+Phi Single
+#r }
 #r if (reader.ReadBoolean()) {
 #w writer.Write(true);
 ActorSettings Object<InstanceActorSettings>
