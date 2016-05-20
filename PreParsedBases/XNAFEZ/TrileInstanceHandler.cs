@@ -16,7 +16,7 @@ namespace FmbLib.TypeHandlers.Fez {
 			obj.TrileId = reader.ReadInt32();
 			byte pPhi = reader.ReadByte();
 			if (pPhi != 137) {
-			obj.SetPhiLight(reader.ReadByte());
+			obj.SetPhiLight(pPhi);
 			} else {
 			obj.Phi = reader.ReadSingle();
 			}
