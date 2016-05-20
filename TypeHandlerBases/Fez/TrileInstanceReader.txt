@@ -9,7 +9,7 @@ TrileId Int32
 ##Let's just r/w phi in the FMB when FmbLib's new enough.
 #r byte pPhi = reader.ReadByte();
 #r if (pPhi != 137) {
-#r obj.SetPhiLight(reader.ReadByte());
+#r obj.SetPhiLight(pPhi);
 #r } else {
 #w writer.Write((byte) 137);
 Phi Single
