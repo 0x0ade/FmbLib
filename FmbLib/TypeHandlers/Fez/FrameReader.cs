@@ -2,7 +2,16 @@ using FmbLib;
 using System;
 using System.IO;
 using FezEngine.Content;
+
+#if XNA
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+#elif UNITY
 using UnityEngine;
+#else
+#warning FmbLib slim XNA still WIP.
+#endif
 
 namespace FmbLib.TypeHandlers.Fez {
 	public class FrameContentHandler : TypeHandler<FrameContent> {

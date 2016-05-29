@@ -4,10 +4,19 @@ using System.IO;
 using FezEngine.Content;
 using FezEngine.Structure;
 using FezEngine.Tools;
-using UnityEngine;
 using System.Collections.Generic;
 using FmbLib.TypeHandlers.Xna;
+
 using Microsoft.Xna.Framework.Graphics;
+
+#if XNA
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+#elif UNITY
+using UnityEngine;
+#else
+#warning FmbLib slim XNA still WIP.
+#endif
 
 namespace FmbLib.TypeHandlers.Fez {
 	public class AnimatedTextureHandler : TypeHandler<AnimatedTexture> {
@@ -22,16 +31,16 @@ namespace FmbLib.TypeHandlers.Fez {
 			
 			int dataSize = reader.ReadInt32();
 			Texture2D texture = Texture2DHandler.GenTexture(width, height, SurfaceFormat.Color, 1);
-			#if XNA
+#if XNA
             //For XNA, we simply pass the data for the only level.
 			texture.SetData(0, null, reader.ReadBytes(dataSize), 0, dataSize);
-            #elif UNITY
+#elif UNITY
             //Oh, Unity, wh~ oh, just one level. Continue on.
 			texture.LoadRawTextureData(Texture2DHandler.Remap(reader.ReadBytes(dataSize), SurfaceFormat.Color));
             
             //updateMipmaps is true by default; makeNoLongerReadable should be false.
             texture.Apply(false, FmbUtil.Setup.TexturesWriteOnly);
-            #endif
+#endif
 			
 			obj.Texture = texture;
 			

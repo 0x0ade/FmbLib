@@ -92,7 +92,6 @@
   <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="TypeHandlerBases\Fez\AmbienceTrackReader.txt" />
-    <EmbeddedResource Include="TypeHandlerBases\Fez\AnimatedTextureReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\ArtObjectActorSettingsReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\ArtObjectInstanceReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\ArtObjectReader.txt" />
@@ -102,7 +101,6 @@
     <EmbeddedResource Include="TypeHandlerBases\Fez\EntityReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\ExtensibleReader`1.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\FezVertexPositionNormalTextureReader.txt" />
-    <EmbeddedResource Include="TypeHandlerBases\Fez\FrameReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\GarbagelessTexture2DReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\IndexedUserPrimitivesReader`1.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\InstanceActorSettingsReader.txt" />
