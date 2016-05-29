@@ -22,11 +22,11 @@ namespace FezEngine.Structure {
         public string SoundName;
         
         public object Clone() {
-            return new CameraNodeData() {
-                Perspective = this.Perspective,
-                PixelsPerTrixel = this.PixelsPerTrixel,
-                SoundName = this.SoundName
-            };
+			CameraNodeData cnd = new CameraNodeData ();
+			cnd.Perspective = this.Perspective;
+			cnd.PixelsPerTrixel = this.PixelsPerTrixel;
+			cnd.SoundName = this.SoundName;
+			return cnd;
         }
         
     }

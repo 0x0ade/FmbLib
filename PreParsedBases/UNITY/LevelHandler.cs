@@ -17,7 +17,7 @@ namespace FmbLib.TypeHandlers.Fez {
 			obj.Size = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
 			obj.StartingPosition = FmbUtil.ReadObject<TrileFace>(reader, xnb);
 			obj.SequenceSamplesPath = FmbUtil.ReadObject<string>(reader, xnb);
-			Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
+			FmbHelper.Log("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 			obj.Flat = reader.ReadBoolean();
 			obj.SkipPostProcess = reader.ReadBoolean();
 			obj.BaseDiffuse = reader.ReadSingle();
@@ -56,17 +56,17 @@ namespace FmbLib.TypeHandlers.Fez {
 		public override void Write(BinaryWriter writer, object obj_) {
 			Level obj = (Level) obj_;
 
-			Console.WriteLine("debug: Level: Name: " + obj.Name);
+			FmbHelper.Log("debug: Level: Name: " + obj.Name);
 			FmbUtil.WriteObject(writer, obj.Name);
 			FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);
 			FmbUtil.WriteObject(writer, obj.StartingPosition);
-			Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
+			FmbHelper.Log("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 			FmbUtil.WriteObject(writer, obj.SequenceSamplesPath);
 			writer.Write(obj.Flat);
 			writer.Write(obj.SkipPostProcess);
 			writer.Write(obj.BaseDiffuse);
 			writer.Write(obj.BaseAmbient);
-			Console.WriteLine("debug: Level: GomezHaloName: " + obj.GomezHaloName);
+			FmbHelper.Log("debug: Level: GomezHaloName: " + obj.GomezHaloName);
 			FmbUtil.WriteObject(writer, obj.GomezHaloName);
 			writer.Write(obj.HaloFiltering);
 			writer.Write(obj.BlinkingAlpha);
@@ -74,7 +74,7 @@ namespace FmbLib.TypeHandlers.Fez {
 			FmbUtil.WriteObject(writer, obj.WaterType);
 			writer.Write(obj.WaterHeight);
 			writer.Write(obj.SkyName);
-			Console.WriteLine("debug: Level: TrileSetName: " + obj.TrileSetName);
+			FmbHelper.Log("debug: Level: TrileSetName: " + obj.TrileSetName);
 			FmbUtil.WriteObject(writer, obj.TrileSetName);
 			FmbUtil.WriteObject(writer, obj.Volumes);
 			FmbUtil.WriteObject(writer, obj.Scripts);

@@ -11,18 +11,21 @@ namespace FmbLib.TypeHandlers.Xna {
             Type valueType = typeof(TValue);
             TypeHandler keyHandler = FmbUtil.GetTypeHandler(keyType);
             TypeHandler valueHandler = FmbUtil.GetTypeHandler(valueType);
+            bool keyIsValueType = keyType.IsValueType();
+            bool valueIsValueType = valueType.IsValueType();
 
             int capacity = reader.ReadInt32();
             #if DEBUG
-            Console.WriteLine("TKey: " + keyType.FullName);
-            Console.WriteLine("TValue: " + valueType.FullName);
-            Console.WriteLine("Capacity: " + capacity);
+            FmbHelper.Log("TKey: " + keyType.FullName);
+            FmbHelper.Log("TValue: " + valueType.FullName);
+            FmbHelper.Log("Capacity: " + capacity);
+            FmbHelper.Log("XNB: " + xnb);
+            FmbHelper.Log("TKey is ValueType: " + keyIsValueType);
+            FmbHelper.Log("TValue is ValueType: " + valueIsValueType);
             Dictionary<TKey, TValue> obj = new Dictionary<TKey, TValue>(0);
             #else
             Dictionary<TKey, TValue> obj = new Dictionary<TKey, TValue>(capacity);
             #endif
-            bool keyIsValueType = FmbHelper.IsValueType(keyType);
-            bool valueIsValueType = FmbHelper.IsValueType(valueType);
             for (int i = 0; i < capacity; i++) {
                 TKey key;
                 if (keyIsValueType || !xnb) {
@@ -32,7 +35,7 @@ namespace FmbLib.TypeHandlers.Xna {
                     key = readerIndex > 0 ? keyHandler.Read<TKey>(reader, xnb) : default(TKey);
                 }
                 TValue value;
-                    if (valueIsValueType || !xnb) {
+                if (valueIsValueType || !xnb) {
                     value = valueHandler.Read<TValue>(reader, xnb);
                 } else {
                     int readerIndex = reader.ReadByte(); //FmbLib ain't no care about reader index.

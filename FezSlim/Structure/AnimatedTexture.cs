@@ -1,4 +1,5 @@
 #if !FEZENGINE
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FezEngine.Structure.Geometry;
@@ -27,7 +28,11 @@ namespace FezEngine.Structure {
         public void Dispose() {
             if (Texture != null) {
                 //TextureExtensions.Unhook(Texture);
+                #if UNITY
+                GameObject.Destroy(Texture);
+                #else
                 Texture.Dispose();
+                #endif
             }
             Texture = null;
             Timing = null;

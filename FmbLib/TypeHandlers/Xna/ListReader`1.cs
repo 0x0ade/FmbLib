@@ -9,21 +9,24 @@ namespace FmbLib.TypeHandlers.Xna {
         public override object Read(BinaryReader reader, bool xnb) {
             Type type = typeof(T);
             TypeHandler handler = FmbUtil.GetTypeHandler(type);
+            bool isValueType = type.IsValueType();
 
+            FmbHelper.Log("List: Position: " + reader.BaseStream.Position);
             int capacity = reader.ReadInt32();
             #if DEBUG
-            Console.WriteLine("T: " + type.FullName);
-            Console.WriteLine("Capacity: " + capacity);
+            FmbHelper.Log("T: " + type.FullName);
+            FmbHelper.Log("Capacity: " + capacity);
+            FmbHelper.Log("XNB: " + xnb);
+            FmbHelper.Log("T is ValueType: " + isValueType);
             List<T> obj = new List<T>(0);
             #else
             List<T> obj = new List<T>(capacity);
             #endif
-            bool isValueType = FmbHelper.IsValueType(type);
             for (int i = 0; i < capacity; i++) {
                 if (isValueType || !xnb) {
                     obj.Add(handler.Read<T>(reader, xnb));
                 } else {
-                    int readerIndex = FmbHelper.Read7BitEncodedInt(reader); //FmbLib ain't no care about reader index.
+                    int readerIndex = reader.Read7BitEncodedInt(); //FmbLib ain't no care about reader index.
                     obj.Add(readerIndex > 0 ? handler.Read<T>(reader, xnb) : default(T));
                 }
             }

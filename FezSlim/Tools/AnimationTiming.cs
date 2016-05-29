@@ -1,7 +1,9 @@
 #if !FEZENGINE
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FezEngine.Structure.Geometry;
+using FmbLib;
 
 #if XNA
 using Microsoft.Xna.Framework;
@@ -42,7 +44,7 @@ namespace FezEngine.Tools {
             }
             set {
                 startFrame = value;
-                startStep = (float) startFrame / (float) FrameTimings.Length;
+                startStep = startFrame / (float) FrameTimings.Length;
             }
         }
     
@@ -52,7 +54,7 @@ namespace FezEngine.Tools {
             }
             set {
                 endFrame = value;
-                endStep = (float) (endFrame + 1) / (float) FrameTimings.Length;
+                endStep = (endFrame + 1f) / (float) FrameTimings.Length;
             }
         }
     
@@ -70,83 +72,77 @@ namespace FezEngine.Tools {
     
         public bool Ended {
             get {
-                return !Loop && FezMath.AlmostEqual(Step, endStep);
+                return !Loop && Step == endStep; //AlmostEqual
             }
         }
     
         public int Frame {
             get {
-                return (int) Math.Floor((double) Step * (double) FrameTimings.Length);
+                return (int) Math.Floor(Step * (double) FrameTimings.Length);
             }
             set {
-                Step = (float) value / (float) FrameTimings.Length;
+                Step = value / (float) FrameTimings.Length;
             }
         }
     
         public float NextFrameContribution {
             get
             {
-                return FezMath.Frac(Step * (float) FrameTimings.Length);
+                return Step * FrameTimings.Length % 1f; //Frac
             }
         }
     
         public AnimationTiming(int startFrame, int endFrame, float[] frameTimings)
-        : this(startFrame, endFrame, false, frameTimings)
-        {
+        : this(startFrame, endFrame, false, frameTimings) {
         }
     
-        public AnimationTiming(int startFrame, int endFrame, bool loop, float[] frameTimings)
-        {
-        Loop = loop;
-        FrameTimings = Enumerable.ToArray<float>(Enumerable.Select<float, float>((IEnumerable<float>) frameTimings, (Func<float, float>) (x =>
-        {
-            if ((double) x != 0.0)
-            return x;
-            else
-            return 0.1f;
-        })));
-        stepPerFrame = 1f / (float) frameTimings.Length;
-        InitialFirstFrame = StartFrame = startFrame;
-        InitialEndFrame = EndFrame = endFrame;
+        public AnimationTiming(int startFrame, int endFrame, bool loop, float[] frameTimings) {
+            Loop = loop;
+            FrameTimings = FmbHelper.Select<float>(frameTimings, delegate(float x) { return x != 0f ? x : 0.1f; });
+            stepPerFrame = 1f / (float) frameTimings.Length;
+            InitialFirstFrame = StartFrame = startFrame;
+            InitialEndFrame = EndFrame = endFrame;
         }
     
         public void Restart() {
-        Step = startStep;
-        Paused = false;
+            Step = startStep;
+            Paused = false;
         }
     
         public void Update(TimeSpan elapsed) {
-        Update(elapsed, 1f);
+            Update(elapsed, 1f);
         }
     
-        public void Update(TimeSpan elapsed, float timeFactor)
-        {
-        if (Paused || Ended)
-            return;
-        int index = (int) Math.Floor((double) Step * (double) FrameTimings.Length);
-        Step += (float) elapsed.TotalSeconds * timeFactor / FrameTimings[index] * stepPerFrame;
-        while ((double) Step >= (double) endStep)
-        {
-            if (Loop)
-            Step -= endStep - startStep;
-            else
-            Step = endStep - 1.0 / 1000.0;
-        }
-        while ((double) Step < (double) startStep)
-        {
-            if (Loop)
-            Step += (float) ((double) endStep - (double) startStep - 1.0 / 1000.0);
-            else
-            Step = startStep;
-        }
+        public void Update(TimeSpan elapsed, float timeFactor) {
+            if (Paused || Ended) {
+                return;
+            }
+            int index = (int) Math.Floor(Step * (double) FrameTimings.Length);
+            Step += (float) elapsed.TotalSeconds * timeFactor / FrameTimings[index] * stepPerFrame;
+            while (Step >= endStep) {
+                if (Loop) {
+                    Step -= endStep - startStep;
+                } else {
+                    Step = endStep - 1f / 1000f;
+                }
+            }
+            while (Step < startStep) {
+                if (Loop) {
+                    Step += (float) ((double) endStep - (double) startStep - 1D / 1000D);
+                } else {
+                    Step = startStep;
+                }
+            }
         }
     
         public void RandomizeStep() {
-        Step = RandomHelper.Between((double) startStep, (double) endStep);
+            //TODO
+            //Step = RandomHelper.Between((double) startStep, (double) endStep);
         }
     
         public AnimationTiming Clone() {
-        return new AnimationTiming(StartFrame, EndFrame, Loop, FrameTimings);
+            return new AnimationTiming(StartFrame, EndFrame, Loop, FrameTimings);
         }
     }
 }
+#endif

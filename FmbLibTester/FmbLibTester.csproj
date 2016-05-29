@@ -76,9 +76,5 @@
       <Project>{EAF975D4-2F22-4E40-A758-C0484E071B9F}</Project>
       <Name>FmbLib.Unity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FmbLib.XNAFEZ.csproj" Condition=" '$(FezType)' == 'XNAFEZ' ">
-      <Project>{0F7F3502-C0BE-47E2-99B3-D985574EC3AE}</Project>
-      <Name>FmbLib.XNAFEZ</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

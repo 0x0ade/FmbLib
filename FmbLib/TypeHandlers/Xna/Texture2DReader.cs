@@ -17,7 +17,7 @@ namespace FmbLib.TypeHandlers.Xna {
 
         public override object Read(BinaryReader reader, bool xnb) {
             if (!xnb) {
-                Console.WriteLine("Reading Texture2Ds will not be implemented - use external images and read / write manually!");
+                FmbHelper.Log("Reading Texture2Ds will not be implemented - use external images and read / write manually!");
                 reader.ReadInt32(); //surfaceFormat
                 reader.ReadInt32(); //width
                 reader.ReadInt32(); //height
@@ -60,24 +60,7 @@ namespace FmbLib.TypeHandlers.Xna {
 
             //Let's pretend we don't know about DXT1, S3TC nor the other formats to convert.
 
-            Texture2D texture = null;
-            #if XNA
-            texture = new Texture2D(
-                FmbUtil.Setup.GraphicsDevice,
-                width,
-                height,
-                levels > 1,
-                surfaceFormat
-            );
-            #elif UNITY
-            texture = new Texture2D(
-                width,
-                height,
-                SurfaceFormatToTextureFormat[(int) surfaceFormat],
-                levels > 1,
-                FmbUtil.Setup.TexturesLinear
-            );
-            #endif
+            Texture2D texture = GenTexture(width, height, surfaceFormat, levels);
 
             #if XNA
             //For XNA, we simply iterate through all levels and set the level data.
@@ -115,12 +98,32 @@ namespace FmbLib.TypeHandlers.Xna {
         }
 
         public override void Write(BinaryWriter writer, object obj_) {
-            Console.WriteLine("Writing Texture2Ds will not be implemented - use external images and read / write manually!");
+            FmbHelper.Log("Writing Texture2Ds will not be implemented - use external images and read / write manually!");
             writer.Write((int) 0); //surfaceFormat
             writer.Write((int) 0); //width
             writer.Write((int) 0); //height
             writer.Write((int) 0); //mips
             //writer.Write((int) 0); //data length
+        }
+        
+        public static Texture2D GenTexture(int width, int height, SurfaceFormat surfaceFormat, int levels) {
+            #if XNA
+            return new Texture2D(
+                FmbUtil.Setup.GraphicsDevice,
+                width,
+                height,
+                levels > 1,
+                surfaceFormat
+            );
+            #elif UNITY
+            return new Texture2D(
+                width,
+                height,
+                SurfaceFormatToTextureFormat[(int) surfaceFormat],
+                levels > 1,
+                FmbUtil.Setup.TexturesLinear
+            );
+            #endif
         }
         
         public static byte[] Remap(byte[] data, SurfaceFormat format) {

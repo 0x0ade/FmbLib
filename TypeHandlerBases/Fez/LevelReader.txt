@@ -6,21 +6,21 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 
-#w Console.WriteLine("debug: Level: Name: " + obj.Name);
+#w FmbHelper.Log("debug: Level: Name: " + obj.Name);
 Name Object<string>
 Size Vector3
 ##r obj.Size = FmbUtil.ReadObject<Vector3>(reader, xnb, false);
 ##Because of the auto-generated ", false", we need to use the handler directly here.
 ##w FmbUtil.GetTypeHandler<Vector3>().Write(writer, obj.Size);
 StartingPosition Object<TrileFace>
-#w Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
+#w FmbHelper.Log("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 SequenceSamplesPath Object<string>
-#r Console.WriteLine("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
+#r FmbHelper.Log("debug: Level: SequenceSamplesPath: " + obj.SequenceSamplesPath);
 Flat Boolean
 SkipPostProcess Boolean
 BaseDiffuse Single
 BaseAmbient Single
-#w Console.WriteLine("debug: Level: GomezHaloName: " + obj.GomezHaloName);
+#w FmbHelper.Log("debug: Level: GomezHaloName: " + obj.GomezHaloName);
 GomezHaloName Object<string>
 HaloFiltering Boolean
 BlinkingAlpha Boolean
@@ -28,7 +28,7 @@ Loops Boolean
 WaterType Object<LiquidType>
 WaterHeight Single
 SkyName String
-#w Console.WriteLine("debug: Level: TrileSetName: " + obj.TrileSetName);
+#w FmbHelper.Log("debug: Level: TrileSetName: " + obj.TrileSetName);
 TrileSetName Object<string>
 Volumes Object<Dictionary<int, Volume>>
 Scripts Object<Dictionary<int, Script>>

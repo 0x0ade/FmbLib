@@ -8,8 +8,6 @@
     <RootNamespace>FmbLibStripper</RootNamespace>
     <AssemblyName>FmbLibStripper</AssemblyName>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <ProductVersion>12.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">

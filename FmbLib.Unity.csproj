@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,8 +7,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FmbLib</RootNamespace>
     <AssemblyName>FmbLib-Unity</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <EnablePreParsed Condition=" '$(EnablePreParsed)' == '' ">1</EnablePreParsed>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>True</DebugSymbols>
@@ -38,6 +39,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FezSlim\Content\AnimatedTextureContent.cs" />
+    <Compile Include="FezSlim\Content\FrameContent.cs" />
+    <Compile Include="FezSlim\Structure\AnimatedTexture.cs" />
+    <Compile Include="FezSlim\Tools\AnimationTiming.cs" />
+    <Compile Include="FmbLib\TypeHandlers\Fez\AnimatedTextureReader.cs" />
+    <Compile Include="FmbLib\TypeHandlers\Fez\FrameReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FmbLib\TypeHandler.cs" />
     <Compile Include="FmbLib\TypeHandlers\Xna\BooleanReader.cs" />
@@ -133,7 +140,7 @@
     <Compile Include="FezSlim\Structure\SkyLayer.cs" />
     <Compile Include="FmbLib\ILzxDecompressor.cs" />
     <Compile Include="PreParsedBases\UNITY\AmbienceTrackHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
-    <Compile Include="PreParsedBases\UNITY\ArtObjectActorSettingsHandler.cs"  Condition=" '$(EnablePreParsed)' == '1' " />
+    <Compile Include="PreParsedBases\UNITY\ArtObjectActorSettingsHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
     <Compile Include="PreParsedBases\UNITY\ArtObjectHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
     <Compile Include="PreParsedBases\UNITY\ArtObjectInstanceHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
     <Compile Include="PreParsedBases\UNITY\BackgroundPlaneHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
@@ -163,24 +170,9 @@
     <Compile Include="PreParsedBases\UNITY\SkyLayerHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="FmbLib\" />
-    <Folder Include="TypeHandlerBases\" />
-    <Folder Include="FmbLib\TypeHandlers\" />
-    <Folder Include="FmbLib\TypeHandlers\Xna\" />
-    <Folder Include="FmbLib\TypeHandlers\Fez\" />
-    <Folder Include="FezSlim\" />
-    <Folder Include="FezSlim\Structure\" />
-    <Folder Include="FezSlim\Structure\Geometry\" />
-    <Folder Include="FezSlim\Structure\Scripting\" />
-    <Folder Include="XnaSlim\" />
-    <Folder Include="FezSlim\Structure\Input\" />
-    <Folder Include="PreParsedBases\" />
-    <Folder Include="PreParsedBases\UNITY\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="TypeHandlerBases\Fez\AmbienceTrackReader.txt" />
-    <EmbeddedResource Include="TypeHandlerBases\Fez\AnimatedTextureReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\ArtObjectActorSettingsReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\ArtObjectInstanceReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\ArtObjectReader.txt" />
@@ -190,7 +182,6 @@
     <EmbeddedResource Include="TypeHandlerBases\Fez\EntityReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\ExtensibleReader`1.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\FezVertexPositionNormalTextureReader.txt" />
-    <EmbeddedResource Include="TypeHandlerBases\Fez\FrameReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\GarbagelessTexture2DReader.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\IndexedUserPrimitivesReader`1.txt" />
     <EmbeddedResource Include="TypeHandlerBases\Fez\InstanceActorSettingsReader.txt" />

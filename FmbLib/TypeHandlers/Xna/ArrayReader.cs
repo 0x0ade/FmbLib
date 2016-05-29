@@ -8,13 +8,13 @@ namespace FmbLib.TypeHandlers.Xna {
         public override object Read(BinaryReader reader, bool xnb) {
             T[] obj = new T[(int) ((IntPtr) reader.ReadUInt32())];
 
-            if (FmbHelper.IsValueType(typeof(T)) || !xnb) {
+            if (typeof(T).IsValueType() || !xnb) {
                 for (int i = 0; i < obj.Length; i++) {
                     obj[i] = FmbUtil.ReadObject<T>(reader, xnb, false);
                 }
             } else {
                 for (int i = 0; i < obj.Length; i++) {
-                    int readerIndex = FmbHelper.Read7BitEncodedInt(reader); //FmbLib ain't no care about reader index.
+                    int readerIndex = reader.Read7BitEncodedInt(); //FmbLib ain't no care about reader index.
                     obj[i] = readerIndex > 0 ? FmbUtil.ReadObject<T>(reader, xnb, false) : default(T);
                 }
             }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 
 namespace FmbLib {
+    public delegate TOut SelectFunc<TIn, TOut>(TIn value);
     public static class FmbHelper {
         
         private readonly static Dictionary<string, Type> CacheTypes = new Dictionary<string, Type>(128);
@@ -62,11 +63,11 @@ namespace FmbLib {
                         CachePrefoundTypes[type.FullName] = CachePrefoundTypes[type.Name] = type;
                     }
                 } catch (ReflectionTypeLoadException e) {
-                    Console.WriteLine("Failed searching a type in XmlHelper's FindType.");
-                    Console.WriteLine("Assembly: " + assembly.GetName().Name);
-                    Console.WriteLine(e.Message);
+                    FmbHelper.Log("Failed searching a type in XmlHelper's FindType.");
+                    FmbHelper.Log("Assembly: " + assembly.GetName().Name);
+                    FmbHelper.Log(e.Message);
                     foreach (Exception le in e.LoaderExceptions) {
-                        Console.WriteLine(le.Message);
+                        FmbHelper.Log(le.Message);
                     }
                 }
             }
@@ -81,11 +82,11 @@ namespace FmbLib {
                         }
                     }
                 } catch (ReflectionTypeLoadException e) {
-                    Console.WriteLine("Failed searching a type in XmlHelper's FindType.");
-                    Console.WriteLine("Assembly: " + assembly.GetName().Name);
-                    Console.WriteLine(e.Message);
+                    FmbHelper.Log("Failed searching a type in XmlHelper's FindType.");
+                    FmbHelper.Log("Assembly: " + assembly.GetName().Name);
+                    FmbHelper.Log(e.Message);
                     foreach (Exception le in e.LoaderExceptions) {
-                        Console.WriteLine(le.Message);
+                        FmbHelper.Log(le.Message);
                     }
                 }
             }
@@ -108,7 +109,7 @@ namespace FmbLib {
             return (TypeHandler) typeHandlerType.MakeGenericType(genericArgs).GetConstructor(new Type[0]).Invoke(new object[0]);
         }
 
-        public static int Read7BitEncodedInt(BinaryReader reader) {
+        public static int Read7BitEncodedInt(this BinaryReader reader) {
             int ret = 0;
             int shift = 0;
             int len;
@@ -131,11 +132,11 @@ namespace FmbLib {
             }
         }
 
-        public static bool IsValueType(Type type) {
+        public static bool IsValueType(this Type type) {
             return type.IsValueType || ValueTypes.Contains(type.Name);
         }
 
-        #if FEZENGINE
+#if FEZENGINE
         public static HashSet<T> HashSetOrList<T>(T[] arr, IEqualityComparer<T> comp) {
             return new HashSet<T>(arr, comp);
         }
@@ -145,7 +146,7 @@ namespace FmbLib {
             set.CopyTo(arr);
             return arr;
         }
-        #else
+#else
         public static List<T> HashSetOrList<T>(T[] arr, object comp) {
             return new List<T>(arr);
         }
@@ -153,11 +154,50 @@ namespace FmbLib {
         public static T[] HashSetOrListToArray<T>(List<T> set) {
             return set.ToArray();
         }
-        #endif
+#endif
 
         public static void AppendTo(string str, StringBuilder b1, StringBuilder b2) {
             b1.Append(str);
             b2.Append(str);
+        }
+        
+        public static void Log(string str) {
+            //This is shorter to reach than FmbUtil.Setup.Log
+            if (FmbUtil.Setup.Log != null) {
+                FmbUtil.Setup.Log(str);
+            }
+        }
+        
+        public static void DefaultLog(string str) {
+            Console.WriteLine(str);
+            #if UNITY
+            UnityEngine.Debug.Log(str);
+            #endif
+        }
+        
+        // Linq
+        
+        // Optimized, writing to the same array
+        public static T[] Select<T>(T[] a, SelectFunc<T, T> func) {
+            for (int i = 0; i < a.Length; i++) {
+                a[i] = func(a[i]);
+            }
+            return a;
+        }
+        
+        public static TOut[] Select<TIn, TOut>(TIn[] aIn, SelectFunc<TIn, TOut> func) {
+            TOut[] aOut = new TOut[aIn.Length];
+            for (int i = 0; i < aIn.Length; i++) {
+                aOut[i] = func(aIn[i]);
+            }
+            return aOut;
+        }
+        
+        // FezMath
+        
+        private static readonly double Log2 = Math.Log(2D);
+        public static int NextPowerOfTwo(double value) {
+            return (int) Math.Pow(2D, Math.Ceiling(Math.Log(value) / Log2));
         }
 
         #if !UNITY

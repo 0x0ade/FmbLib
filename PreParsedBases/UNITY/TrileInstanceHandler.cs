@@ -19,9 +19,12 @@ namespace FmbLib.TypeHandlers.Fez {
 			} else {
 			obj.Phi = reader.ReadSingle();
 			}
-			if (reader.ReadBoolean()) {
+			//FIXME either this screws up...
+			bool b = reader.ReadBoolean();
+			if (b) {
 			obj.ActorSettings = FmbUtil.ReadObject<InstanceActorSettings>(reader, xnb);
 			}
+			//... or this.
 			obj.OverlappedTriles = FmbUtil.ReadObject<List<TrileInstance>>(reader, xnb);
 
 			return obj;
