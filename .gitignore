@@ -7,3 +7,4 @@ FmbLibStripper/obj/
 *.fmb
 waterfront/
 .vscode/.browse.VC.db*
+.vs/
