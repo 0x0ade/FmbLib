@@ -52,7 +52,7 @@ namespace FezEngine.Structure {
         public List<AmbienceTrack> AmbienceTracks;
 
         //Loaded after deserializing, currently can be ignored
-        //public Sky Sky; //TODO
+        public Sky Sky;
         public TrileSet TrileSet;
         //public TrackedSong Song; //TODO
         

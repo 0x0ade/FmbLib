@@ -40,7 +40,22 @@ namespace FezEngine.Structure {
         public int TrileId;
         public InstanceActorSettings ActorSettings;
 
-        public float Phi;
+        public float Phi {
+            get {
+                #if !UNITY
+                return Data.PositionPhi.W;
+                #else
+                return Data.PositionPhi.w;
+                #endif
+            }
+            set {
+                #if !UNITY
+                Data.PositionPhi.W = value;
+                #else
+                Data.PositionPhi.w = value;
+                #endif
+            }
+        }
 
         public List<TrileInstance> OverlappedTriles = new List<TrileInstance>();
 
