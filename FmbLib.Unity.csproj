@@ -118,6 +118,7 @@
     <Compile Include="FezSlim\Structure\Scripting\Script.cs" />
     <Compile Include="FezSlim\Structure\TrileGroup.cs" />
     <Compile Include="FezSlim\Structure\NpcInstance.cs" />
+	<Compile Include="FezSlim\Structure\NpcMetadata.cs" />
     <Compile Include="FezSlim\Structure\SpeechLine.cs" />
     <Compile Include="FezSlim\Structure\NpcActionContent.cs" />
     <Compile Include="FezSlim\Structure\Group.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="PreParsedBases\UNITY\MovementPathHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
     <Compile Include="PreParsedBases\UNITY\NpcActionContentHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
     <Compile Include="PreParsedBases\UNITY\NpcInstanceHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
+	<Compile Include="PreParsedBases\UNITY\NpcMetadataHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
     <Compile Include="PreParsedBases\UNITY\PathSegmentHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
     <Compile Include="PreParsedBases\UNITY\ScriptActionHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />
     <Compile Include="PreParsedBases\UNITY\ScriptConditionHandler.cs" Condition=" '$(EnablePreParsed)' == '1' " />

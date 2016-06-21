@@ -16,7 +16,7 @@ using UnityEngine;
 namespace FezEngine.Structure {
     public class NpcInstance {
 
-        //public readonly NpcMetadata Metadata = new NpcMetadata(); //Is this required at all? FillMetadata will not be implemented.
+        public readonly NpcMetadata Metadata = new NpcMetadata();
         public int Id;
         public bool Talking;
         public bool Enabled;
@@ -31,9 +31,31 @@ namespace FezEngine.Structure {
         public Group Group;
         //public NpcState State; //TODO (that's the game component of the NPC - implement it?)
         public Dictionary<NpcAction, NpcActionContent> Actions;
-        public float WalkSpeed;
-        public bool AvoidsGomez;
-        public ActorType ActorType;
+
+        public float WalkSpeed {
+            get {
+                return Metadata.WalkSpeed;
+            }
+            set {
+                Metadata.WalkSpeed = value;
+            }
+        }
+        public bool AvoidsGomez {
+            get {
+                return Metadata.AvoidsGomez;
+            }
+            set {
+                Metadata.AvoidsGomez = value;
+            }
+        }
+        public ActorType ActorType {
+            get {
+                return Metadata.ActorType;
+            }
+            set {
+                Metadata.ActorType = value;
+            }
+        }
 
         public NpcInstance() {
             Speech = new List<SpeechLine>();
@@ -41,7 +63,14 @@ namespace FezEngine.Structure {
             Enabled = true;
             Visible = true;
         }
-    	
+
+        public void FillMetadata(NpcMetadata md) {
+            Metadata.AvoidsGomez = md.AvoidsGomez;
+            Metadata.WalkSpeed = md.WalkSpeed;
+            Metadata.SoundPath = md.SoundPath;
+            Metadata.SoundActions = md.SoundActions;
+        }
+
     }
 }
 #endif
