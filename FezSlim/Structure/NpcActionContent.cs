@@ -18,7 +18,7 @@ namespace FezEngine.Structure {
 
         public string AnimationName;
         public string SoundName;
-        //public AnimatedTexture Animation; //TODO
+        public AnimatedTexture Animation;
         //public SoundEffect Sound; //TODO
     	
     }
