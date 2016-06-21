@@ -26,8 +26,12 @@ namespace FmbLib {
 
         public static class Setup {
             public static CreateLzxDecompressor CreateLzxDecompressor;
-            
+
+            #if UNITY
+            public static Action<string> Log = null;
+            #else
             public static Action<string> Log = FmbHelper.DefaultLog;
+            #endif
             
             #if XNA
             public static Microsoft.Xna.Framework.Graphics.GraphicsDevice GraphicsDevice;
