@@ -136,6 +136,63 @@ namespace FmbLib {
             return type.IsValueType || ValueTypes.Contains(type.Name);
         }
 
+        public static List<Type> GetGenericParamTypes(string typeName) {
+            typeName = typeName.Substring(typeName.IndexOf("[[") + 1, typeName.Length - typeName.IndexOf("[[") - 2);
+
+            List<string> matches = new List<string>();
+            StringBuilder current = new StringBuilder();
+            int depth = 0;
+            for (int i = 0; i < typeName.Length; i++) {
+                char c = typeName[i];
+                if (c == '[') {
+                    depth++;
+                    if (depth != 1) {
+                        current.Append(c);
+                    }
+                } else if (c == ']') {
+                    depth--;
+                    if (depth != 0) {
+                        current.Append(c);
+                    }
+                } else {
+                    current.Append(c);
+                }
+                if (depth == 0) {
+                    if (1 < current.Length) {
+                        matches.Add(current.ToString());
+                    }
+                    current = new StringBuilder();
+                }
+            }
+
+            List<Type> genericParams = new List<Type>(matches.Count);
+            for (int i = 0; i < matches.Count; i++) {
+                string paramName = matches[i];
+                if (paramName.Contains("Version=")) {
+                    if (!paramName.Contains("[[")) {
+                        int commaIndex = paramName.LastIndexOf("Version=") - 1;
+                        commaIndex = paramName.LastIndexOf(", ", commaIndex - 1);
+                        paramName = paramName.Substring(0, commaIndex);
+                    } else {
+                        paramName = paramName.Substring(0, paramName.LastIndexOf("]]") + 2);
+                    }
+                } else {
+                    paramName = paramName.Substring(0, paramName.LastIndexOf(", "));
+                }
+                //FmbHelper.Log(i + ": " + paramName + ": " + FmbHelper.FindType(paramName));
+                if (!paramName.Contains("[[")) {
+                    genericParams.Add(FindType(paramName));
+                } else {
+                    string paramNameStrip = paramName.Substring(0, paramName.IndexOf("[["));
+                    paramNameStrip = paramNameStrip.Substring(paramNameStrip.LastIndexOf('.') + 1);
+                    Type type = FindType(paramNameStrip);
+                    type = type.MakeGenericType(GetGenericParamTypes(paramName).ToArray());
+                    genericParams.Add(type);
+                }
+            }
+            return genericParams;
+        }
+
 #if FEZENGINE
         public static HashSet<T> HashSetOrList<T>(T[] arr, IEqualityComparer<T> comp) {
             return new HashSet<T>(arr, comp);

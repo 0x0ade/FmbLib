@@ -241,7 +241,7 @@ namespace FmbLib {
 
         public static void WriteObject(BinaryWriter writer, object obj_) {
             Type type = obj_.GetType();
-            writer.Write(type.Name);
+            writer.Write(type.FullName);
             TypeHandler handler = GetTypeHandler(type);
             handler.Write(writer, obj_);
         }
@@ -263,7 +263,7 @@ namespace FmbLib {
                 writer.Write("");
                 return;
             }
-            writer.Write(typeof(T).Name);
+            writer.Write(typeof(T).FullName);
             TypeHandler handler = GetTypeHandler(typeof(T));
             handler.Write(writer, obj_);
         }
@@ -374,6 +374,9 @@ namespace FmbLib {
             if (type == null) {
                 type = FmbHelper.FindType(typeName);
             }
+            if (type == null && typeName.Contains("[[")) {
+                type = FmbHelper.FindType(typeName.Substring(0, typeName.IndexOf("[[")));
+            }
             if (type != null && type.IsEnum) {
                 return FmbHelper.GetGenericTypeHandler(typeof(EnumHandler<>), type);
             }
@@ -388,28 +391,13 @@ namespace FmbLib {
             //FmbHelper.Log("typeName: " + typeName);
 
             if (typeName.Contains("[[") || (type != null && type.IsGenericType)) {
-                handlerName = typeName.Substring(0, typeName.IndexOf("`")) + "Handler" + typeName.Substring(typeName.IndexOf("`"), typeName.IndexOf("[[") - typeName.IndexOf("`"));
-
-                MatchCollection matches = GenericSplitRegex.Matches(typeName.Substring(typeName.IndexOf("[[") + 1));
-                List<Type> genericParams = new List<Type>();
-                for (int i = 0; i < matches.Count; i++) {
-                    Match match = matches[i];
-                    for (int ii = 0; ii < match.Captures.Count; ii++) {
-                        string paramName = match.Captures[ii].Value;
-                        paramName = paramName.Substring(1);
-                        paramName = paramName.Substring(0, paramName.Length - 1);
-                        if (paramName.Contains("Version=")) {
-                            int commaIndex = paramName.LastIndexOf("Version=") - 1;
-                            commaIndex = paramName.LastIndexOf(", ", commaIndex - 1);
-                            paramName = paramName.Substring(0, commaIndex);
-                        } else {
-                            paramName = paramName.Substring(0, paramName.LastIndexOf(", "));
-                        }
-                        //FmbHelper.Log(i + ": " + paramName + ": " + FmbHelper.FindType(paramName));
-                        genericParams.Add(FmbHelper.FindType(paramName));
-                    }
+                int length = typeName.IndexOf("[[");
+                if (length < 0) {
+                    length = typeName.Length;
                 }
+                handlerName = typeName.Substring(0, typeName.IndexOf("`")) + "Handler" + typeName.Substring(typeName.IndexOf("`"), length - typeName.IndexOf("`"));
 
+                List<Type> genericParams = FmbHelper.GetGenericParamTypes(typeName);
                 for (int i = 0; i < types.Length; i++) {
                     string typeName_ = getTypeName(types[i].Name, null);
                     if (typeName_ == handlerName && types[i].GetGenericArguments().Length == genericParams.Count) {

@@ -48,10 +48,11 @@ namespace FmbLibTester {
                 Console.WriteLine("to generate the .cs sources for the TypeHandlerBase .txts.");
                 Console.WriteLine("Using default testing args instead.");
                 args = new string[] {
-                    "../../../cmycave.xnb"
+                    //"../../../cmycave.xnb"
                     //"../../../gateao.xnb"
                     //"../../../fox.xnb"
                     //"../../../waterfront.xnb"
+                    "../../../gametext.xnb" // FIXME: Reading back. The dictionary generic types went missing?
                     //-pp", "../../../PreParsedBases/" + (FmbUtil.IsUNITY ? "UNITY" : "XNAFEZ")
                 };
             }
