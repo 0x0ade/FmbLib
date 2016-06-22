@@ -54,7 +54,7 @@ namespace FezEngine.Tools {
             }
             set {
                 endFrame = value;
-                endStep = (endFrame + 1f) / (float) FrameTimings.Length;
+                endStep = (endFrame + 1f) / FrameTimings.Length;
             }
         }
     
@@ -72,7 +72,7 @@ namespace FezEngine.Tools {
     
         public bool Ended {
             get {
-                return !Loop && Step == endStep; //AlmostEqual
+                return !Loop && Math.Abs(Step - endStep) < 0.05D; //AlmostEqual
             }
         }
     
